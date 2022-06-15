@@ -2,10 +2,16 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import Slider from './components/Slider.vue'
+
+const slides = ['<img src="https://via.placeholder.com/150">', '<img src="https://via.placeholder.com/250">']
+
 </script>
 
+
 <template>
-  <Slider></Slider>
+  <Slider :slides="slides">
+
+  </Slider>
 </template>
 
 <style>
