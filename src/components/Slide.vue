@@ -1,13 +1,17 @@
 <template>
-    <div>
-        <div v-html="slide"></div>
-    </div>
+    <div v-html="slide" class="cc-h-full"></div>
+    {{ slide }}
 </template>
 <script setup lang="ts">
+
 const props = defineProps({
     slide: {
-        type: Object,
+        type: HTMLElement,
         required: true,
+    },
+    width: {
+        type: Number,
+        required: true
     }
 })
 </script>
