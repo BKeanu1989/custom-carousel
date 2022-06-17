@@ -1,5 +1,5 @@
 <template>
-    <div class="carousel cc-flex cc-relative cc-w-f" ref="root">
+    <div class="custom-carousel cc-flex cc-relative cc-w-f" ref="root">
         
         <slot name="navigation">
 

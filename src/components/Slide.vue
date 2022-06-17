@@ -1,5 +1,5 @@
 <template>
-    <div v-html="slide" :width="width" class="cc-h-full cc-absolute" :style="{width: width + 'px', left: left + 'px'}"></div>
+    <div v-html="slide" :width="width" class="cc-h-full cc-absolute custom-carousel" :style="{width: width + 'px', left: left + 'px'}"></div>
 </template>
 <script setup lang="ts">
 import { onMounted, PropType, ref, watch } from 'vue';
