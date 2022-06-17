@@ -22,7 +22,7 @@ const slides = [
 
 
 <template>
-  <Slider :slides="slides" :toShow="4" style="height: 400px;">
+  <Slider :slides="slides" :toShow="3" style="height: 400px;">
 
   </Slider>
 </template>

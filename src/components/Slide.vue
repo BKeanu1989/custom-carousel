@@ -61,7 +61,6 @@ function getWidthForSlide(slide: string, combinedWidth: number) :number {
 }
 
 function setLeftPosition(position) {
-    console.log("inside single slide", position)
     left.value = position
 }
 
@@ -69,13 +68,5 @@ defineExpose({
     width,
     setLeftPosition
 })
-
-onMounted(() => {
-//   width.value = getWidthForSlide(props.slide)  
-console.group('Slide.vue')
-console.log("slide done")
-console.groupEnd()
-})
-
 
 </script>

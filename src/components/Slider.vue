@@ -45,11 +45,6 @@ const props = defineProps({
     }
 })
 
-// function updateSlideWidth() {
-//     if (!root.value) return
-//     const rect = root.value.getBoundingClientRect()
-// }
-
 function getWidthOfImage(slide: string) :number {
     const parser = new DOMParser()
     const doc = parser.parseFromString(slide, 'text/html')
@@ -79,24 +74,19 @@ function getWidthForSlide(slide: string, combinedWidth: number) :number {
 function setLefts() {
     slideRefs.value.forEach((slideRef, index) => {
         const leftPos = getLeft(index)
-        console.log("🚀 ~ file: Slider.vue ~ line 82 ~ slideRefs.value.forEach ~ leftPos", leftPos)
         slideRef.setLeftPosition(leftPos)
-        // const width = getWidthForSlide(slideRef.slide, combinedWidth.value)
-        // slideRef.left = width * index
     })
-    // props.slides.forEach((slide, index) => {
-    //     console.log(slide)
-    //     // const width = getWidthForSlide(slide, combinedWidth.value)
-    //     // widthsOfSlides.value[index] = width
-    // })
 }
 
 function getLeft(index: number) {
     const leftPosition = widthsOfSlides.value.slice(0, index).reduce((acc, cur) => acc + cur, 0)
-    console.log("🚀 ~ file: Slider.vue ~ line 81 ~ getLeft ~ leftPosition", leftPosition)
     
     return leftPosition
 }
+
+defineExpose({
+    slideRefs
+})
 
 onMounted(() => {
     if (root.value) {
@@ -109,16 +99,9 @@ onMounted(() => {
             return acc + getWidthOfImage(slide)
         }, 0)
 
-        widthsOfSlides.value = slidesToShowWidth.map(slide => getWidthForSlide(slide, combinedWidth.value))
+        widthsOfSlides.value = props.slides.map(slide => getWidthForSlide(slide, combinedWidth.value))
         setLefts()
         rootMounted.value = true
-
-        // slideRefs.value.forEach(slideRef => {
-        //     console.log("🚀 ~ file: Slider.vue ~ line 90 ~ onMounted ~ slideRef", slideRef, slideRef.width)
-        //     // slideRef.width.value = getWidthForSlide(slideRef.slide)
-        //     console.log("🚀 ~ file: Slider.vue ~ line 89 ~ onMounted ~ slideRef.width", slideRef.width)
-        // })
     }
-
 })
 </script>
