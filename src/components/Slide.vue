@@ -28,8 +28,11 @@ const props = defineProps({
     },
 })
 
+// TODO: might need to determine object-fit: contain if hochkant bild
+
 const width = ref(0)
 const left = ref(0)
+const order = ref<number | null>(null)
 
 watch(() => props.rootMounted,(val) => {
     if (val) {
@@ -56,9 +59,14 @@ function setLeftPosition(position) {
     left.value = position
 }
 
+function setOrder(index: number) {
+    order.value = index
+}
+
 defineExpose({
     width,
-    setLeftPosition
+    setLeftPosition,
+    setOrder,
 })
 
 </script>

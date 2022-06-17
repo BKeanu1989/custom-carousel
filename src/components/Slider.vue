@@ -7,7 +7,7 @@
         <!-- <slot name="navigation"> -->
             <Navigation @prev="prev" @next="next" />
         <!-- </slot> -->
-        <div class="custom-carousel--inner" ref="innerTrack">
+        <div class="custom-carousel--inner cc-transition-all" ref="innerTrack">
             <slot>
                 <Slide v-for="(slide, index) in slides" :key="index" 
                     :slide="slide" 
@@ -85,8 +85,6 @@ function updateSlide(index: number) {
     const slidesWidth = slideRefs.value.splice(0, index).reduce((acc, slide) => {
         return acc + slide.width
     }, 0)
-
-    console.log("🚀 ~ file: Slider.vue ~ line 69 ~ slidesWidth ~ slidesWidth", slidesWidth)
 
     innerTrack.value!.style.transform = `translateX(-${slidesWidth}px)`
 }
