@@ -1,38 +1,69 @@
 <template>
-    <div class="custom-carousel cc-flex cc-relative cc-w-f" ref="root">
+    <div class="custom-carousel cc-flex cc-relative cc-w-f cc-overflow-x-hidden" ref="root">
+        <span class="cc-z-10">
+            {{ activeIndex }}
+        </span>
         
-        <slot name="navigation">
-
-        </slot>
-        <slot>
-            <Slide v-for="(slide, index) in slides" :key="index" 
-                :slide="slide" 
-                :sliderWidth="sliderWidth" 
-                class="" 
-                :rootMounted="rootMounted" 
-                :toShow="props.toShow"
-                :imageToShowCombinedWidth="combinedWidth"
-
-                ref="slideRefs"
-                >
-            </Slide>
-        </slot>
+        <!-- <slot name="navigation"> -->
+            <Navigation @prev="prev" @next="next" />
+        <!-- </slot> -->
+        <div class="custom-carousel--inner" ref="innerTrack">
+            <slot>
+                <Slide v-for="(slide, index) in slides" :key="index" 
+                    :slide="slide" 
+                    :sliderWidth="sliderWidth" 
+                    class="" 
+                    :rootMounted="rootMounted" 
+                    :toShow="props.toShow"
+                    :imageToShowCombinedWidth="combinedWidth"
+                    :style="{}"
+                    ref="slideRefs"
+                    >
+                </Slide>
+            </slot>
+        </div>
         <slot name="pagination">
 
         </slot>
     </div>
 </template>
 <script setup lang="ts">
-import { onMounted, PropType, ref } from 'vue';
+import { computed, onMounted, PropType, ref, watch } from 'vue';
 import Slide from './Slide.vue'
+import Navigation from './Navigation.vue'
 
 const root = ref<HTMLElement | null>(null)
+const innerTrack = ref<HTMLElement | null>(null)
+
 const rootMounted = ref(false)
 const sliderWidth = ref(0)
 const widthsOfSlides = ref<number[]>([])
 
 const slideRefs = ref([])
 const combinedWidth = ref(0)
+const activeIndex = ref(0)
+const activeSlide = computed(() => {
+
+    return slideRefs.value[activeIndex.value]
+})
+
+const activeSlideWidth = computed(() => {
+    return activeSlide.value.width
+})
+
+const prevSlide = computed(() => {
+    return slideRefs.value[activeIndex.value - 1]
+})
+
+const nextSlide = computed(() => {
+    
+    return slideRefs.value[activeIndex.value + 1]
+})
+// const prevSlide = ref
+
+watch(activeIndex, (newVal) => {
+  updateSlide(newVal)
+})
 
 const props = defineProps({
     slides: {
@@ -44,6 +75,21 @@ const props = defineProps({
         required: true,
     }
 })
+
+function updateSlide(index: number) {
+    if (index === 0) {
+        innerTrack.value!.style.transform = `translateX(0px)`
+        return
+    }
+
+    const slidesWidth = slideRefs.value.splice(0, index).reduce((acc, slide) => {
+        return acc + slide.width
+    }, 0)
+
+    console.log("🚀 ~ file: Slider.vue ~ line 69 ~ slidesWidth ~ slidesWidth", slidesWidth)
+
+    innerTrack.value!.style.transform = `translateX(-${slidesWidth}px)`
+}
 
 function getWidthOfImage(slide: string) :number {
     const parser = new DOMParser()
@@ -83,6 +129,25 @@ function getLeft(index: number) {
     
     return leftPosition
 }
+
+function prev() {
+    if (activeIndex.value === 0) {
+        activeIndex.value = props.slides.length - 1
+        return
+    }
+
+    activeIndex.value--
+}
+
+function next() {
+    if (activeIndex.value === props.slides.length - 1) {
+        activeIndex.value = 0
+        return
+    }
+
+    activeIndex.value++
+}
+
 
 defineExpose({
     slideRefs

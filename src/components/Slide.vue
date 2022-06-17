@@ -10,10 +10,6 @@ const props = defineProps({
         type: String as PropType<string>,
         required: true,
     },
-    // width: {
-    //     type: Number,
-    //     required: true
-    // },
     sliderWidth: {
         type: Number,
         required: true
@@ -30,10 +26,6 @@ const props = defineProps({
         type: Number,
         required: true
     },
-    // left: {
-    //     type: Number,
-    //     required: true
-    // }
 })
 
 const width = ref(0)

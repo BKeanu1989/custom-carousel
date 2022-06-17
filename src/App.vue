@@ -3,6 +3,7 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import { ref } from 'vue'
 import Slider from './components/Slider.vue'
+import Navigation from './components/Navigation.vue'
 
 const slides = [
   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_13_e9027d8aea.jpg" sizes="(max-width: 870px) 100vw, 870px" />', 
