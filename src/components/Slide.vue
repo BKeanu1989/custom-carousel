@@ -1,5 +1,5 @@
 <template>
-    <div v-html="slide" :width="width" class="cc-h-full cc-absolute custom-carousel" :style="{width: width + 'px', left: left + 'px'}"></div>
+    <div v-html="slide" class="cc-h-full custom-carousel" :style="{width: width + 'px'}"></div>
 </template>
 <script setup lang="ts">
 import { onMounted, PropType, ref, watch } from 'vue';
@@ -31,20 +31,24 @@ const props = defineProps({
 // TODO: might need to determine object-fit: contain if hochkant bild
 
 const width = ref(0)
-const left = ref(0)
-const order = ref<number | null>(null)
+// const left = ref(0)
+// const order = ref<number | null>(null)
 
 watch(() => props.rootMounted,(val) => {
+    console.log("🚀 ~ file: Slide.vue ~ line 38 ~ watch ~ val", val)
     if (val) {
         width.value = getWidthForSlide(props.slide, props.imageToShowCombinedWidth)
+        console.log("🚀 ~ file: Slide.vue ~ line 41 ~ watch ~ width.value", width.value)
     }
 })
 
-/**
- * 
- * @param slide HTMLImageElement
- */
+// /**
+//  * 
+//  * @param slide HTMLImageElement
+//  */
 function getWidthForSlide(slide: string, combinedWidth: number) :number {
+    console.log("🚀 ~ file: Slide.vue ~ line 50 ~ getWidthForSlide ~ combinedWidth", combinedWidth)
+    console.log("🚀 ~ file: Slide.vue ~ line 50 ~ getWidthForSlide ~ slide", slide)
     const parser = new DOMParser()
     const doc = parser.parseFromString(slide, 'text/html')
     const img = doc.querySelector('img')
@@ -55,18 +59,18 @@ function getWidthForSlide(slide: string, combinedWidth: number) :number {
     return imageWidth
 }
 
-function setLeftPosition(position) {
-    left.value = position
-}
+// function setLeftPosition(position) {
+//     left.value = position
+// }
 
-function setOrder(index: number) {
-    order.value = index
-}
+// function setOrder(index: number) {
+//     order.value = index
+// }
 
-defineExpose({
-    width,
-    setLeftPosition,
-    setOrder,
-})
+// defineExpose({
+//     width,
+//     setLeftPosition,
+//     setOrder,
+// })
 
 </script>
