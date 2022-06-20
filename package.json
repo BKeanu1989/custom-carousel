@@ -20,6 +20,7 @@
     "tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/custom-carousel.css --watch"
   },
   "dependencies": {
+    "gsap": "^3.10.4",
     "vue": "^3.2.25"
   },
   "devDependencies": {
