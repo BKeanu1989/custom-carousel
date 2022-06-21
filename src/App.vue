@@ -1,7 +1,7 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import { ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import Slider from './components/Slider.vue'
 import Navigation from './components/Navigation.vue'
 
@@ -13,19 +13,34 @@ const slides = [
   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556.jpg 870w, http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556-300x200.jpg 300w, http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556-768x512.jpg 768w" sizes="(max-width: 870px) 100vw, 870px" />'
 ]
 
+const car_slider = ref(null)
+
 // const _slides = ref(slides.map((slide) => {
 //   const parser = new DOMParser()
 //   const doc = parser.parseFromString(slide, 'text/html')
 //   return doc.querySelector('img')
 // }))
 
+const activeSlide = computed(() => {
+  if (car_slider.value) {
+    return car_slider.value.activeSlide
+  }
+})
+
+onMounted(() => {
+  // aSlide = car
+})
+
 </script>
 
 
 <template>
-  <Slider :slides="slides" :toShow="3" style="height: 400px;">
-
-  </Slider>
+  <div>
+    <Slider :slides="slides" :toShow="3" style="height: 400px;" ref="car_slider">
+  
+    </Slider>
+    {{ activeSlide }}
+  </div>
 </template>
 
 <style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="cc-relative cc-z-10">
+    <div class="cc-absolute cc-z-10">
         <button @click="$emit('prev')">prev</button>
         <button @click="$emit('next')">next</button>
     </div>

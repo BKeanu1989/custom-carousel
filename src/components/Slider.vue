@@ -1,8 +1,5 @@
 <template>
     <div class="custom-carousel cc-flex cc-relative cc-w-f cc-overflow-x-hidden" ref="root">
-        <span class="cc-z-10">
-            {{ activeIndex }}
-        </span>
         
         <!-- <slot name="navigation"> -->
             <Navigation @prev="prev" @next="next" />
@@ -148,7 +145,10 @@ function next() {
 
 
 defineExpose({
-    slideRefs
+    slideRefs,
+    activeSlide,
+    prev,
+    next
 })
 
 onMounted(() => {
