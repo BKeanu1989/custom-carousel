@@ -35,10 +35,8 @@ const width = ref(0)
 // const order = ref<number | null>(null)
 
 watch(() => props.rootMounted,(val) => {
-    console.log("🚀 ~ file: Slide.vue ~ line 38 ~ watch ~ val", val)
     if (val) {
         width.value = getWidthForSlide(props.slide, props.imageToShowCombinedWidth)
-        console.log("🚀 ~ file: Slide.vue ~ line 41 ~ watch ~ width.value", width.value)
     }
 })
 
@@ -47,8 +45,6 @@ watch(() => props.rootMounted,(val) => {
 //  * @param slide HTMLImageElement
 //  */
 function getWidthForSlide(slide: string, combinedWidth: number) :number {
-    console.log("🚀 ~ file: Slide.vue ~ line 50 ~ getWidthForSlide ~ combinedWidth", combinedWidth)
-    console.log("🚀 ~ file: Slide.vue ~ line 50 ~ getWidthForSlide ~ slide", slide)
     const parser = new DOMParser()
     const doc = parser.parseFromString(slide, 'text/html')
     const img = doc.querySelector('img')
@@ -58,6 +54,10 @@ function getWidthForSlide(slide: string, combinedWidth: number) :number {
 
     return imageWidth
 }
+
+onMounted(() => {
+    // console.log("slide mounted")
+})
 
 // function setLeftPosition(position) {
 //     left.value = position
