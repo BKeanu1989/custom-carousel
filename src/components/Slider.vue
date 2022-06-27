@@ -79,18 +79,24 @@ function next() {
 }
 
 function onCompleteFn() {
-  console.log(_loop.value.current(), slideRefs.value)
+  console.log(_loop.value.current(), slideRefs.value, 'onCompleteFn')
   const curIndex = _loop.value.current()
+  console.log(props.slides[curIndex])
   const slideToAddCss = slideRefs.value[curIndex]
   if (slideToAddCss) {
     console.log(slideToAddCss)
   }
 }
 
+function resetLoop() {
+  console.log("reset loop")
+  activeIndex.value = 0
+}
+
 function horizontalLoop(items, config) {
 	items = gsap.utils.toArray(items);
 	config = config || {};
-	let tl = gsap.timeline({onComplete: () => console.log("only gets called when end is hit"),repeat: config.repeat, paused: config.paused, defaults: {ease: "none"}, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)}),
+	let tl = gsap.timeline({onComplete: () => resetLoop(),repeat: config.repeat, paused: config.paused, defaults: {ease: "none"}, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)}),
 		length = items.length,
 		startX = items[0].offsetLeft,
 		times = [],
@@ -124,16 +130,17 @@ function horizontalLoop(items, config) {
 	function toIndex(index, vars) {
     console.log(index)
     // TODO: not really working due to gsap ...
-    activeIndex.value = index
 		vars = vars || {};
 		(Math.abs(index - curIndex) > length / 2) && (index += index > curIndex ? -length : length); // always go in the shortest direction
 		let newIndex = gsap.utils.wrap(0, length, index),
 			time = times[newIndex];
+    console.log("🚀 ~ file: Slider.vue ~ line 137 ~ toIndex ~ newIndex", newIndex)
 		if (time > tl.time() !== index > curIndex) { // if we're wrapping the timeline's playhead, make the proper adjustments
 			vars.modifiers = {time: gsap.utils.wrap(0, tl.duration())};
 			time += tl.duration() * (index > curIndex ? 1 : -1);
 		}
 		curIndex = newIndex;
+    activeIndex.value = curIndex
 		vars.overwrite = true;
 		return tl.tweenTo(time, vars);
 	}
