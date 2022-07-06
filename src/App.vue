@@ -14,6 +14,8 @@ const slides = [
   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556.jpg 870w, http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556-300x200.jpg 300w, http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556-768x512.jpg 768w" sizes="(max-width: 870px) 100vw, 870px" />'
 ]
 
+const car_slider = ref(null)
+
 // const _slides = ref(slides.map((slide) => {
 //   const parser = new DOMParser()
 //   const doc = parser.parseFromString(slide, 'text/html')

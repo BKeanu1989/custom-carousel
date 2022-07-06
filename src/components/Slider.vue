@@ -79,7 +79,9 @@ function resetLoop() {
 }
 
 defineExpose({
-    slideRefs
+    slideRefs,
+    prev,
+    next
 })
 
 onMounted(() => {
