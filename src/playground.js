@@ -14,7 +14,7 @@ const bPs = [{
     }
 }];
 
-function getCurrentBreakPointWidth(widthOfElement, breakPoints) {
+function getBreakPointWidth(widthOfElement, breakPoints) {
     const keys = Object.keys(breakPoints[0]);
     const _keys = keys.map(key => parseInt(key));
 
@@ -24,13 +24,12 @@ function getCurrentBreakPointWidth(widthOfElement, breakPoints) {
         } 
         return cur;
     })
-
-
-    console.log("result", test)
+    return breakPoints[0][test];
 }
 
-getCurrentBreakPointWidth(850, bPs);
-getCurrentBreakPointWidth(905, bPs);
-getCurrentBreakPointWidth(1105, bPs);
-getCurrentBreakPointWidth(1205, bPs);
+const foo = getBreakPointWidth(850, bPs);
+console.log("🚀 ~ file: playground.js ~ line 31 ~ foo", foo)
+getBreakPointWidth(905, bPs);
+getBreakPointWidth(1105, bPs);
+getBreakPointWidth(1205, bPs);
 

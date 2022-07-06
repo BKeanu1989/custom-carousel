@@ -1,6 +1,9 @@
 // declare let gsap: any;
 import gsap from 'gsap'
 
+function resetLoop() {
+  console.log("reset loop");
+}
 export function horizontalLoop(items, config) {
 	items = gsap.utils.toArray(items);
 	config = config || {};

@@ -1,12 +1,21 @@
 import {type BreakPoint} from '../types/BreakPoints'
 
-function getCurrentBreakPointWidth(widthOfElement: number, breakPoints: BreakPoint[]) {
-    console.log("begin")
+export function getBreakPointWidth(widthOfElement: number, breakPoints: BreakPoint[]) {
+    const keys = Object.keys(breakPoints[0]);
+    const _keys = keys.map(key => parseInt(key));
+
+    const test = _keys.reduce((prev, cur) => {
+        if (prev < widthOfElement && cur > widthOfElement) {
+            return Math.min(prev, cur);
+        } 
+        return cur;
+    })
+    return breakPoints[0][test].itemsToShow;
 }
 
 function calcCombinedWidth(slides, breakPoints) {
   let width = 0;
-  const imagesToShow = getCurrentBreakPointWidth(window.innerWidth, breakPoints);
+  const imagesToShow = getBreakPointWidth(window.innerWidth, breakPoints);
   const slidesToShowWidth = slides.slice(0, imagesToShow)
 
   width = slidesToShowWidth.reduce((acc, slide) => {
@@ -25,4 +34,4 @@ export function getWidthOfImage(slide: string) :number {
     const imageWidth = img.width
 
     return imageWidth
-}a
+}

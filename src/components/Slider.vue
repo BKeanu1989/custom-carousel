@@ -31,10 +31,11 @@
 <script setup lang="ts">
 import { computed, onMounted, PropType, ref, watch } from 'vue';
 import Slide from './Slide.vue'
-import Navigation from './Navigation.vue'
+import Navigation from './Navigation.vue';
+import gsap from 'gsap';
 import { type BreakPoint } from '../types/BreakPoints';
 import { horizontalLoop } from '../utils/gsapUtils';
-import { getWidthOfImage } from '../utils/misc';
+import { getWidthOfImage, getBreakPointWidth } from '../utils/misc';
 
 const root = ref<HTMLElement | null>(null)
 const innerTrack = ref<HTMLElement | null>(null)
@@ -86,7 +87,9 @@ onMounted(() => {
         const rect = root.value.getBoundingClientRect()
         sliderWidth.value = rect.width
 
-        const slidesToShowWidth = props.slides.slice(0, props.toShow)
+        const toShow = getBreakPointWidth(window.innerWidth, props.breakPoints)
+        console.log("🚀 ~ file: Slider.vue ~ line 90 ~ onMounted ~ toShow", toShow)
+        const slidesToShowWidth = props.slides.slice(0, toShow)
 
         combinedWidth.value = slidesToShowWidth.reduce((acc, slide) => {
             return acc + getWidthOfImage(slide)
