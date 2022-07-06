@@ -36,7 +36,8 @@ const width = ref(0)
 
 watch(() => props.rootMounted,(val) => {
     if (val) {
-        width.value = getWidthForSlide(props.slide, props.imageToShowCombinedWidth)
+        width.value = getWidthForSlide(props.slide, props.imageToShowCombinedWidth);
+        console.log("width", width.value)
     }
 })
 

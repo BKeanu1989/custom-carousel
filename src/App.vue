@@ -1,9 +1,10 @@
-<script setup>
+<script setup lang="ts">
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import { ref } from 'vue'
-import Slider from './components/Slider.vue'
-import Navigation from './components/Navigation.vue'
+import { ref } from 'vue';
+import Slider from './components/Slider.vue';
+import Navigation from './components/Navigation.vue';
+import { type BreakPoint } from './types/BreakPoints';
 
 const slides = [
   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_13_e9027d8aea.jpg" sizes="(max-width: 870px) 100vw, 870px" />', 
@@ -19,11 +20,26 @@ const slides = [
 //   return doc.querySelector('img')
 // }))
 
+const bP = ref<BreakPoint[]>([{
+  1600: {
+    itemsToShow: 2.5,
+  },
+  1200: {
+    itemsToShow: 2,
+  },
+  900: {
+    itemsToShow: 1.5,
+  },
+  750: {
+    itemsToShow: 1,
+  }
+  
+}])
 </script>
 
 
 <template>
-  <Slider :slides="slides" :toShow="3" style="height: 400px;">
+  <Slider :slides="slides" :toShow="3" style="height: 400px;" :breakPoints="bP">
 
   </Slider>
 </template>
