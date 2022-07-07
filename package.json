@@ -22,7 +22,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/sw-carousel.css --watch",
-    "release": "npx standard-version && npm publish"
+    "release": "npx standard-version && git push --follow-tags origin master && npm publish"
   },
   "dependencies": {
     "gsap": "^3.10.4",
