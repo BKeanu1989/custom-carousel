@@ -1,4 +1,5 @@
 <template>
+  <div>
     <div class="custom-carousel cc-flex cc-relative cc-w-f cc-overflow-x-hidden" ref="root">
         <!-- <slot name="navigation"> -->
             <Navigation @prev="prev" @next="next" />
@@ -19,20 +20,23 @@
                   </Slide>
               </slot>
         </div>
+    </div>
         <div>
           {{ activeIndex }}
           {{ breakPoints }}
           {{ test }}
         </div>
         <slot name="pagination">
-
+          <Pagination :images="slides" :currentIndex="activeIndex" @updateSlide="gsapToIndex($event)"/>
         </slot>
-    </div>
+
+  </div>
 </template>
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, PropType, ref, watch } from 'vue';
 import Slide from './Slide.vue'
 import Navigation from './Navigation.vue';
+import Pagination from './Pagination.vue';
 import gsap from 'gsap';
 
 import { type BreakPoint } from '../types/BreakPoints';
@@ -69,6 +73,10 @@ const props = defineProps({
       required: true
     }
 })
+
+function gsapToIndex(index) {
+  _loop.value.toIndex(index, {duration: 0.8, ease: 'power1.inOut'})
+}
 
 function prev() {
   _loop.value.previous({duration: 0.8, ease: 'power1.inOut'})

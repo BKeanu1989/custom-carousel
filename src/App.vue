@@ -3,7 +3,6 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import { ref } from 'vue';
 import Slider from './components/Slider.vue';
-import Navigation from './components/Navigation.vue';
 import { type BreakPoint } from './types/BreakPoints';
 
 const slides = [
