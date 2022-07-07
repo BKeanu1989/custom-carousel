@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.6...v0.0.7) (2022-07-07)
+
+
+### Bug Fixes
+
+* **tailwind:** prefix ([21ca339](https://github.com/BKeanu1989/custom-carousel/commit/21ca339767212aec1884ffce02ac7a5527d53995))
+
 ### [0.0.6](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.5...v0.0.6) (2022-07-07)
 
 ### [0.0.5](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.4...v0.0.5) (2022-07-07)
