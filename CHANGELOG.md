@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.10](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.9...v0.0.10) (2022-07-07)
+
+
+### Bug Fixes
+
+* cleaning up ([e6eb6d5](https://github.com/BKeanu1989/custom-carousel/commit/e6eb6d54735ae83f5962cf3205a82b63d840e079))
+* **lazyness:** adding custom values statically ([44b189a](https://github.com/BKeanu1989/custom-carousel/commit/44b189af873567648b4b88688e3022d234943b28))
+* navigation arrow position ([e71807f](https://github.com/BKeanu1989/custom-carousel/commit/e71807f9b2c2472bbc71f28ccfbf757fc8d4b5fc))
+
 ### [0.0.9](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.8...v0.0.9) (2022-07-07)
 
 ### [0.0.8](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.7...v0.0.8) (2022-07-07)
