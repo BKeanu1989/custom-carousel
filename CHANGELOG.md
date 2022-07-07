@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.2...v0.0.3) (2022-07-07)
+
+
+### Bug Fixes
+
+* **breakpoint:** input as single object & name ([65ac737](https://github.com/BKeanu1989/custom-carousel/commit/65ac737f62417c2820bf4da36ac0f6e59d04b182))
+
 ### [0.0.2](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.1...v0.0.2) (2022-07-07)
 
 ### 0.0.1 (2022-07-07)
