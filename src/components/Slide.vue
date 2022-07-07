@@ -1,8 +1,8 @@
 <template>
-    <div v-html="slide" class="cc-h-full custom-carousel" :style="{width: width + 'px'}"></div>
+    <div v-html="slide" class="cc-h-full custom-carousel" :style="{width: width + 'px', transform: transformText}" ref="slideElement"></div>
 </template>
 <script setup lang="ts">
-import { onMounted, PropType, ref, watch } from 'vue';
+import { onMounted, onUnmounted, PropType, ref, watch } from 'vue';
 
 
 const props = defineProps({
@@ -30,15 +30,12 @@ const props = defineProps({
 
 // TODO: might need to determine object-fit: contain if hochkant bild
 
+const transformText = ref('')
 const width = ref(0)
-// const left = ref(0)
-// const order = ref<number | null>(null)
-
-// watch(() => props.rootMounted,(val) => {
+const slideElement = ref(null)
 watch(() => [props.rootMounted, props.imageToShowCombinedWidth],(val) => {
     if (val) {
-        width.value = getWidthForSlide(props.slide, props.imageToShowCombinedWidth);
-        console.log("width", width.value)
+        setWidth()
     }
 })
 
@@ -59,20 +56,40 @@ function getWidthForSlide(slide: string, combinedWidth: number) :number {
 
 onMounted(() => {
     // console.log("slide mounted")
+    // window.addEventListener('resize', setWidth)
 })
 
-// function setLeftPosition(position) {
-//     left.value = position
-// }
+onUnmounted(() => {
+    // window.removeEventListener('resize', setWidth)
+})
 
-// function setOrder(index: number) {
-//     order.value = index
-// }
+function setWidth() {
+    width.value = getWidthForSlide(props.slide, props.imageToShowCombinedWidth);
+    // console.log("width", width.value)
+}
 
-// defineExpose({
-//     width,
-//     setLeftPosition,
-//     setOrder,
-// })
+function setWidthManualy(val) {
+    width.value = val
+}
+
+function setTransform() {
+    // console.log(this)
+    if (slideElement.value) {
+        // slideElement.value.style.transform = `translateX(${props.sliderWidth * -props.activeIndex}px)`
+        // slideElement.value
+        // console.log("🚀 ~ file: Slide.vue ~ line 79 ~ setTransform ~ slideElement.value", slideElement.value.style)
+        // console.log(slideElement.value.style.transform)
+        // slideElement.value.style.transform += ` scale(1.1)`
+        // transformText.value = slideElement.value.style.transform + ` scale(1.1)`
+        // console.log(slideElement.value.style.transform)
+
+    }
+}
+
+defineExpose({
+    width,
+    setWidth,
+    setTransform
+})
 
 </script>

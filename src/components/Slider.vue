@@ -13,7 +13,7 @@
                       :toShow="props.toShow"
                       :imageToShowCombinedWidth="combinedWidth"
                       :style="{}"
-                      :class="{active: index === activeIndex, inActive: index !== activeIndex}"
+                      :class="{inActive: index !== activeIndex, 'cc-z-10': index === activeIndex}"
                       ref="slideRefs"
                       >
                   </Slide>
@@ -92,6 +92,12 @@ function setImagesDependingOnWidth() {
   combinedWidth.value = slidesToShowWidth.reduce((acc, slide) => {
       return acc + getWidthOfImage(slide)
   }, 0)
+
+  // console.log(slideRefs.value)
+  // slideRefs.value.forEach((slide, index) => {
+  //   console.log("🚀 ~ file: Slider.vue ~ line 100 ~ slideRefs.value.forEach ~ slide", slide)
+  //   slide.setWidth()
+  // })
 }
 
 defineExpose({
@@ -119,6 +125,13 @@ onMounted(() => {
         },
         onComplete: (old, newV) => {
           console.log("onComplete", old, newV)
+          // slideRefs.value[newV].setTransform()
+        },
+        onCompleteSecond: (old, newV) => {
+          console.log("onCompleteSecond", old, newV)
+          console.log("🚀 ~ file: Slider.vue ~ line 133 ~ setTimeout ~ slideRefs.value[activeIndex.value]", slideRefs.value[activeIndex.value])
+          slideRefs.value[activeIndex.value].setTransform()
+          // slideRefs.value[newV].setTransform()
         },
         onReset: () => {
           resetLoop()

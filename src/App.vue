@@ -29,10 +29,10 @@ const bP = ref<BreakPoint[]>([{
   1200: {
     itemsToShow: 3,
   },
-  900: {
+  800: {
     itemsToShow: 2,
   },
-  750: {
+  400: {
     itemsToShow: 1,
   }
   

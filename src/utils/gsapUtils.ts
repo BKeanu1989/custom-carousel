@@ -1,6 +1,6 @@
 import gsap from 'gsap'
 
-export function horizontalLoop(items, config, {aniEnd: cb, onComplete: cb2, onReset: cb3}) {
+export function horizontalLoop(items, config, {aniEnd: cb, onComplete: cb2, onCompleteSecond: onCompleteFn,onReset: cb3}) {
 	items = gsap.utils.toArray(items);
 	config = config || {};
 	let tl = gsap.timeline({onComplete: () => cb3(),repeat: config.repeat, paused: config.paused, defaults: {ease: "none"}, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)}),
