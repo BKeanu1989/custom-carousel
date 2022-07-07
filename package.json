@@ -1,23 +1,22 @@
 {
-  "name": "custom-carousel",
-  "private": true,
+  "name": "sw-carousel",
   "version": "0.0.1",
   "files": [
     "dist"
   ],
-  "main": "./dist/custom-carousel.umd.js",
-  "module": "./dist/custom-carousel.es.js",
+  "main": "./dist/sw-carousel.umd.js",
+  "module": "./dist/sw-carousel.es.js",
   "exports": {
     ".": {
-      "import": "./dist/custom-carousel.es.js",
-      "require": "./dist/custom-carousel.umd.js"
+      "import": "./dist/sw-carousel.es.js",
+      "require": "./dist/sw-carousel.umd.js"
     }
   },
   "scripts": {
     "dev": "concurrently \"vite\" \"npm:tailwind\"",
     "build": "vite build",
     "preview": "vite preview",
-    "tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/custom-carousel.css --watch"
+    "tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/sw-carousel.css --watch"
   },
   "dependencies": {
     "gsap": "^3.10.4",
