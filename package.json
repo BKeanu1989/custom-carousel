@@ -19,7 +19,7 @@
   },
   "scripts": {
     "dev": "concurrently \"vite\" \"npm:tailwind\"",
-    "build": "vite build",
+    "build": "vite build && npx tailwindcss -i ./src/input.css -o ./dist/sw-carousel.css",
     "preview": "vite preview",
     "tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/sw-carousel.css --watch",
     "release": "npm run buikd && npx standard-version && git push --follow-tags origin master && npm publish"
