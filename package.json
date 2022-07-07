@@ -2,7 +2,8 @@
   "name": "sw-carousel",
   "version": "0.0.3",
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "main": "./dist/sw-carousel.umd.js",
   "module": "./dist/sw-carousel.es.js",
