@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="custom-carousel cc-flex cc-relative cc-w-f cc-overflow-x-hidden" ref="root">
+    <div class="sw-carousel cc-flex cc-relative cc-w-f cc-overflow-x-hidden" ref="root">
         <!-- <slot name="navigation"> -->
             <Navigation @prev="prev" @next="next" />
         <!-- </slot> -->
-        <div class="custom-carousel--inner" ref="innerTrack">
+        <div class="sw-carousel--inner" ref="innerTrack">
               <slot>
                   <Slide v-for="(slide, index) in slides" :key="index" 
                       :slide="slide" 
@@ -69,7 +69,7 @@ const props = defineProps({
         required: true,
     },
     breakPoints: {
-      type: Array as PropType<BreakPoint[]>,
+      type: Object as PropType<BreakPoint>,
       required: true
     }
 })
@@ -160,7 +160,7 @@ onUnmounted(() => {
 </script>
 
 <style>
-.custom-carousel--inner {
+.sw-carousel--inner {
   /* height: 20%; */
   /* width: 60%; */
   /* background: #555; */

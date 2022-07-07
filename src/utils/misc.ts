@@ -1,8 +1,8 @@
 import {type BreakPoint} from '../types/BreakPoints'
 
-export function getBreakPointWidth(widthOfElement: number, breakPoints: BreakPoint[]) {
+export function getBreakPointWidth(widthOfElement: number, breakPoints: BreakPoint) {
     console.log("breakPoints", breakPoints)
-    const keys = Object.keys(breakPoints[0]);
+    const keys = Object.keys(breakPoints);
     const _keys = keys.map(key => parseInt(key));
 
     const test = _keys.reduce((prev, cur) => {
@@ -11,7 +11,7 @@ export function getBreakPointWidth(widthOfElement: number, breakPoints: BreakPoi
         } 
         return cur;
     })
-    return breakPoints[0][test].itemsToShow;
+    return breakPoints[test].itemsToShow;
 }
 
 function calcCombinedWidth(slides, breakPoints) {

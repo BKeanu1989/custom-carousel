@@ -21,7 +21,7 @@ const car_slider = ref(null)
 //   return doc.querySelector('img')
 // }))
 
-const bP = ref<BreakPoint[]>([{
+const bP = ref<BreakPoint>({
   1600: {
     itemsToShow: 4,
   },
@@ -35,7 +35,7 @@ const bP = ref<BreakPoint[]>([{
     itemsToShow: 1,
   }
   
-}])
+})
 </script>
 
 
