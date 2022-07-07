@@ -24,13 +24,13 @@ const car_slider = ref(null)
 
 const bP = ref<BreakPoint[]>([{
   1600: {
-    itemsToShow: 2.5,
+    itemsToShow: 4,
   },
   1200: {
-    itemsToShow: 2,
+    itemsToShow: 3,
   },
   900: {
-    itemsToShow: 1.5,
+    itemsToShow: 2,
   },
   750: {
     itemsToShow: 1,

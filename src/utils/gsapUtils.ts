@@ -4,7 +4,7 @@ import gsap from 'gsap'
 function resetLoop() {
   console.log("reset loop");
 }
-export function horizontalLoop(items, config) {
+export function horizontalLoop(items, config, cb, cb2) {
 	items = gsap.utils.toArray(items);
 	config = config || {};
 	let tl = gsap.timeline({onComplete: () => resetLoop(),repeat: config.repeat, paused: config.paused, defaults: {ease: "none"}, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)}),
@@ -52,6 +52,7 @@ export function horizontalLoop(items, config) {
 		}
 		curIndex = newIndex;
     // activeIndex.value = curIndex
+    cb(curIndex);
 		vars.overwrite = true;
 		return tl.tweenTo(time, vars);
 	}

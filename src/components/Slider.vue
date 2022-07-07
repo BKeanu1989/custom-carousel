@@ -4,24 +4,25 @@
             <Navigation @prev="prev" @next="next" />
         <!-- </slot> -->
         <div class="custom-carousel--inner" ref="innerTrack">
-            <slot>
-                <Slide v-for="(slide, index) in slides" :key="index" 
-                    :slide="slide" 
-                    :sliderWidth="sliderWidth" 
-                    class="cc-slide" 
-                    :rootMounted="rootMounted" 
-                    :toShow="props.toShow"
-                    :imageToShowCombinedWidth="combinedWidth"
-                    :style="{}"
-                    :class="{active: index === activeIndex, inActive: index !== activeIndex}"
-                    ref="slideRefs"
-                    >
-                </Slide>
-            </slot>
+              <slot>
+                  <Slide v-for="(slide, index) in slides" :key="index" 
+                      :slide="slide" 
+                      :sliderWidth="sliderWidth" 
+                      class="cc-slide" 
+                      :rootMounted="rootMounted" 
+                      :toShow="props.toShow"
+                      :imageToShowCombinedWidth="combinedWidth"
+                      :style="{}"
+                      :class="{active: index === activeIndex, inActive: index !== activeIndex}"
+                      ref="slideRefs"
+                      >
+                  </Slide>
+              </slot>
         </div>
         <div>
           {{ activeIndex }}
           {{ breakPoints }}
+          {{ test }}
         </div>
         <slot name="pagination">
 
@@ -33,6 +34,7 @@ import { computed, onMounted, PropType, ref, watch } from 'vue';
 import Slide from './Slide.vue'
 import Navigation from './Navigation.vue';
 import gsap from 'gsap';
+
 import { type BreakPoint } from '../types/BreakPoints';
 import { horizontalLoop } from '../utils/gsapUtils';
 import { getWidthOfImage, getBreakPointWidth } from '../utils/misc';
@@ -48,6 +50,10 @@ const _loop = ref<any>(null)
 const slideRefs = ref([])
 const combinedWidth = ref(0)
 const activeIndex = ref(0)
+
+const test = computed(() => {
+  return _loop.value?.current || null;
+})
 
 const props = defineProps({
     slides: {
@@ -89,6 +95,7 @@ onMounted(() => {
         const rect = root.value.getBoundingClientRect()
         sliderWidth.value = rect.width
 
+        // MAYBE: get container width instead of window width
         const toShow = getBreakPointWidth(window.innerWidth, props.breakPoints)
         console.log("🚀 ~ file: Slider.vue ~ line 90 ~ onMounted ~ toShow", toShow)
         const slidesToShowWidth = props.slides.slice(0, toShow)
@@ -103,7 +110,12 @@ onMounted(() => {
 
     setTimeout(() => {
       const boxes = gsap.utils.toArray('.cc-slide')
-      _loop.value = horizontalLoop(boxes, {paused: true, draggable: true});
+      _loop.value = horizontalLoop(boxes, {paused: true, draggable: true}, (activeI) => {
+        console.log("active index", activeI);
+        activeIndex.value = activeI
+      }, () => {
+        console.log("this will not happen so far")
+      }),
       boxes.forEach((box, i) => box.addEventListener("click", () => _loop.value.toIndex(i, {duration: 0.8, ease: "power1.inOut"})));
     }, 50);
 
