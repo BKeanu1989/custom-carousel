@@ -30,7 +30,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted, PropType, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, PropType, ref, watch } from 'vue';
 import Slide from './Slide.vue'
 import Navigation from './Navigation.vue';
 import gsap from 'gsap';
@@ -84,6 +84,16 @@ function resetLoop() {
   activeIndex.value = 0
 }
 
+function setImagesDependingOnWidth() {
+  // MAYBE: get container width instead of window width
+  const toShow = getBreakPointWidth(window.innerWidth, props.breakPoints)
+  const slidesToShowWidth = props.slides.slice(0, toShow)
+
+  combinedWidth.value = slidesToShowWidth.reduce((acc, slide) => {
+      return acc + getWidthOfImage(slide)
+  }, 0)
+}
+
 defineExpose({
     slideRefs,
     prev,
@@ -95,15 +105,8 @@ onMounted(() => {
         const rect = root.value.getBoundingClientRect()
         sliderWidth.value = rect.width
 
-        // MAYBE: get container width instead of window width
-        const toShow = getBreakPointWidth(window.innerWidth, props.breakPoints)
-        console.log("🚀 ~ file: Slider.vue ~ line 90 ~ onMounted ~ toShow", toShow)
-        const slidesToShowWidth = props.slides.slice(0, toShow)
-
-        combinedWidth.value = slidesToShowWidth.reduce((acc, slide) => {
-            return acc + getWidthOfImage(slide)
-        }, 0)
-
+        window.addEventListener('resize', setImagesDependingOnWidth)
+        setImagesDependingOnWidth()
         // setLefts()
         rootMounted.value = true
     }
@@ -114,8 +117,8 @@ onMounted(() => {
         aniEnd: (index) => {
           activeIndex.value = index
         },
-        onComplete: () => {
-          console.log("onComplete")
+        onComplete: (old, newV) => {
+          console.log("onComplete", old, newV)
         },
         onReset: () => {
           resetLoop()
@@ -128,6 +131,10 @@ onMounted(() => {
     }, 50);
 
 
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', setImagesDependingOnWidth)
 })
 </script>
 

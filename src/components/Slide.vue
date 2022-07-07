@@ -34,7 +34,8 @@ const width = ref(0)
 // const left = ref(0)
 // const order = ref<number | null>(null)
 
-watch(() => props.rootMounted,(val) => {
+// watch(() => props.rootMounted,(val) => {
+watch(() => [props.rootMounted, props.imageToShowCombinedWidth],(val) => {
     if (val) {
         width.value = getWidthForSlide(props.slide, props.imageToShowCombinedWidth);
         console.log("width", width.value)
