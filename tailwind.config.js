@@ -5,5 +5,5 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-  prefix: "cc-"
+  prefix: "sw-"
 }

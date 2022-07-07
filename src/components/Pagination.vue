@@ -1,8 +1,8 @@
 <template>
-    <div class="cc-flex cc-flex-row cc-justify-center gallery-preview-slide cc-gap-2 cc-mb-10" v-if="images">
+    <div class="sw-flex sw-flex-row sw-justify-center gallery-preview-slide sw-gap-2 sw-mb-10" v-if="images">
       <template v-for="(photo, index) in images" :key="index">
-          <div class="wrapper cc-relative hover:cc-cursor-pointer" 
-          :class="{'cc-bg-gold cc-bg-opacity-50 cc-z-10': index === currentIndex}" 
+          <div class="wrapper sw-relative hover:sw-cursor-pointer" 
+          :class="{'sw-bg-gold sw-bg-opacity-50 sw-z-10': index === currentIndex}" 
           @click="$emit('updateSlide', index)" 
           v-html="photo">
           </div>

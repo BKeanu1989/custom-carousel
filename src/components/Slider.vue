@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="sw-carousel cc-flex cc-relative cc-w-f cc-overflow-x-hidden" ref="root">
+    <div class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden" ref="root">
         <!-- <slot name="navigation"> -->
             <Navigation @prev="prev" @next="next" />
         <!-- </slot> -->
@@ -9,12 +9,12 @@
                   <Slide v-for="(slide, index) in slides" :key="index" 
                       :slide="slide" 
                       :sliderWidth="sliderWidth" 
-                      class="cc-slide" 
+                      class="sw-slide" 
                       :rootMounted="rootMounted" 
                       :toShow="props.toShow"
                       :imageToShowCombinedWidth="combinedWidth"
                       :style="{}"
-                      :class="{inActive: index !== activeIndex, 'cc-z-10': index === activeIndex}"
+                      :class="{inActive: index !== activeIndex, 'sw-z-10': index === activeIndex}"
                       ref="slideRefs"
                       >
                   </Slide>
@@ -126,7 +126,7 @@ onMounted(() => {
     }
 
     setTimeout(() => {
-      const boxes = gsap.utils.toArray('.cc-slide')
+      const boxes = gsap.utils.toArray('.sw-slide')
       const callBackOptions = {
         aniEnd: (index) => {
           activeIndex.value = index
@@ -171,7 +171,7 @@ onUnmounted(() => {
 }
 
 
-.cc-slide {
+.sw-slide {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -187,11 +187,11 @@ onUnmounted(() => {
   cursor: pointer;
 }
 
-.cc-slide.active {
+.sw-slide.active {
   transform: scale(1.1);
 }
 
-.cc-slide.inActive {
+.sw-slide.inActive {
   filter: opacity(.7)
 }
 

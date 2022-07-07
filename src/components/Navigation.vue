@@ -1,7 +1,7 @@
 <template>
-    <div class="cc-z-40">
-        <LeftArrowIcon @click="$emit('prev')" class="cc-absolute cc-prev cc-top-0 cc-left-0" />
-        <RightArrowIcon @click="$emit('next')" class="cc-absolute cc-next cc-top-0 cc-right-0"></RightArrowIcon>
+    <div class="sw-z-40">
+        <LeftArrowIcon @click="$emit('prev')" class="sw-absolute sw-prev sw-top-0 sw-left-0" />
+        <RightArrowIcon @click="$emit('next')" class="sw-absolute sw-next sw-top-0 sw-right-0"></RightArrowIcon>
     </div>
 </template>
 <script setup lang="ts">

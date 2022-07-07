@@ -1,5 +1,5 @@
 <template>
-    <div v-html="slide" class="cc-h-full sw-carousel" :style="{width: width + 'px', transform: transformText}" ref="slideElement"></div>
+    <div v-html="slide" class="sw-h-full sw-carousel" :style="{width: width + 'px', transform: transformText}" ref="slideElement"></div>
 </template>
 <script setup lang="ts">
 import { onMounted, onUnmounted, PropType, ref, watch } from 'vue';
