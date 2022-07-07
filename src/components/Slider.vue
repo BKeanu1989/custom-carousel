@@ -110,12 +110,20 @@ onMounted(() => {
 
     setTimeout(() => {
       const boxes = gsap.utils.toArray('.cc-slide')
-      _loop.value = horizontalLoop(boxes, {paused: true, draggable: true}, (activeI) => {
-        console.log("active index", activeI);
-        activeIndex.value = activeI
-      }, (oldV, newV) => {
-        console.log("this will not happen so far", oldV, newV)
-      }),
+      const callBackOptions = {
+        aniEnd: (index) => {
+          activeIndex.value = index
+        },
+        onComplete: () => {
+          console.log("onComplete")
+        },
+        onReset: () => {
+          resetLoop()
+        }
+      }
+      _loop.value = horizontalLoop(boxes, {paused: true, draggable: true},
+      callBackOptions)
+      ,
       boxes.forEach((box, i) => box.addEventListener("click", () => _loop.value.toIndex(i, {duration: 0.8, ease: "power1.inOut"})));
     }, 50);
 

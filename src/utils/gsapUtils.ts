@@ -1,13 +1,9 @@
-// declare let gsap: any;
 import gsap from 'gsap'
 
-function resetLoop() {
-  console.log("reset loop");
-}
-export function horizontalLoop(items, config, cb, cb2) {
+export function horizontalLoop(items, config, {aniEnd: cb, onComplete: cb2, onReset: cb3}) {
 	items = gsap.utils.toArray(items);
 	config = config || {};
-	let tl = gsap.timeline({onComplete: () => resetLoop(),repeat: config.repeat, paused: config.paused, defaults: {ease: "none"}, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)}),
+	let tl = gsap.timeline({onComplete: () => cb3(),repeat: config.repeat, paused: config.paused, defaults: {ease: "none"}, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)}),
 		length = items.length,
 		startX = items[0].offsetLeft,
 		times = [],
@@ -105,12 +101,6 @@ export function horizontalLoop(items, config, cb, cb2) {
 }
 
 function onCompleteFn() {
-    // console.log(_loop.value.current(), slideRefs.value, 'onCompleteFn')
-    // const curIndex = _loop.value.current()
-    // console.log(props.slides[curIndex])
-    // const slideToAddCss = slideRefs.value[curIndex]
-    // if (slideToAddCss) {
-    //   console.log(slideToAddCss)
-    // }
+    console.log('onCompleteFn')
 }
 
