@@ -1,6 +1,6 @@
 {
   "name": "sw-carousel",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "files": [
     "dist",
     "CHANGELOG.md"
@@ -21,7 +21,8 @@
     "dev": "concurrently \"vite\" \"npm:tailwind\"",
     "build": "vite build",
     "preview": "vite preview",
-    "tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/sw-carousel.css --watch"
+    "tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/sw-carousel.css --watch",
+    "release": "npx standard-version && npm publish"
   },
   "dependencies": {
     "gsap": "^3.10.4",
