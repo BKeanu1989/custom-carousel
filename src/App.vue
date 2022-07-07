@@ -40,7 +40,7 @@ const bP = ref<BreakPoint>({
 
 
 <template>
-  <Slider :slides="slides" :toShow="3" style="height: 400px;" :breakPoints="bP">
+  <Slider :slides="slides" :toShow="3" :breakPoints="bP">
 
   </Slider>
 </template>

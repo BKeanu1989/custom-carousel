@@ -1,7 +1,11 @@
 <template>
     <div class="sw-z-40">
-        <LeftArrowIcon @click="$emit('prev')" class="sw-absolute sw-prev sw-top-0 sw-left-0" />
-        <RightArrowIcon @click="$emit('next')" class="sw-absolute sw-next sw-top-0 sw-right-0"></RightArrowIcon>
+        <slot name="leftArrow">
+            <LeftArrowIcon @click="$emit('prev')" class="sw-absolute sw-prev sw-top-0 sw-left-0 hover:sw-cursor-pointer" />
+        </slot>
+        <slot name="rightArrow">
+            <RightArrowIcon @click="$emit('next')" class="sw-absolute sw-next sw-top-0 sw-right-0 hover:sw-cursor-pointer"></RightArrowIcon>
+        </slot>
     </div>
 </template>
 <script setup lang="ts">

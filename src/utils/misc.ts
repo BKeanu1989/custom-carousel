@@ -1,7 +1,6 @@
 import {type BreakPoint} from '../types/BreakPoints'
 
 export function getBreakPointWidth(widthOfElement: number, breakPoints: BreakPoint) {
-    console.log("breakPoints", breakPoints)
     const keys = Object.keys(breakPoints);
     const _keys = keys.map(key => parseInt(key));
 

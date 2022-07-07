@@ -101,6 +101,6 @@ export function horizontalLoop(items, config, {aniEnd: cb, onComplete: cb2, onCo
 }
 
 function onCompleteFn() {
-    console.log('onCompleteFn')
+    // console.log('onCompleteFn')
 }
 

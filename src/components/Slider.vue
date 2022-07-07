@@ -21,11 +21,6 @@
               </slot>
         </div>
     </div>
-        <div>
-          {{ activeIndex }}
-          {{ breakPoints }}
-          {{ test }}
-        </div>
         <slot name="pagination">
           <Pagination :images="slides" :currentIndex="activeIndex" @updateSlide="gsapToIndex($event)"/>
         </slot>
@@ -88,7 +83,6 @@ function next() {
 }
 
 function resetLoop() {
-  console.log("reset loop")
   activeIndex.value = 0
 }
 
@@ -132,12 +126,9 @@ onMounted(() => {
           activeIndex.value = index
         },
         onComplete: (old, newV) => {
-          console.log("onComplete", old, newV)
           // slideRefs.value[newV].setTransform()
         },
         onCompleteSecond: (old, newV) => {
-          console.log("onCompleteSecond", old, newV)
-          console.log("🚀 ~ file: Slider.vue ~ line 133 ~ setTimeout ~ slideRefs.value[activeIndex.value]", slideRefs.value[activeIndex.value])
           slideRefs.value[activeIndex.value].setTransform()
           // slideRefs.value[newV].setTransform()
         },
