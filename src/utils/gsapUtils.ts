@@ -39,13 +39,12 @@ export function horizontalLoop(items, config, cb, cb2) {
 		times[i] = distanceToStart / pixelsPerSecond;
 	}
 	function toIndex(index, vars) {
-    console.log(index)
+    const oldIndex = curIndex;
     // TODO: not really working due to gsap ...
 		vars = vars || {};
 		(Math.abs(index - curIndex) > length / 2) && (index += index > curIndex ? -length : length); // always go in the shortest direction
 		let newIndex = gsap.utils.wrap(0, length, index),
 			time = times[newIndex];
-    console.log("🚀 ~ file: Slider.vue ~ line 137 ~ toIndex ~ newIndex", newIndex)
 		if (time > tl.time() !== index > curIndex) { // if we're wrapping the timeline's playhead, make the proper adjustments
 			vars.modifiers = {time: gsap.utils.wrap(0, tl.duration())};
 			time += tl.duration() * (index > curIndex ? 1 : -1);
@@ -54,6 +53,7 @@ export function horizontalLoop(items, config, cb, cb2) {
     // activeIndex.value = curIndex
     cb(curIndex);
 		vars.overwrite = true;
+    vars.onComplete = cb2(oldIndex, curIndex);
 		return tl.tweenTo(time, vars);
 	}
 	tl.next = vars => toIndex(curIndex+1, vars);

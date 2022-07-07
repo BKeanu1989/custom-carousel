@@ -113,8 +113,8 @@ onMounted(() => {
       _loop.value = horizontalLoop(boxes, {paused: true, draggable: true}, (activeI) => {
         console.log("active index", activeI);
         activeIndex.value = activeI
-      }, () => {
-        console.log("this will not happen so far")
+      }, (oldV, newV) => {
+        console.log("this will not happen so far", oldV, newV)
       }),
       boxes.forEach((box, i) => box.addEventListener("click", () => _loop.value.toIndex(i, {duration: 0.8, ease: "power1.inOut"})));
     }, 50);
