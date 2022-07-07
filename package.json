@@ -7,12 +7,6 @@
   ],
   "main": "./dist/sw-carousel.umd.js",
   "module": "./dist/sw-carousel.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/sw-carousel.es.js",
-      "require": "./dist/sw-carousel.umd.js"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/BKeanu1989/custom-carousel"
