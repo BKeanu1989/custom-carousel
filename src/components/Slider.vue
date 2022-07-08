@@ -11,7 +11,6 @@
                       :sliderWidth="sliderWidth" 
                       class="sw-slide" 
                       :rootMounted="rootMounted" 
-                      :toShow="props.toShow"
                       :imageToShowCombinedWidth="combinedWidth"
                       :style="{}"
                       :class="{inActive: index !== activeIndex, 'sw-z-10': index === activeIndex}"
@@ -57,10 +56,6 @@ const test = computed(() => {
 const props = defineProps({
     slides: {
         type: Array as PropType<string[]>,
-        required: true,
-    },
-    toShow: {
-        type: Number,
         required: true,
     },
     breakPoints: {

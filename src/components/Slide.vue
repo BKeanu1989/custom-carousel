@@ -18,10 +18,10 @@ const props = defineProps({
         type: Boolean,
         required: true
     },
-    toShow: {
-        type: Number,
-        required: true
-    },
+    // toShow: {
+    //     type: Number,
+    //     required: true
+    // },
     imageToShowCombinedWidth: {
         type: Number,
         required: true
