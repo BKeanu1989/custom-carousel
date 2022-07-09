@@ -58,17 +58,17 @@ onMounted(() => {
     console.log("🚀 ~ file: Slide.vue ~ line 59 ~ onMounted ~ _image", _image)
     if (_image) {
         const parser = new DOMParser()
-        const doc = parser.parseFromString(slideElement.value?.innerHTML, 'text/html')
-        const img = doc.querySelector('img')
-        if (!img) return 0;
-
-        
-        const imageWidth = _image.width || img.width;
-        const imageHeight = _image.height || img.height; 
-        
-        
+        if (slideElement.value?.innerHTML) {
+            const doc = parser.parseFromString(slideElement.value?.innerHTML, 'text/html')
+            const img = doc.querySelector('img')
+            if (!img) return 0;
+    
+            
+            const imageWidth = _image.width || img.width;
+            const imageHeight = _image.height || img.height; 
+            console.log("🚀 ~ file: Slide.vue ~ line 68 ~ onMounted ~ imageWidth", imageWidth, imageHeight)
+        }
     }
-    // window.addEventListener('resize', setWidth)
 })
 
 onUnmounted(() => {
@@ -80,7 +80,7 @@ function setWidth() {
     // console.log("width", width.value)
 }
 
-function setWidthManualy(val) {
+function setWidthManualy(val: number) {
     width.value = val
 }
 

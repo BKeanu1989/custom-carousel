@@ -13,12 +13,12 @@ export function getBreakPointWidth(widthOfElement: number, breakPoints: BreakPoi
     return breakPoints[test].itemsToShow;
 }
 
-function calcCombinedWidth(slides, breakPoints) {
+function calcCombinedWidth(slides: any[], breakPoints: BreakPoint) {
   let width = 0;
   const imagesToShow = getBreakPointWidth(window.innerWidth, breakPoints);
   const slidesToShowWidth = slides.slice(0, imagesToShow)
 
-  width = slidesToShowWidth.reduce((acc, slide) => {
+  width = slidesToShowWidth.reduce((acc: number, slide: any) => {
       return acc + getWidthOfImage(slide)
   }, 0)
 

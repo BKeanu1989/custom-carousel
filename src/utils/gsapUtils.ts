@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import gsap from 'gsap'
 
 export function horizontalLoop(items, config, {aniEnd: cb, onComplete: cb2, onCompleteSecond: onCompleteFn,onReset: cb3}) {

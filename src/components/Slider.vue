@@ -64,7 +64,7 @@ const props = defineProps({
     }
 })
 
-function gsapToIndex(index) {
+function gsapToIndex(index: number) {
   _loop.value.toIndex(index, {duration: 0.8, ease: 'power1.inOut'})
 }
 
@@ -117,13 +117,14 @@ onMounted(() => {
     setTimeout(() => {
       const boxes = gsap.utils.toArray('.sw-slide')
       const callBackOptions = {
-        aniEnd: (index) => {
+        aniEnd: (index: number) => {
           activeIndex.value = index
         },
-        onComplete: (old, newV) => {
+        onComplete: (old: number, newV: number) => {
           // slideRefs.value[newV].setTransform()
         },
-        onCompleteSecond: (old, newV) => {
+        onCompleteSecond: (old: any, newV: any) => {
+          // @ts-ignore
           slideRefs.value[activeIndex.value].setTransform()
           // slideRefs.value[newV].setTransform()
         },
@@ -134,7 +135,7 @@ onMounted(() => {
       _loop.value = horizontalLoop(boxes, {paused: true, draggable: true},
       callBackOptions)
       ,
-      boxes.forEach((box, i) => box.addEventListener("click", () => _loop.value.toIndex(i, {duration: 0.8, ease: "power1.inOut"})));
+      boxes.forEach((box: any, i: number) => box.addEventListener("click", () => _loop.value.toIndex(i, {duration: 0.8, ease: "power1.inOut"})));
     }, 50);
 
 
