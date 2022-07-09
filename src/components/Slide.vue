@@ -3,7 +3,7 @@
 </template>
 <script setup lang="ts">
 import { onMounted, onUnmounted, PropType, ref, watch } from 'vue';
-
+const slideElement = ref<HTMLElement | null>(null)
 
 const props = defineProps({
     slide: {
@@ -32,7 +32,6 @@ const props = defineProps({
 
 const transformText = ref('')
 const width = ref(0)
-const slideElement = ref(null)
 watch(() => [props.rootMounted, props.imageToShowCombinedWidth],(val) => {
     if (val) {
         setWidth()
@@ -55,7 +54,20 @@ function getWidthForSlide(slide: string, combinedWidth: number) :number {
 }
 
 onMounted(() => {
-    // console.log("slide mounted")
+    const _image = slideElement.value?.querySelector('img')
+    console.log("🚀 ~ file: Slide.vue ~ line 59 ~ onMounted ~ _image", _image)
+    if (_image) {
+        const parser = new DOMParser()
+        const doc = parser.parseFromString(slideElement.value?.innerHTML, 'text/html')
+        const img = doc.querySelector('img')
+        if (!img) return 0;
+
+        
+        const imageWidth = _image.width || img.width;
+        const imageHeight = _image.height || img.height; 
+        
+        
+    }
     // window.addEventListener('resize', setWidth)
 })
 
