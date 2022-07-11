@@ -2,7 +2,7 @@
   <div>
     <div class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden" ref="root">
         <!-- <slot name="navigation"> -->
-            <Navigation @prev="prev" @next="next" />
+            <Navigation @prev="prev" @next="next"></Navigation>
         <!-- </slot> -->
         <div class="sw-carousel--inner" ref="innerTrack">
               <slot>
@@ -21,7 +21,7 @@
         </div>
     </div>
         <slot name="pagination">
-          <Pagination :images="slides" :currentIndex="activeIndex" @updateSlide="gsapToIndex($event)"/>
+          <Pagination :images="slides" :currentIndex="activeIndex" @updateSlide="gsapToIndex($event)"></Pagination>
         </slot>
 
   </div>

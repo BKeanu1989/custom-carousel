@@ -15,10 +15,6 @@
 <script setup lang="ts">
 import { PropType } from 'vue';
 
-// const computedStyle = computed(() => {
-
-// })
-
 const props = defineProps({
     images: {
         type: Array as PropType<string[]>,
