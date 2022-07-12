@@ -18,6 +18,9 @@
                       >
                   </Slide>
               </slot>
+              <slot name="indicator">
+                <PaginationIndicator :items="slides" :currentIndex="activeIndex"></PaginationIndicator>
+              </slot>
         </div>
     </div>
         <slot name="pagination">
@@ -31,6 +34,8 @@ import { computed, onMounted, onUnmounted, PropType, ref, watch } from 'vue';
 import Slide from './Slide.vue'
 import Navigation from './Navigation.vue';
 import Pagination from './Pagination.vue';
+import PaginationIndicator from './PaginationIndicator.vue';
+
 import gsap from 'gsap';
 
 import { type BreakPoint } from '../types/BreakPoints';
