@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.14](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.13...v0.0.14) (2022-07-13)
+
+
+### Bug Fixes
+
+* **pagination:** active image overlay ([508cd4f](https://github.com/BKeanu1989/custom-carousel/commit/508cd4fbe167da605074dea92865d8a31d9a158d))
+* **slide update:** via pagination click ([db70e49](https://github.com/BKeanu1989/custom-carousel/commit/db70e498baf6df2254a60a551fa4a96e96c6e709))
+
 ### [0.0.13](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.12...v0.0.13) (2022-07-12)
 
 
