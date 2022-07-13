@@ -4,7 +4,7 @@
         <!-- <slot name="navigation"> -->
             <Navigation @prev="prev" @next="next"></Navigation>
         <!-- </slot> -->
-        <div class="sw-carousel--inner" ref="innerTrack">
+        <div class="sw-carousel--inner sw-max-h-[365px]"  ref="innerTrack">
               <slot>
                   <Slide v-for="(slide, index) in slides" :key="index" 
                       :slide="slide" 
