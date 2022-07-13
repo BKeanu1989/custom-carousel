@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.16](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.15...v0.0.16) (2022-07-13)
+
+
+### Bug Fixes
+
+* **images:** object-fit & max hide for innerTrack ([0ffea19](https://github.com/BKeanu1989/custom-carousel/commit/0ffea19c4621402d14e20fba9f850089f4b0f993))
+
 ### [0.0.15](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.14...v0.0.15) (2022-07-13)
 
 ### [0.0.14](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.13...v0.0.14) (2022-07-13)
