@@ -1,7 +1,7 @@
 <template>
     <div class="sw-flex sw-flex-row sw-justify-center gallery-preview-slide sw-gap-2 sw-mb-10 sw-max-h-36" v-if="images">
       <template v-for="(photo, index) in images" :key="index">
-        <PaginationItem :item="photo" :index="index" :currentIndex="currentIndex"></PaginationItem>
+        <PaginationItem :item="photo" :index="index" :currentIndex="currentIndex" @click="$emit('updateSlide', index)"></PaginationItem>
       </template>
     </div>
 </template>
@@ -23,6 +23,7 @@ const props = defineProps({
         default: () => ({}),
     },
 }) 
+const emits = defineEmits(['updateSlide'])
 </script>
 <style>
 .v-html-photo, .v-html-photo img {
