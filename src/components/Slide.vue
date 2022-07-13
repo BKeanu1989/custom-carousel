@@ -55,7 +55,6 @@ function getWidthForSlide(slide: string, combinedWidth: number) :number {
 
 onMounted(() => {
     const _image = slideElement.value?.querySelector('img')
-    console.log("🚀 ~ file: Slide.vue ~ line 59 ~ onMounted ~ _image", _image)
     if (_image) {
         const parser = new DOMParser()
         if (slideElement.value?.innerHTML) {
@@ -66,7 +65,6 @@ onMounted(() => {
             
             const imageWidth = _image.width || img.width;
             const imageHeight = _image.height || img.height; 
-            console.log("🚀 ~ file: Slide.vue ~ line 68 ~ onMounted ~ imageWidth", imageWidth, imageHeight)
         }
     }
 })

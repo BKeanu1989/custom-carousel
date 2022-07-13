@@ -1,18 +1,15 @@
 <template>
     <!-- <div v-html="item" class="pagination--item" :style="computedStyle"></div> -->
-    <div class="wrapper sw-relative pagination--item hover:sw-cursor-pointer" 
-        :class="{'sw-bg-gold sw-bg-opacity-50 sw-z-10': index === currentIndex}" 
+    <div class="wrapper sw-relative pagination--item sw-min-w-[50px] hover:sw-cursor-pointer" 
         :style="computedStyle"
         @click="$emit('updateSlide', index)" 
         >
-        <div v-html="item" class="v-html-item"></div>
-        <div class="sw-absolute sw-w-full sw-h-full sw-top-0" :class="{'sw-bg-gold sw-bg-opacity-50 sw-z-10': index === currentIndex}"></div>
-
+        <div v-html="item" class="v-html-item sw-relative" ref="html_image" :id="'pagination-html-' + index"></div>
     </div>
 </template>
 <script setup lang="ts">
-import { ref, computed, onMounted} from 'vue';
-
+import { ref, computed, onMounted, watch} from 'vue';
+const html_image = ref<HTMLElement | null>(null)
 const props = defineProps({
     item: {
         type: String,
@@ -32,12 +29,23 @@ const imageHeight = ref(0)
 
 onMounted(() => {
     const ratioInfo = getAspectRatio(props.item)
-    console.log("🚀 ~ file: PaginationItem.vue ~ line 18 ~ onMounted ~ ratioInfo", ratioInfo)
     if (ratioInfo) {
         imageWidth.value = ratioInfo.width
         imageHeight.value = ratioInfo.height
     }
+
 })
+
+
+watch(() => props.currentIndex,(newVal, oldVal) => {
+    if (newVal === props.index) {
+        console.log("current index changed to same index", newVal)
+        addImageOverlay()
+    } else {
+        removeImageOverlay()
+    }
+})
+
 
 const computedStyle = computed(() => {
     return {
@@ -65,6 +73,22 @@ function getAspectRatio(item: string) :RatioInfo | null {
         'width': imageWidth,
     }
 }
+
+function addImageOverlay() {
+    const _template = `<div class="sw-absolute sw-w-full sw-h-full sw-top-0 sw-bg-gold sw-bg-opacity-50 sw-z-10" id="imageOverlay-${props.index}"></div>`
+    const element = document.querySelector(`#pagination-html-${props.index}`)
+    if (element) {
+        element.insertAdjacentHTML('beforeend', _template)
+    }
+}
+
+function removeImageOverlay() {
+    const imageOverlay = document.getElementById(`imageOverlay-${props.index}`)
+    if (imageOverlay) {
+        imageOverlay.remove()
+    }
+}
+
 </script>
 <style>
 .pagination--item {
