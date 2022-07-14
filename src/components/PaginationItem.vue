@@ -9,6 +9,7 @@
 </template>
 <script setup lang="ts">
 import { ref, computed, onMounted, watch} from 'vue';
+import { getAspectRatio } from '../utils/misc';
 const html_image = ref<HTMLElement | null>(null)
 const props = defineProps({
     item: {
@@ -39,7 +40,6 @@ onMounted(() => {
 
 watch(() => props.currentIndex,(newVal, oldVal) => {
     if (newVal === props.index) {
-        console.log("current index changed to same index", newVal)
         addImageOverlay()
     } else {
         removeImageOverlay()
@@ -53,26 +53,7 @@ const computedStyle = computed(() => {
     }
 })
 
-interface RatioInfo {
-    aspectRatio: string,
-    width: number,
-    height: number,
-}
-function getAspectRatio(item: string) :RatioInfo | null {
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(item, 'text/html')
-    const img = doc.querySelector('img')
-    if (!img) return null;
 
-    const imageWidth = img.width
-    const imageHeight = img.height
-
-    return {
-        'aspectRatio': `${imageWidth} / ${imageHeight}`,
-        'height': imageHeight,
-        'width': imageWidth,
-    }
-}
 
 function addImageOverlay() {
     const _template = `<div class="sw-absolute sw-w-full sw-h-full sw-top-0 sw-bg-gold sw-bg-opacity-50 sw-z-10" id="imageOverlay-${props.index}"></div>`

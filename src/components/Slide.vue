@@ -1,8 +1,9 @@
 <template>
-    <div v-html="slide" class="sw-h-full sw-carousel" :style="{width: width + 'px', transform: transformText}" ref="slideElement"></div>
+    <div v-html="slide" class="sw-h-full sw-carousel" :style="computedStyle" ref="slideElement"></div>
 </template>
 <script setup lang="ts">
-import { onMounted, onUnmounted, PropType, ref, watch } from 'vue';
+import { getAspectRatio } from '../utils/misc';
+import { computed, onMounted, onUnmounted, PropType, ref, watch } from 'vue';
 const slideElement = ref<HTMLElement | null>(null)
 
 const props = defineProps({
@@ -32,9 +33,20 @@ const props = defineProps({
 
 const transformText = ref('')
 const width = ref(0)
+const imageHeight = ref(0)
+const imageWidth = ref(0)
+
 watch(() => [props.rootMounted, props.imageToShowCombinedWidth],(val) => {
     if (val) {
         setWidth()
+    }
+})
+
+const computedStyle = computed(() => {
+    return {
+        'aspect-ratio': `${imageWidth.value} / ${imageHeight.value}`,
+        'width': `${width.value}px`,
+        'transform': transformText.value,
     }
 })
 
@@ -56,15 +68,21 @@ function getWidthForSlide(slide: string, combinedWidth: number) :number {
 onMounted(() => {
     const _image = slideElement.value?.querySelector('img')
     if (_image) {
-        const parser = new DOMParser()
-        if (slideElement.value?.innerHTML) {
-            const doc = parser.parseFromString(slideElement.value?.innerHTML, 'text/html')
-            const img = doc.querySelector('img')
-            if (!img) return 0;
+        // const parser = new DOMParser()
+        // if (slideElement.value?.innerHTML) {
+        //     const doc = parser.parseFromString(slideElement.value?.innerHTML, 'text/html')
+        //     const img = doc.querySelector('img')
+        //     if (!img) return 0;
     
             
-            const imageWidth = _image.width || img.width;
-            const imageHeight = _image.height || img.height; 
+        //     const imageWidth = _image.width || img.width;
+        //     const imageHeight = _image.height || img.height; 
+        // }
+        const ratioInfo = getAspectRatio(props.slide)
+        // console.log("🚀 ~ file: Slide.vue ~ line 81 ~ onMounted ~ ratioInfo", ratioInfo)
+        if (ratioInfo) {
+            imageWidth.value = ratioInfo.width
+            imageHeight.value = ratioInfo.height
         }
     }
 })

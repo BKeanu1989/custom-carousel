@@ -35,3 +35,24 @@ export function getWidthOfImage(slide: string) :number {
 
     return imageWidth
 }
+
+interface RatioInfo {
+    aspectRatio: string,
+    width: number,
+    height: number,
+}
+export function getAspectRatio(item: string) :RatioInfo | null {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(item, 'text/html')
+    const img = doc.querySelector('img')
+    if (!img) return null;
+
+    const imageWidth = img.width
+    const imageHeight = img.height
+
+    return {
+        'aspectRatio': `${imageWidth} / ${imageHeight}`,
+        'height': imageHeight,
+        'width': imageWidth,
+    }
+}

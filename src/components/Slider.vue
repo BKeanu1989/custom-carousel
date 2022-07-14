@@ -164,12 +164,12 @@ onUnmounted(() => {
 
 
 .sw-slide {
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   /* background: green; */
-  height: 80%;
-  width: 100%;
+  /* height: 80%;
+  width: 100%; */
   margin: 0;
   padding: 0;
   position: relative;
