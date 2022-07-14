@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.17](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.16...v0.0.17) (2022-07-14)
+
+
+### Bug Fixes
+
+* **aspect ratio:** 4 innerTrack ([6c670f4](https://github.com/BKeanu1989/custom-carousel/commit/6c670f4f11f4157507bd1e5107e0416674d072e3))
+* **whitespace carousel:** no whitespace ([310094d](https://github.com/BKeanu1989/custom-carousel/commit/310094d813e701a65d77b4328c1b97c9c2a77b47))
+
 ### [0.0.16](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.15...v0.0.16) (2022-07-13)
 
 
