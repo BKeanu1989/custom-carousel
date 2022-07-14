@@ -45,7 +45,7 @@ watch(() => [props.rootMounted, props.imageToShowCombinedWidth],(val) => {
 const computedStyle = computed(() => {
     return {
         'aspect-ratio': `${imageWidth.value} / ${imageHeight.value}`,
-        'width': `${width.value}px`,
+        // 'width': `${width.value}px`,
         'transform': transformText.value,
     }
 })

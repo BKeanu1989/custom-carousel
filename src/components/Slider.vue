@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden" ref="root">
+    <div class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden" ref="root" :style="computedStyle">
         <!-- <slot name="navigation"> -->
             <Navigation @prev="prev" @next="next"></Navigation>
         <!-- </slot> -->
@@ -58,6 +58,12 @@ const test = computed(() => {
   return _loop.value?.current || null;
 })
 
+const computedStyle = computed(() => {
+  return {
+    'height': `${props.height}px`
+  }
+})
+
 const props = defineProps({
     slides: {
         type: Array as PropType<string[]>,
@@ -66,7 +72,12 @@ const props = defineProps({
     breakPoints: {
       type: Object as PropType<BreakPoint>,
       required: true
-    }
+    },
+    height: {
+        type: Number,
+        required: false,
+        default: 400
+    },
 })
 
 function gsapToIndex(index: number) {
@@ -170,10 +181,10 @@ onUnmounted(() => {
   /* background: green; */
   /* height: 80%;
   width: 100%; */
-  margin: 0;
+  /* margin: 0;
   padding: 0;
   position: relative;
-  flex-shrink: 0;
+  flex-shrink: 0; */
   color: black;
   font-size: 21px;
   cursor: pointer;
