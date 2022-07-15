@@ -39,7 +39,7 @@ import PaginationIndicator from './PaginationIndicator.vue';
 import gsap from 'gsap';
 
 import { type BreakPoint } from '../types/BreakPoints';
-import { horizontalLoop } from '../utils/gsapUtils';
+import { horizontalLoop, horizontalLoop2 } from '../utils/gsapUtils';
 import { getWidthOfImage, getBreakPointWidth } from '../utils/misc';
 
 const root = ref<HTMLElement | null>(null)
@@ -136,10 +136,13 @@ onMounted(() => {
         aniEnd: (index: number) => {
           activeIndex.value = index
         },
-        onComplete: (old: number, newV: number) => {
+        onComplete: (_old: number, _newV: number) => {
+          console.log("onComplete", _newV)
           // slideRefs.value[newV].setTransform()
         },
-        onCompleteSecond: (old: any, newV: any) => {
+        onCompleteSecond: (_old: any, _newV: any) => {
+          console.log("onCompleteSecond")
+
           // @ts-ignore
           slideRefs.value[activeIndex.value].setTransform()
           // slideRefs.value[newV].setTransform()
@@ -148,9 +151,19 @@ onMounted(() => {
           resetLoop()
         }
       }
-      _loop.value = horizontalLoop(boxes, {paused: true, draggable: true},
-      callBackOptions)
-      ,
+      let activeElement: any; 
+      _loop.value = horizontalLoop(boxes, {paused: true, draggable: true, center: true}, callBackOptions)
+      // _loop.value = horizontalLoop(boxes, {
+      //   paused: true, 
+      //   draggable: true, // make it draggable
+      //   center: true, // active element is the one in the center of the container rather than th left edge
+      //   onChange: (element: HTMLElement, index: number) => { // when the active element changes, this function gets called.
+      //     console.log(element, index)
+      //     activeElement && activeElement.classList.remove("active");
+      //     element.classList.add("active");
+      //     activeElement = element;
+      //   }
+      // })
       boxes.forEach((box: any, i: number) => box.addEventListener("click", () => _loop.value.toIndex(i, {duration: 0.8, ease: "power1.inOut"})));
     }, 50);
 
