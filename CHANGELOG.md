@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.18](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.17...v0.0.18) (2022-07-18)
+
+
+### Features
+
+* finish basic gallery ([2e4f8c6](https://github.com/BKeanu1989/custom-carousel/commit/2e4f8c6e8963554413b6c9b322b65fedfe1741f8))
+
+
+### Bug Fixes
+
+* **center:** in slide2 ([aa1f8b2](https://github.com/BKeanu1989/custom-carousel/commit/aa1f8b2f3e11ecfb09783323ce3fc235b01d19fc))
+* slider2 working with center ([9024898](https://github.com/BKeanu1989/custom-carousel/commit/9024898b4691c5b7f80aedf2c1339ae5422dedd4))
+
 ### [0.0.17](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.16...v0.0.17) (2022-07-14)
 
 
