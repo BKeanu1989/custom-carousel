@@ -3,7 +3,7 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import { ref } from 'vue';
 import Slider from './components/Slider.vue';
-import Slider2 from './components/Slider2.vue';
+// import Slider2 from './components/Slider2.vue';
 import { type BreakPoint } from './types/BreakPoints';
 
 // const slides = [
@@ -74,15 +74,9 @@ const bP = ref<BreakPoint>({
 
 <template>
 <div>
-  <!-- <Slider :slides="slides" :toShow="3" :breakPoints="bP">
+  <Slider :slides="slides" :toShow="3" :breakPoints="bP">
 
-  </Slider> -->
-  <div>
-    slider 2
-      <Slider2 :slides="slides" :toShow="3" :breakPoints="bP">
-
-    </Slider2>
-  </div>
+  </Slider>
 </div>
 </template>
 

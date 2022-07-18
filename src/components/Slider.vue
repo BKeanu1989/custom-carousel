@@ -4,12 +4,12 @@
         <!-- <slot name="navigation"> -->
             <Navigation @prev="prev" @next="next"></Navigation>
         <!-- </slot> -->
-        <div class="sw-carousel--inner sw-max-h-[365px]"  ref="innerTrack">
+        <div class="sw-carousel--inner sw-max-h-[365px] sw-w-full"  ref="innerTrack">
               <slot>
                   <Slide v-for="(slide, index) in slides" :key="index" 
                       :slide="slide" 
                       :sliderWidth="sliderWidth" 
-                      class="sw-slide" 
+                      class="sw-slide2" 
                       :rootMounted="rootMounted" 
                       :imageToShowCombinedWidth="combinedWidth"
                       :style="{}"
@@ -39,7 +39,7 @@ import PaginationIndicator from './PaginationIndicator.vue';
 import gsap from 'gsap';
 
 import { type BreakPoint } from '../types/BreakPoints';
-import { horizontalLoop, horizontalLoop2 } from '../utils/gsapUtils';
+import { horizontalLoop2 } from '../utils/gsapUtils';
 import { getWidthOfImage, getBreakPointWidth } from '../utils/misc';
 
 const root = ref<HTMLElement | null>(null)
@@ -52,7 +52,13 @@ const _loop = ref<any>(null)
 
 const slideRefs = ref([])
 const combinedWidth = ref(0)
+
+// we could make it to a computed property...
 const activeIndex = ref(0)
+
+// const activeIndex = computed(() => {
+//   return _loop.value?.current() || 0;
+// })
 
 const test = computed(() => {
   return _loop.value?.current || null;
@@ -131,11 +137,11 @@ onMounted(() => {
     }
 
     setTimeout(() => {
-      const boxes = gsap.utils.toArray('.sw-slide')
+      const boxes = gsap.utils.toArray('.sw-slide2')
       const callBackOptions = {
-        aniEnd: (index: number) => {
-          activeIndex.value = index
-        },
+        // aniEnd: (index: number) => {
+        //   activeIndex.value = index
+        // },
         onComplete: (_old: number, _newV: number) => {
           console.log("onComplete", _newV)
           // slideRefs.value[newV].setTransform()
@@ -152,19 +158,27 @@ onMounted(() => {
         }
       }
       let activeElement: any; 
-      _loop.value = horizontalLoop(boxes, {paused: true, draggable: true, center: true}, callBackOptions)
-      // _loop.value = horizontalLoop(boxes, {
-      //   paused: true, 
-      //   draggable: true, // make it draggable
-      //   center: true, // active element is the one in the center of the container rather than th left edge
-      //   onChange: (element: HTMLElement, index: number) => { // when the active element changes, this function gets called.
-      //     console.log(element, index)
-      //     activeElement && activeElement.classList.remove("active");
-      //     element.classList.add("active");
-      //     activeElement = element;
-      //   }
-      // })
+    //   _loop.value = horizontalLoop(boxes, {paused: true, draggable: true, center: true}, callBackOptions)
+      _loop.value = horizontalLoop2(boxes, {
+        paused: true, 
+        draggable: true, // make it draggable
+        center: true, // active element is the one in the center of the container rather than th left edge
+        onChange: (element: HTMLElement, index: number) => { // when the active element changes, this function gets called.
+          activeElement && activeElement.classList.remove("active");
+          element.classList.add("active");
+          activeElement = element;
+        },
+        updateIndex(index: number) {
+          activeIndex.value = index
+        }
+      })
       boxes.forEach((box: any, i: number) => box.addEventListener("click", () => _loop.value.toIndex(i, {duration: 0.8, ease: "power1.inOut"})));
+
+      try {
+        activeIndex.value = _loop.value?.current() || 0;
+      } catch (error) {
+        console.log(error)
+      }
     }, 50);
 
 
@@ -208,11 +222,7 @@ onUnmounted(() => {
 }
 
 .sw-slide.inActive {
-  filter: opacity(.7);
-}
-
-.sw-slide2.inActive {
-  filter: opacity(.7);
+  filter: opacity(.7)
 }
 
 </style>
