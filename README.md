@@ -13,5 +13,6 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Orderin
 https://stackoverflow.com/questions/18846481/use-transition-on-flexbox-order
 
 https://codepen.io/PointC/pen/eYGvgym/2cb33399a603622390d57072bd1d6844
+https://codepen.io/GreenSock/pen/gOvvJee
 
 https://greensock.com/docs/v3/HelperFunctions?&_rid=18404 - demo with draggable center
