@@ -52,7 +52,13 @@ const _loop = ref<any>(null)
 
 const slideRefs = ref([])
 const combinedWidth = ref(0)
+
+// we could make it to a computed property...
 const activeIndex = ref(0)
+
+// const activeIndex = computed(() => {
+//   return _loop.value?.current() || 0;
+// })
 
 const test = computed(() => {
   return _loop.value?.current || null;
@@ -133,9 +139,9 @@ onMounted(() => {
     setTimeout(() => {
       const boxes = gsap.utils.toArray('.sw-slide2')
       const callBackOptions = {
-        aniEnd: (index: number) => {
-          activeIndex.value = index
-        },
+        // aniEnd: (index: number) => {
+        //   activeIndex.value = index
+        // },
         onComplete: (_old: number, _newV: number) => {
           console.log("onComplete", _newV)
           // slideRefs.value[newV].setTransform()
@@ -162,9 +168,18 @@ onMounted(() => {
           activeElement && activeElement.classList.remove("active");
           element.classList.add("active");
           activeElement = element;
+        },
+        updateIndex(index: number) {
+          activeIndex.value = index
         }
       })
       boxes.forEach((box: any, i: number) => box.addEventListener("click", () => _loop.value.toIndex(i, {duration: 0.8, ease: "power1.inOut"})));
+
+      try {
+        activeIndex.value = _loop.value?.current() || 0;
+      } catch (error) {
+        console.log(error)
+      }
     }, 50);
 
 

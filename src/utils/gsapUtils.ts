@@ -221,7 +221,9 @@ export function horizontalLoop2(items, config) {
       vars.modifiers = {time: timeWrap};
     }
 		curIndex = newIndex;
-    console.log("🚀 ~ file: gsapUtils.ts ~ line 220 ~ toIndex ~ newIndex", newIndex)
+    config.updateIndex(curIndex);
+
+    // console.log("🚀 ~ file: gsapUtils.ts ~ line 220 ~ toIndex ~ newIndex", newIndex)
 		vars.overwrite = true;
     gsap.killTweensOf(proxy);
 		return tl.tweenTo(time, vars);

@@ -208,7 +208,11 @@ onUnmounted(() => {
 }
 
 .sw-slide.inActive {
-  filter: opacity(.7)
+  filter: opacity(.7);
+}
+
+.sw-slide2.inActive {
+  filter: opacity(.7);
 }
 
 </style>
