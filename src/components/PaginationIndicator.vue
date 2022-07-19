@@ -48,7 +48,7 @@ onMounted(() => {
     const viewPortWidth = window.innerWidth
     const test = document.querySelector('.sw-carousel--inner')
     // console.log("🚀 ~ file: PaginationIndicator.vue ~ line 50 ~ onMounted ~ test", test.offsetWidth)
-    // if (_root.value && test) {
+    if (_root.value && test) {
         const half = test.offsetWidth / 2 - _root.value.clientWidth / 2
         setLeft(half)
     }
