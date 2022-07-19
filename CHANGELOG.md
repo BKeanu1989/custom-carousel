@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.22](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.21...v0.0.22) (2022-07-19)
+
+
+### Bug Fixes
+
+* **indicator:** place mid ([f70255d](https://github.com/BKeanu1989/custom-carousel/commit/f70255d10bfe22d6c98133c4fea315a97722cf3f))
+
 ### [0.0.21](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.20...v0.0.21) (2022-07-19)
 
 
