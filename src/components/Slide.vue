@@ -1,5 +1,10 @@
 <template>
-    <div v-html="slide" class="sw-h-full sw-carousel" :style="computedStyle" ref="slideElement"></div>
+    <!-- <div class="sw-carousel--slide"> -->
+        <div v-html="slide" class="sw-h-full sw-carousel sw-relative" :style="computedStyle" ref="slideElement"></div>
+        <!-- <div v-if="active">
+            {{ credits }}
+        </div>
+    </div> -->
 </template>
 <script setup lang="ts">
 import { getAspectRatio } from '../utils/misc';
@@ -7,6 +12,10 @@ import { computed, onMounted, onUnmounted, PropType, ref, watch } from 'vue';
 const slideElement = ref<HTMLElement | null>(null)
 
 const props = defineProps({
+    active: {
+        type: Boolean,
+        default: false
+    },
     slide: {
         type: String as PropType<string>,
         required: true,
@@ -35,10 +44,16 @@ const transformText = ref('')
 const width = ref(0)
 const imageHeight = ref(0)
 const imageWidth = ref(0)
-
+const credits = ref('')
 watch(() => [props.rootMounted, props.imageToShowCombinedWidth],(val) => {
     if (val) {
         setWidth()
+    }
+})
+
+watch(() => props.active ,(val) => {
+    if (val) {
+        appendCredits()
     }
 })
 
@@ -71,20 +86,20 @@ function getPhotographerCredits() {
     const doc = parser.parseFromString(props.slide, 'text/html')
     const img = doc.querySelector('img')
     if (!img) return '';
+    const regex = /(©|%C2%A9)(.*)-(\d*)-/g
 
-    const regex = /©(\s*)(.*?)( \(\d*\))(-optimized)?/g
-
+    // (©|%C2%A9)(\s*)(.*?)( \(\d*\))(-optimized)?
+// http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk%C2%A9Steffen-Roth-7-optimized.jpg
     const match = regex.exec(img.src)
-    console.log("🚀 ~ file: Slide.vue ~ line 73 ~ getPhotographerCredits ~ match", match)
     if (!match) return '';
 
-    return match[1]
+    return match[2].replaceAll('-', ' ')
 }
 
 onMounted(() => {
     const _image = slideElement.value?.querySelector('img')
     if (props.parseCredits) {
-        getPhotographerCredits()
+        credits.value = getPhotographerCredits()
     }
     if (_image) {
         const ratioInfo = getAspectRatio(props.slide)
@@ -101,6 +116,27 @@ onUnmounted(() => {
 
 function setWidth() {
     width.value = getWidthForSlide(props.slide, props.imageToShowCombinedWidth);
+}
+
+function appendCredits() {
+    if (!props.parseCredits) return;
+
+    if (slideElement.value) {
+        console.log(slideElement.value)
+        const creditsElement = document.createElement('div')
+        const classesToAdd = ['sw-carousel--credits','sw-absolute','sw-top-0','sw-left-0']
+        classesToAdd.forEach((className) => {
+            creditsElement.classList.add(className)
+        })
+        creditsElement.innerText = credits.value
+        slideElement.value.appendChild(creditsElement)
+        // const test = slideElement.value.querySelector('.sw-slide')
+        // console.log("🚀 ~ file: Slide.vue ~ line 131 ~ appendCredits ~ test", test)
+    }
+    // const credits = getPhotographerCredits()
+    // if (credits) {
+    //     transformText.value = `translateY(-100%)`
+    // }
 }
 
 function setWidthManualy(val: number) {

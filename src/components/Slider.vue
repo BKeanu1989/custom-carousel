@@ -15,6 +15,7 @@
                       :parseCredits="true"
                       :style="{}"
                       :class="{inActive: index !== activeIndex, 'sw-z-10': index === activeIndex}"
+                      :active="index === activeIndex"
                       ref="slideRefs"
                       >
                   </Slide>
