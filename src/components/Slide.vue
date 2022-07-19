@@ -19,17 +19,17 @@ const props = defineProps({
         type: Boolean,
         required: true
     },
-    // toShow: {
-    //     type: Number,
-    //     required: true
-    // },
     imageToShowCombinedWidth: {
         type: Number,
         required: true
     },
+    parseCredits: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
 })
 
-// TODO: might need to determine object-fit: contain if hochkant bild
 
 const transformText = ref('')
 const width = ref(0)
@@ -65,21 +65,29 @@ function getWidthForSlide(slide: string, combinedWidth: number) :number {
     return imageWidth
 }
 
+function getPhotographerCredits() {
+
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(props.slide, 'text/html')
+    const img = doc.querySelector('img')
+    if (!img) return '';
+
+    const regex = /©(\s*)(.*?)( \(\d*\))(-optimized)?/g
+
+    const match = regex.exec(img.src)
+    console.log("🚀 ~ file: Slide.vue ~ line 73 ~ getPhotographerCredits ~ match", match)
+    if (!match) return '';
+
+    return match[1]
+}
+
 onMounted(() => {
     const _image = slideElement.value?.querySelector('img')
+    if (props.parseCredits) {
+        getPhotographerCredits()
+    }
     if (_image) {
-        // const parser = new DOMParser()
-        // if (slideElement.value?.innerHTML) {
-        //     const doc = parser.parseFromString(slideElement.value?.innerHTML, 'text/html')
-        //     const img = doc.querySelector('img')
-        //     if (!img) return 0;
-    
-            
-        //     const imageWidth = _image.width || img.width;
-        //     const imageHeight = _image.height || img.height; 
-        // }
         const ratioInfo = getAspectRatio(props.slide)
-        // console.log("🚀 ~ file: Slide.vue ~ line 81 ~ onMounted ~ ratioInfo", ratioInfo)
         if (ratioInfo) {
             imageWidth.value = ratioInfo.width
             imageHeight.value = ratioInfo.height
@@ -93,7 +101,6 @@ onUnmounted(() => {
 
 function setWidth() {
     width.value = getWidthForSlide(props.slide, props.imageToShowCombinedWidth);
-    // console.log("width", width.value)
 }
 
 function setWidthManualy(val: number) {
@@ -101,15 +108,7 @@ function setWidthManualy(val: number) {
 }
 
 function setTransform() {
-    // console.log(this)
     if (slideElement.value) {
-        // slideElement.value.style.transform = `translateX(${props.sliderWidth * -props.activeIndex}px)`
-        // slideElement.value
-        // console.log("🚀 ~ file: Slide.vue ~ line 79 ~ setTransform ~ slideElement.value", slideElement.value.style)
-        // console.log(slideElement.value.style.transform)
-        // slideElement.value.style.transform += ` scale(1.1)`
-        // transformText.value = slideElement.value.style.transform + ` scale(1.1)`
-        // console.log(slideElement.value.style.transform)
 
     }
 }

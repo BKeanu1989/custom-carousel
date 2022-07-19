@@ -12,6 +12,7 @@
                       class="sw-slide2" 
                       :rootMounted="rootMounted" 
                       :imageToShowCombinedWidth="combinedWidth"
+                      :parseCredits="true"
                       :style="{}"
                       :class="{inActive: index !== activeIndex, 'sw-z-10': index === activeIndex}"
                       ref="slideRefs"
@@ -221,7 +222,7 @@ onUnmounted(() => {
   transform: scale(1.1);
 }
 
-.sw-slide.inActive {
+.sw-slide.inActive, .sw-slide2.inActive {
   filter: opacity(.7)
 }
 
