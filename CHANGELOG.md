@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.24](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.23...v0.0.24) (2022-07-19)
+
+
+### Bug Fixes
+
+* **height:** fit another ele height via selector ([baf18d6](https://github.com/BKeanu1989/custom-carousel/commit/baf18d6eae04acb55096a642a08d694d4120cf29))
+
 ### [0.0.23](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.22...v0.0.23) (2022-07-19)
 
 
