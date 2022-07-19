@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.20](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.19...v0.0.20) (2022-07-19)
+
+
+### Bug Fixes
+
+* **credits:** only show active; todo: contrast ([4306b34](https://github.com/BKeanu1989/custom-carousel/commit/4306b344a00443569e22da76946b93d02239eb35))
+
 ### [0.0.19](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.18...v0.0.19) (2022-07-19)
 
 ### [0.0.18](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.17...v0.0.18) (2022-07-18)
