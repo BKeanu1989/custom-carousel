@@ -37,6 +37,10 @@ const props = defineProps({
         required: false,
         default: false
     },
+    id: {
+        type: Number,
+        required: true
+    },
 })
 
 
@@ -54,6 +58,8 @@ watch(() => [props.rootMounted, props.imageToShowCombinedWidth],(val) => {
 watch(() => props.active ,(val) => {
     if (val) {
         appendCredits()
+    } else {
+        removeCredits()
     }
 })
 
@@ -122,21 +128,32 @@ function appendCredits() {
     if (!props.parseCredits) return;
 
     if (slideElement.value) {
-        console.log(slideElement.value)
-        const creditsElement = document.createElement('div')
-        const classesToAdd = ['sw-carousel--credits','sw-absolute','sw-top-0','sw-left-0']
-        classesToAdd.forEach((className) => {
-            creditsElement.classList.add(className)
-        })
-        creditsElement.innerText = credits.value
-        slideElement.value.appendChild(creditsElement)
-        // const test = slideElement.value.querySelector('.sw-slide')
-        // console.log("🚀 ~ file: Slide.vue ~ line 131 ~ appendCredits ~ test", test)
+        if (!document.querySelector(`#credits-${props.id}`)) {
+            const creditsElement = document.createElement('div')
+            creditsElement.id = `credits-${props.id}`
+            const classesToAdd = ['sw-carousel--credits','sw-absolute','sw-top-0','sw-left-0']
+            classesToAdd.forEach((className) => {
+                creditsElement.classList.add(className)
+            })
+            creditsElement.innerText = `©${credits.value}`
+            slideElement.value.appendChild(creditsElement)
+        }
     }
     // const credits = getPhotographerCredits()
     // if (credits) {
     //     transformText.value = `translateY(-100%)`
     // }
+}
+
+function removeCredits(){
+    if (!props.parseCredits) return;
+
+    if (slideElement.value) {
+        const creditsElement = slideElement.value.querySelector(`#credits-${props.id}`)
+        if (creditsElement) {
+            creditsElement.remove()
+        }
+    }
 }
 
 function setWidthManualy(val: number) {

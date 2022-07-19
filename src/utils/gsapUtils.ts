@@ -116,7 +116,6 @@ export function horizontalLoop(items, config, {aniEnd: cb, onComplete: cb2, onCo
 
 export function horizontalLoop2(items, config) {
 	items = gsap.utils.toArray(items);
-  console.log("🚀 ~ file: gsapUtils.ts ~ line 118 ~ horizontalLoop2 ~ items", items)
 	config = config || {};
 	let onChange = config.onChange,
       lastIndex = 0,
@@ -126,7 +125,6 @@ export function horizontalLoop2(items, config) {
         if (lastIndex !== i) {
           lastIndex = i;
           onChange(items[i], i);
-          console.log(items[i])
         }
       }, paused: config.paused, defaults: {ease: "none"}, onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)}),
       length = items.length,

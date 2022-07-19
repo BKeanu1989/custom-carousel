@@ -16,3 +16,6 @@ https://codepen.io/PointC/pen/eYGvgym/2cb33399a603622390d57072bd1d6844
 https://codepen.io/GreenSock/pen/gOvvJee
 
 https://greensock.com/docs/v3/HelperFunctions?&_rid=18404 - demo with draggable center
+
+## TODO
+- [ ] credits color contrast - https://dev.to/xenoxdev/how-to-make-dynamic-text-overlays-on-images-dcc

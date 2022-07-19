@@ -142,12 +142,9 @@ onMounted(() => {
           activeIndex.value = index
         },
         onComplete: (_old: number, _newV: number) => {
-          console.log("onComplete", _newV)
           // slideRefs.value[newV].setTransform()
         },
         onCompleteSecond: (_old: any, _newV: any) => {
-          console.log("onCompleteSecond")
-
           // @ts-ignore
           slideRefs.value[activeIndex.value].setTransform()
           // slideRefs.value[newV].setTransform()

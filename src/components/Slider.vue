@@ -16,6 +16,7 @@
                       :style="{}"
                       :class="{inActive: index !== activeIndex, 'sw-z-10': index === activeIndex}"
                       :active="index === activeIndex"
+                      :id="index"
                       ref="slideRefs"
                       >
                   </Slide>
@@ -145,11 +146,9 @@ onMounted(() => {
         //   activeIndex.value = index
         // },
         onComplete: (_old: number, _newV: number) => {
-          console.log("onComplete", _newV)
           // slideRefs.value[newV].setTransform()
         },
         onCompleteSecond: (_old: any, _newV: any) => {
-          console.log("onCompleteSecond")
 
           // @ts-ignore
           slideRefs.value[activeIndex.value].setTransform()
