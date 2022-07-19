@@ -46,8 +46,10 @@ function setLeft(value: number) {
 
 onMounted(() => {
     const viewPortWidth = window.innerWidth
-    if (_root.value) {
-        const half = viewPortWidth / 2 - _root.value.clientWidth / 2
+    const test = document.querySelector('.sw-carousel--inner')
+    // console.log("🚀 ~ file: PaginationIndicator.vue ~ line 50 ~ onMounted ~ test", test.offsetWidth)
+    // if (_root.value && test) {
+        const half = test.offsetWidth / 2 - _root.value.clientWidth / 2
         setLeft(half)
     }
 })
