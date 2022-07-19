@@ -26,7 +26,7 @@
               </slot>
         </div>
     </div>
-        <slot name="pagination">
+        <slot name="pagination" v-if="showPagination">
           <Pagination :images="slides" :currentIndex="activeIndex" @updateSlide="gsapToIndex($event)"></Pagination>
         </slot>
 
@@ -86,6 +86,11 @@ const props = defineProps({
         type: Number,
         required: false,
         default: 400
+    },
+    showPagination: {
+      type: Boolean,
+      required: false,
+      default: true
     },
 })
 
