@@ -68,9 +68,15 @@ const test = computed(() => {
 })
 
 const computedStyle = computed(() => {
-  return {
-    'height': `${props.height}px`
+  if (props.selectorForFullHeight && root.value) {
+    const element = document.querySelector(props.selectorForFullHeight)
+    if (!element) return {}
+    return {
+      height: `${element.offsetHeight}px`
+    }
   }
+  
+  return {  }
 })
 
 const props = defineProps({
@@ -92,6 +98,10 @@ const props = defineProps({
       required: false,
       default: true
     },
+    selectorForFullHeight: {
+      type: String,
+      required: false,
+    }
 })
 
 function gsapToIndex(index: number) {

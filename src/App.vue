@@ -86,11 +86,11 @@ const bP = ref<BreakPoint>({
 <template>
 <div class="sw-flex sw-flex-col lg:sw-flex-row ">
   <div class="lg:sw-w-2/3">
-    <Slider :slides="slides" :toShow="3" :breakPoints="bP" :showPagination="false">
+    <Slider :slides="slides" :toShow="3" :breakPoints="bP" :showPagination="false" selectorForFullHeight="#foobar">
   
     </Slider>
   </div>
-  <div class="lg:sw-w-1/3 sw-bg-blueish sw-p-10 sw-text-sm sw-h-[500px]">
+  <div class="lg:sw-w-1/3 sw-bg-blueish sw-p-10 sw-text-sm sw-h-[600px]" id="foobar">
 
   </div>
 </div>
