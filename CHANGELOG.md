@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.27](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.26...v0.0.27) (2022-07-21)
+
+
+### Bug Fixes
+
+* **pagination:** flex wrap ([6c979da](https://github.com/BKeanu1989/custom-carousel/commit/6c979dad6704594d8193793820f6b580dbb8d797))
+
 ### [0.0.26](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.25...v0.0.26) (2022-07-21)
 
 
