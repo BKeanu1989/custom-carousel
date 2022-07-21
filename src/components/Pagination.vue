@@ -1,5 +1,5 @@
 <template>
-    <div class="sw-flex sw-flex-row sw-justify-center gallery-preview-slide sw-gap-2 sw-mb-10 sw-max-h-36" v-if="images">
+    <div class="sw-carousel--pagination sw-flex sw-flex-row sw-justify-center gallery-preview-slide sw-gap-1 sw-mb-10 sw-max-h-36 sw-mt-[2px]" v-if="images">
       <template v-for="(photo, index) in images" :key="index">
         <PaginationItem :item="photo" :index="index" :currentIndex="currentIndex" @click="$emit('updateSlide', index)"></PaginationItem>
       </template>

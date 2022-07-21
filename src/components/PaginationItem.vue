@@ -49,7 +49,8 @@ watch(() => props.currentIndex,(newVal, oldVal) => {
 
 const computedStyle = computed(() => {
     return {
-        'aspect-ratio': `${imageWidth.value} / ${imageHeight.value}`,
+        // TODO: maybe need to remove it. or add it again in case of x amount of images
+        // 'aspect-ratio': `${imageWidth.value} / ${imageHeight.value}`
     }
 })
 
