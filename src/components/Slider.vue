@@ -68,15 +68,20 @@ const test = computed(() => {
 })
 
 const computedStyle = computed(() => {
-  if (props.selectorForFullHeight && root.value) {
-    const element = document.querySelector(props.selectorForFullHeight)
-    if (!element) return {}
-    return {
-      height: `${element.offsetHeight}px`
+  const styles = {
+    height: ''
+  }
+  if (root.value) {
+    if (props.selectorForFullHeight) {
+      const element = document.querySelector(props.selectorForFullHeight)
+      if (!element) return {}
+      styles.height = `${element.offsetHeight}px`
+    } else {
+      styles.height = `${props.height}px`
     }
   }
   
-  return {  }
+  return styles
 })
 
 const props = defineProps({
