@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.32](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.31...v0.0.32) (2022-07-26)
+
+
+### Bug Fixes
+
+* **credits:** empty credits without [@credits](https://github.com/credits) ([b727646](https://github.com/BKeanu1989/custom-carousel/commit/b727646b110ccf5b4d5afcbf3c2a12dd19deac30))
+
 ### [0.0.31](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.30...v0.0.31) (2022-07-26)
 
 
