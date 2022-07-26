@@ -135,7 +135,7 @@ function appendCredits() {
             classesToAdd.forEach((className) => {
                 creditsElement.classList.add(className)
             })
-            creditsElement.innerText = `©${credits.value}`
+            creditsElement.innerText = (credits.value) ? `©${credits.value}` : ''
             slideElement.value.appendChild(creditsElement)
         }
     }
