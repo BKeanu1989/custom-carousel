@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.29](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.28...v0.0.29) (2022-07-26)
+
+
+### Bug Fixes
+
+* slide to active index ([ae9d254](https://github.com/BKeanu1989/custom-carousel/commit/ae9d254e26c61bab2a5a985f55a4a13ef4d89dd1))
+
 ### [0.0.28](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.27...v0.0.28) (2022-07-26)
 
 ### [0.0.27](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.26...v0.0.27) (2022-07-21)
