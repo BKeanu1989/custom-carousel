@@ -197,6 +197,7 @@ onMounted(() => {
 
       try {
         activeIndex.value = _loop.value?.current() || 0;
+        _loop.value.toIndex(activeIndex.value, {duration: 0.8, ease: 'power1.inOut'})
       } catch (error) {
         console.log(error)
       }
