@@ -75,6 +75,6 @@ function removeImageOverlay() {
 <style>
 .pagination--item {
     width: auto;
-    height: 150px;
+    height: 80px;
 }
 </style>
