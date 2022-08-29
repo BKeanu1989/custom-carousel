@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.33](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.32...v0.0.33) (2022-08-29)
+
+
+### Features
+
+* add gesture ([a4fb3cf](https://github.com/BKeanu1989/custom-carousel/commit/a4fb3cfcc7c46eaa0c937027c8182d5a47788279))
+
 ### [0.0.32](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.31...v0.0.32) (2022-07-26)
 
 
