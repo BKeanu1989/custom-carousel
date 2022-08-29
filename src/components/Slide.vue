@@ -1,7 +1,9 @@
 <template>
     <!-- <div class="sw-carousel--slide"> -->
-        <div v-html="slide" class="sw-h-full sw-carousel sw-relative" :style="computedStyle" ref="slideElement"></div>
-        <!-- <div v-if="active">
+    <div v-html="slide"
+        class="sw-h-full sw-carousel sw-relative sw-pointer-events-none sw-select-none sw-cursor-pointer"
+        :style="computedStyle" ref="slideElement"></div>
+    <!-- <div v-if="active">
             {{ credits }}
         </div>
     </div> -->
@@ -49,13 +51,13 @@ const width = ref(0)
 const imageHeight = ref(0)
 const imageWidth = ref(0)
 const credits = ref('')
-watch(() => [props.rootMounted, props.imageToShowCombinedWidth],(val) => {
+watch(() => [props.rootMounted, props.imageToShowCombinedWidth], (val) => {
     if (val) {
         setWidth()
     }
 })
 
-watch(() => props.active ,(val) => {
+watch(() => props.active, (val) => {
     if (val) {
         appendCredits()
     } else {
@@ -75,7 +77,7 @@ const computedStyle = computed(() => {
 //  * 
 //  * @param slide HTMLImageElement
 //  */
-function getWidthForSlide(slide: string, combinedWidth: number) :number {
+function getWidthForSlide(slide: string, combinedWidth: number): number {
     const parser = new DOMParser()
     const doc = parser.parseFromString(slide, 'text/html')
     const img = doc.querySelector('img')
@@ -95,7 +97,7 @@ function getPhotographerCredits() {
     const regex = /(©|%C2%A9)(.*)-(\d*)-/g
 
     // (©|%C2%A9)(\s*)(.*?)( \(\d*\))(-optimized)?
-// http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk%C2%A9Steffen-Roth-7-optimized.jpg
+    // http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk%C2%A9Steffen-Roth-7-optimized.jpg
     const match = regex.exec(img.src)
     if (!match) return '';
 
@@ -131,7 +133,7 @@ function appendCredits() {
         if (!document.querySelector(`#credits-${props.id}`)) {
             const creditsElement = document.createElement('div')
             creditsElement.id = `credits-${props.id}`
-            const classesToAdd = ['sw-carousel--credits','sw-absolute','sw-top-0','sw-left-0']
+            const classesToAdd = ['sw-carousel--credits', 'sw-absolute', 'sw-top-0', 'sw-left-0']
             classesToAdd.forEach((className) => {
                 creditsElement.classList.add(className)
             })
@@ -145,7 +147,7 @@ function appendCredits() {
     // }
 }
 
-function removeCredits(){
+function removeCredits() {
     if (!props.parseCredits) return;
 
     if (slideElement.value) {
