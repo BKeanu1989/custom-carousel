@@ -58,7 +58,7 @@ const computedStyle = computed(() => {
   }
   if (root.value) {
     if (props.selectorForFullHeight) {
-      const element = document.querySelector(props.selectorForFullHeight)
+      const element = document.querySelector(props.selectorForFullHeight) as HTMLElement
       if (!element) return {}
       styles.height = `${element.offsetHeight}px`
     } else {
@@ -150,7 +150,7 @@ onMounted(() => {
       onCompleteSecond: (_old: any, _newV: any) => {
 
         // @ts-ignore
-        slideRefs.value[activeIndex.value].setTransform()
+        // slideRefs.value[activeIndex.value].setTransform()
         // slideRefs.value[newV].setTransform()
       },
       onReset: () => {
@@ -162,7 +162,7 @@ onMounted(() => {
     _loop.value = horizontalLoop2(boxes, {
       paused: true,
       draggable: true, // make it draggable
-      center: true, // active element is the one in the center of the container rather than th left edge
+      center: false, // active element is the one in the center of the container rather than th left edge
       onChange: (element: HTMLElement, index: number) => { // when the active element changes, this function gets called.
         activeElement && activeElement.classList.remove("active");
         element.classList.add("active");

@@ -69,7 +69,7 @@ const computedStyle = computed(() => {
     return {
         'aspect-ratio': `${imageWidth.value} / ${imageHeight.value}`,
         // 'width': `${width.value}px`,
-        'transform': transformText.value,
+        // 'transform': transformText.value,
     }
 })
 
