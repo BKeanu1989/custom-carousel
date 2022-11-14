@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import { resolve } from "path";
 // import typescript from '@rollup/plugin-typescript';
 // console.log("🚀 ~ file: vite.config.js ~ line 5 ~ typescript", typescript)
 
@@ -14,26 +14,27 @@ export default defineConfig({
     //   declarationDir: 'types/',
     //   rootDir: '/'
     // },
-    vue()],
+    vue(),
+  ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.js'),
-      name: 'custom-carousel',
+      entry: resolve(__dirname, "src/index.js"),
+      name: "custom-carousel",
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ['vue'],
+      external: ["vue"],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps
         globals: {
-          vue: 'Vue',
+          vue: "Vue",
         },
       },
     },
   },
   server: {
-    host: true
-  }
-})
+    host: true,
+  },
+});

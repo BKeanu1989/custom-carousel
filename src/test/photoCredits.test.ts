@@ -1,12 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { plainGetPhotoCredits } from '../src/utils/misc'
-
-
-// http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk%C2%A9Steffen-Roth-7-optimized.jpg
-// http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk%C2%A9Christian-van-dalen-optimized.jpg
-// http://localhost:4444/wp-content/uploads/2022/05/Franz-Xaver-Zeller©-Elena-Zaucke-18.jpg
-// 
-
+import { plainGetPhotoCredits } from '../utils/misc'
 
 describe('PhotoCredits', () => {
     it('resolves on normal input name', () => {
