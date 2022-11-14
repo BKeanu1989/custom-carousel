@@ -1,57 +1,31 @@
 <template>
   <div>
-    <div
-      class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden"
-      ref="root"
-      :style="computedStyle"
-    >
+    <div class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden" ref="root" :style="computedStyle">
       <!-- <slot name="navigation"> -->
       <Navigation @prev="prev" @next="next"></Navigation>
       <!-- </slot> -->
-      <div
-        class="sw-carousel--inner sw-max-h-[600px] sw-w-full"
-        ref="innerTrack"
-      >
+      <div class="sw-carousel--inner sw-max-h-[600px] sw-w-full" ref="innerTrack">
         <slot>
-          <Slide
-            v-for="(slide, index) in slides"
-            :key="index"
-            :slide="slide"
-            :sliderWidth="sliderWidth"
-            class="sw-slide2"
-            :rootMounted="rootMounted"
-            :imageToShowCombinedWidth="combinedWidth"
-            :parseCredits="true"
-            :style="{}"
-            :class="{
+          <Slide v-for="(slide, index) in slides" :key="index" :slide="slide" :sliderWidth="sliderWidth"
+            class="sw-slide2" :rootMounted="rootMounted" :imageToShowCombinedWidth="combinedWidth" :parseCredits="true"
+            :style="{}" :class="{
               inActive: index !== activeIndex,
               'sw-z-10': index === activeIndex,
-            }"
-            :active="index === activeIndex"
-            :id="index"
-            ref="slideRefs"
-          >
+            }" :active="index === activeIndex" :id="index" ref="slideRefs">
           </Slide>
         </slot>
         <slot name="indicator">
-          <PaginationIndicator
-            :items="slides"
-            :currentIndex="activeIndex"
-          ></PaginationIndicator>
+          <PaginationIndicator :items="slides" :currentIndex="activeIndex"></PaginationIndicator>
         </slot>
       </div>
     </div>
     <slot name="pagination" v-if="showPagination">
-      <Pagination
-        :images="slides"
-        :currentIndex="activeIndex"
-        @updateSlide="gsapToIndex($event)"
-      ></Pagination>
+      <Pagination :images="slides" :currentIndex="activeIndex" @updateSlide="gsapToIndex($event)"></Pagination>
     </slot>
   </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, PropType, ref, watch } from "vue";
+import { computed, onMounted, onUnmounted, PropType, ref, watch, provide } from "vue";
 import { useDrag } from "@vueuse/gesture";
 
 import Slide from "./Slide.vue";
@@ -125,7 +99,19 @@ const props = defineProps({
     type: Object,
     required: false,
   },
+  creditStyles: {
+    type: String,
+    required: false,
+  },
+  slideClasses: {
+    type: Array,
+    required: false
+  }
 });
+
+provide('slideStyles', props.slideStyles)
+provide('slideClasses', props.slideClasses)
+provide('creditStyles', props.creditStyles)
 
 function gsapToIndex(index: number) {
   _loop.value.toIndex(index, { duration: 0.8, ease: "power1.inOut" });
@@ -234,6 +220,7 @@ function restartDragPos() {
   dragEndPos.value = null;
 }
 const dragHandler = (state: any) => {
+  console.log("drag handler", state)
   if (dragStartPos.value === null) {
     dragStartPos.value = state.event.offsetX;
   }
@@ -260,8 +247,45 @@ const dragHandler = (state: any) => {
   }
 };
 
-useDrag(dragHandler, {
-  domTarget: innerTrack,
+const dragHandler_v2 = <T extends { movement: any, dragging: any }>({ movement: [x, y], dragging }: T) => {
+  console.log("drag handler", x, y, dragging)
+
+  if (!dragging) {
+    const direction = x > 0 ? 'left' : 'right'
+    if (direction === 'left') {
+      _loop.value.previous({ duration: 0.8, ease: 'power1.inOut' })
+    } else {
+      _loop.value.next({ duration: 0.8, ease: 'power1.inOut' })
+    }
+  }
+  // if (dragStartPos.value === null) {
+  //   dragStartPos.value = state.event.offsetX;
+  // }
+
+  // if (state.dragging === false) {
+  //   dragEndPos.value = state.event.offsetX;
+  // }
+
+  // if (dragStartPos.value && dragEndPos.value) {
+  //   const draggingPixels = dragStartPos.value - dragEndPos.value;
+  //   if (draggingPixels !== 0) {
+  //     const carouselDistance = Math.round(draggingPixels / 300);
+  //     if (carouselDistance > 0) {
+  //       for (let index = 0; index < carouselDistance; index++) {
+  //         _loop.value.next({ duration: 0.8, ease: "power1.inOut" });
+  //       }
+  //     } else {
+  //       for (let index = 0; index > carouselDistance; index--) {
+  //         _loop.value.previous({ duration: 0.8, ease: "power1.inOut" });
+  //       }
+  //     }
+  //   }
+  //   restartDragPos();
+  // }
+};
+
+useDrag(dragHandler_v2, {
+  domTarget: root,
   filterTaps: true,
   swipeDistance: "1000",
   axis: "x",
