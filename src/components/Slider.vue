@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden" ref="root" :style="computedStyle">
+    <div class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden sw-overflow-y-hidden" ref="root"
+      :style="computedStyle">
       <!-- <slot name="navigation"> -->
       <Navigation @prev="prev" @next="next"></Navigation>
       <!-- </slot> -->
