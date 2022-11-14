@@ -90,10 +90,10 @@ export function plainGetPhotoCredits(url: string) {
         result = result.replace(blackListedChars, '')
         result = result.replaceAll('_', ' ').trim()
 
-
+        result = result.replace(/\d/g, '');
+        result = result.replace(/(High|Res)/g, '');
 
         result = titleCase(result).trim()
-        console.log("🚀 ~ file: misc.ts ~ line 93 ~ plainGetPhotoCredits ~ result", result)
 
         return result
     } catch (error) {

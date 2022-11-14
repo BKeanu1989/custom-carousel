@@ -18,10 +18,10 @@ describe('PhotoCredits', () => {
 
     it('resolves on somewhat normal input name', () => {
         expect(plainGetPhotoCredits('Christian A. Koch_© Jan Merkle (29).jpg')).toBe('Jan Merkle')
-        expect(plainGetPhotoCredits('http://localhost:4444/wp-content/uploads/2022/08/Ausschnitt_Christian_A._Koch__c__Jan_Merkle__12_.jpg')).toBeTruthy()
+        expect(plainGetPhotoCredits('http://localhost:4444/wp-content/uploads/2022/08/Ausschnitt_Christian_A._Koch__c__Jan_Merkle__12_.jpg')).toBe('Jan Merkle')
     })
 
     it('resolves on normal input name', () => {
-        expect(plainGetPhotoCredits('Jutta_Fastian_2021_©Marlene_Rahmann_High_Res_78-scaled.jpg')).toBeTruthy()
+        expect(plainGetPhotoCredits('Jutta_Fastian_2021_©Marlene_Rahmann_High_Res_78-scaled.jpg')).toBe('Marlene Rahmann')
     })
 })
