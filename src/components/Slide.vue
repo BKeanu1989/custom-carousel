@@ -9,7 +9,7 @@
     </div> -->
 </template>
 <script setup lang="ts">
-import { getAspectRatio } from "../utils/misc";
+import { getAspectRatio, getPhotographerCredits } from "../utils/misc";
 import {
     computed,
     onMounted,
@@ -104,40 +104,11 @@ function getWidthForSlide(slide: string, combinedWidth: number): number {
     return imageWidth;
 }
 
-function getPhotographerCredits() {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(props.slide, "text/html");
-    const img = doc.querySelector("img");
-    if (!img) return "";
-
-    try {
-        const regex = /(©|%C2%A9)(.*)(.jpg|.jpeg|.webp)$/g;
-        // (©|%C2%A9)(\s*)(.*?)( \(\d*\))(-optimized)?
-        // http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk%C2%A9Steffen-Roth-7-optimized.jpg
-        // http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk%C2%A9Steffen-Roth-7-optimized.jpg
-        // http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk%C2%A9Christian-van-dalen-7-optimized.jpg
-        // http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk%C2%A9Christian-van-dalen-optimized.jpg
-        // Jutta_Fastian_2021_©Marlene_Rahmann_High_Res_78-scaled.jpg
-        // http://localhost:4444/wp-content/uploads/2022/05/Franz-Xaver-Zeller©-Elena-Zaucke-18.jpg
-
-        const match = regex.exec(img.src);
-        if (!match) return "";
-
-        // (\w*)((\d*)?(-scaled|-optimized|-opt)?)?
-        const removeSuffixRegex = /((\d*)?(-scaled|-optimized|-opt)?)?$/g; //g
-        const tmpResult = match[2].replace(removeSuffixRegex, "");
-
-        return tmpResult.replaceAll("-", " ").trim();
-    } catch (error) {
-        console.log(error);
-        return "";
-    }
-}
 
 onMounted(() => {
     const _image = slideElement.value?.querySelector("img");
     if (props.parseCredits) {
-        credits.value = getPhotographerCredits();
+        credits.value = getPhotographerCredits(props.slide);
     }
     if (_image) {
         const ratioInfo = getAspectRatio(props.slide);
