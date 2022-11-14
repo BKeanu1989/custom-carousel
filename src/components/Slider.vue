@@ -146,6 +146,7 @@ defineExpose({
 });
 
 onMounted(() => {
+  console.log("should work...")
   if (root.value) {
     const rect = root.value.getBoundingClientRect();
     sliderWidth.value = rect.width;
