@@ -75,8 +75,6 @@ export function plainGetPhotoCredits(url: string) {
     try {
         const regex = /(©|%C2%A9|__c__)(.*)(.jpg|.jpeg|.webp)$/g;
         // (©|%C2%A9)(\s*)(.*?)( \(\d*\))(-optimized)?
-
-
         const match = regex.exec(url);
         if (!match) return "";
 
