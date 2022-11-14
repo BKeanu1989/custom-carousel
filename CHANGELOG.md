@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.39](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.38...v0.0.39) (2022-11-14)
+
+
+### Bug Fixes
+
+* overflow y hidden ([ffb07c7](https://github.com/BKeanu1989/custom-carousel/commit/ffb07c7ccfb8cc2ebbf4d1dff522436f2477bc9f))
+
 ### [0.0.38](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.37...v0.0.38) (2022-11-14)
 
 
