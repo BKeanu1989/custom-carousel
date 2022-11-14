@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden sw-overflow-y-hidden" ref="root"
-      :style="computedStyle">
+      :style="computedStyle" :data-active="activeIndex">
       <!-- <slot name="navigation"> -->
-      <Navigation @prev="prev" @next="next"></Navigation>
+      <Navigation @prev="onPrev" @next="onNext"></Navigation>
       <!-- </slot> -->
       <div class="sw-carousel--inner sw-max-h-[600px] sw-w-full" ref="innerTrack">
         <slot>
@@ -12,7 +12,7 @@
             :style="{}" :class="{
               inActive: index !== activeIndex,
               'sw-z-10': index === activeIndex,
-            }" :active="index === activeIndex" :id="index" ref="slideRefs">
+            }" :active="index === activeIndex" :id="index" ref="slideRefs" @click="gsapToIndex(index)">
           </Slide>
         </slot>
         <slot name="indicator">
@@ -37,7 +37,7 @@ import PaginationIndicator from "./PaginationIndicator.vue";
 import gsap from "gsap";
 
 import { type BreakPoint } from "../types/BreakPoints";
-import { horizontalLoop2 } from "../utils/gsapUtils";
+import { horizontalLoop3 } from "../utils/gsapUtils";
 import { getWidthOfImage, getBreakPointWidth } from "../utils/misc";
 
 const root = ref<HTMLElement | null>(null);
@@ -115,14 +115,17 @@ provide('slideClasses', props.slideClasses)
 provide('creditStyles', props.creditStyles)
 
 function gsapToIndex(index: number) {
+  console.log("gsapToIndex", index)
   _loop.value.toIndex(index, { duration: 0.8, ease: "power1.inOut" });
 }
 
-function prev() {
+function onPrev() {
+  // for some reason we need this rn
+  _loop.value.previous({ duration: 0.8, ease: "power1.inOut" });
   _loop.value.previous({ duration: 0.8, ease: "power1.inOut" });
 }
 
-function next() {
+function onNext() {
   _loop.value.next({ duration: 0.8, ease: "power1.inOut" });
 }
 
@@ -142,8 +145,8 @@ function setImagesDependingOnWidth() {
 
 defineExpose({
   slideRefs,
-  prev,
-  next,
+  onPrev,
+  onNext,
 });
 
 onMounted(() => {
@@ -158,7 +161,7 @@ onMounted(() => {
   }
 
   setTimeout(() => {
-    const boxes = gsap.utils.toArray(".sw-slide2");
+    const boxes = gsap.utils.toArray('.sw-slide2')
     const callBackOptions = {
       // aniEnd: (index: number) => {
       //   activeIndex.value = index
@@ -167,46 +170,100 @@ onMounted(() => {
         // slideRefs.value[newV].setTransform()
       },
       onCompleteSecond: (_old: any, _newV: any) => {
+
         // @ts-ignore
-        // slideRefs.value[activeIndex.value].setTransform()
+        slideRefs.value[activeIndex.value].setTransform()
         // slideRefs.value[newV].setTransform()
       },
       onReset: () => {
-        resetLoop();
-      },
-    };
+        resetLoop()
+      }
+    }
     let activeElement: any;
     //   _loop.value = horizontalLoop(boxes, {paused: true, draggable: true, center: true}, callBackOptions)
-    _loop.value = horizontalLoop2(boxes, {
+    _loop.value = horizontalLoop3(boxes, {
       paused: true,
       draggable: true, // make it draggable
-      center: false, // active element is the one in the center of the container rather than th left edge
-      onChange: (element: HTMLElement, index: number) => {
-        // when the active element changes, this function gets called.
+      center: true, // active element is the one in the center of the container rather than th left edge
+      onChange: (element: HTMLElement, index: number) => { // when the active element changes, this function gets called.
         activeElement && activeElement.classList.remove("active");
         element.classList.add("active");
         activeElement = element;
       },
       updateIndex(index: number) {
-        activeIndex.value = index;
-      },
-    });
-    boxes.forEach((box: any, i: number) =>
-      box.addEventListener("click", () =>
+        activeIndex.value = index
+      }
+    })
+    console.log("🚀 ~ file: Slider.vue ~ line 179 ~ boxes.forEach ~ boxes", boxes)
+    boxes.forEach((box: any, i: number) => {
+      console.log(i, box)
+      box.addEventListener("click", () => {
+        console.log("test")
         _loop.value.toIndex(i, { duration: 0.8, ease: "power1.inOut" })
-      )
-    );
+      })
+    });
 
     try {
       activeIndex.value = _loop.value?.current() || 0;
-      _loop.value.toIndex(activeIndex.value, {
-        duration: 0.8,
-        ease: "power1.inOut",
-      });
+      _loop.value.toIndex(activeIndex.value, { duration: 0.8, ease: 'power1.inOut' })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }, 50);
+  // setTimeout(() => {
+  //   const boxes = gsap.utils.toArray(".sw-slide2");
+  //   console.log("🚀 ~ file: Slider.vue ~ line 166 ~ setTimeout ~ boxes", boxes)
+  //   const callBackOptions = {
+  //     // aniEnd: (index: number) => {
+  //     //   activeIndex.value = index
+  //     // },
+  //     onComplete: (_old: number, _newV: number) => {
+  //       // slideRefs.value[newV].setTransform()
+  //     },
+  //     onCompleteSecond: (_old: any, _newV: any) => {
+  //       // @ts-ignore
+  //       // slideRefs.value[activeIndex.value].setTransform()
+  //       // slideRefs.value[newV].setTransform()
+  //     },
+  //     onReset: () => {
+  //       resetLoop();
+  //     },
+  //   };
+  //   let activeElement: any;
+  //   //   _loop.value = horizontalLoop(boxes, {paused: true, draggable: true, center: true}, callBackOptions)
+  //   _loop.value = horizontalLoop3(boxes, {
+  //     paused: true,
+  //     draggable: false, // make it draggable
+  //     center: true, // active element is the one in the center of the container rather than th left edge
+  //     onChange: (element: HTMLElement, index: number) => {
+  //       // when the active element changes, this function gets called.
+  //       activeElement && activeElement.classList.remove("active");
+  //       element.classList.add("active");
+  //       activeElement = element;
+  //     },
+  //     updateIndex(index: number) {
+  //       activeIndex.value = index;
+  //     },
+  //   });
+
+  //   // boxes.forEach((box: any, i: number) => box.addEventListener("click", () => _loop.value.toIndex(i, { duration: 0.8, ease: "power1.inOut" })));
+
+  //   // boxes.forEach((box: any, i: number) =>
+  //   //   box.addEventListener("click", () =>
+  //   //     _loop.value.toIndex(i, { duration: 0.8, ease: "power1.inOut" })
+  //   //   )
+  //   // );
+
+  //   try {
+  //     activeIndex.value = _loop.value?.current() || 0;
+  //     _loop.value.toIndex(activeIndex.value, {
+  //       duration: 0.8,
+  //       ease: "power1.inOut",
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, 50);
 });
 
 onUnmounted(() => {
@@ -220,33 +277,6 @@ function restartDragPos() {
   dragStartPos.value = null;
   dragEndPos.value = null;
 }
-const dragHandler = (state: any) => {
-  console.log("drag handler", state)
-  if (dragStartPos.value === null) {
-    dragStartPos.value = state.event.offsetX;
-  }
-
-  if (state.dragging === false) {
-    dragEndPos.value = state.event.offsetX;
-  }
-
-  if (dragStartPos.value && dragEndPos.value) {
-    const draggingPixels = dragStartPos.value - dragEndPos.value;
-    if (draggingPixels !== 0) {
-      const carouselDistance = Math.round(draggingPixels / 300);
-      if (carouselDistance > 0) {
-        for (let index = 0; index < carouselDistance; index++) {
-          _loop.value.next({ duration: 0.8, ease: "power1.inOut" });
-        }
-      } else {
-        for (let index = 0; index > carouselDistance; index--) {
-          _loop.value.previous({ duration: 0.8, ease: "power1.inOut" });
-        }
-      }
-    }
-    restartDragPos();
-  }
-};
 
 const dragHandler_v2 = <T extends { movement: any, dragging: any }>({ movement: [x, y], dragging }: T) => {
   if (!dragging) {
