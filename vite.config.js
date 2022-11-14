@@ -1,18 +1,19 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
-import typescript from '@rollup/plugin-typescript';
+// import typescript from '@rollup/plugin-typescript';
+// console.log("🚀 ~ file: vite.config.js ~ line 5 ~ typescript", typescript)
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    {
-      ...typescript({ tsconfig: './tsconfig.json' }),
-      apply: 'build',
-      declaration: true,
-      declarationDir: 'types/',
-      rootDir: '/'
-    },
+    // {
+    //   ...typescript({ tsconfig: './tsconfig.json' }),
+    //   apply: 'build',
+    //   declaration: true,
+    //   declarationDir: 'types/',
+    //   rootDir: '/'
+    // },
     vue()],
   build: {
     lib: {
@@ -32,4 +33,7 @@ export default defineConfig({
       },
     },
   },
+  server: {
+    host: true
+  }
 })

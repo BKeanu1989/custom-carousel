@@ -1,29 +1,29 @@
 <script setup lang="ts">
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import { ref } from 'vue';
-import Slider from './components/Slider.vue';
+import { ref } from "vue";
+import Slider from "./components/Slider.vue";
 // import Slider2 from './components/Slider2.vue';
-import { type BreakPoint } from './types/BreakPoints';
+import { type BreakPoint } from "./types/BreakPoints";
 
 // const slides = [
-//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_13_e9027d8aea.jpg" sizes="(max-width: 870px) 100vw, 870px" />', 
-//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_12_2_65f5c8a86f.jpg" sizes="(max-width: 870px) 100vw, 870px" />', 
-//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_102_c0facfd275.jpg" sizes="(max-width: 870px) 100vw, 870px" />', 
+//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_13_e9027d8aea.jpg" sizes="(max-width: 870px) 100vw, 870px" />',
+//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_12_2_65f5c8a86f.jpg" sizes="(max-width: 870px) 100vw, 870px" />',
+//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_102_c0facfd275.jpg" sizes="(max-width: 870px) 100vw, 870px" />',
 //   '<img width="467" height="700" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_78_56229fda60.jpg" sizes="(max-width: 467px) 100vw, 467px" />',
-//     '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_13_e9027d8aea.jpg" sizes="(max-width: 870px) 100vw, 870px" />', 
-//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_102_c0facfd275.jpg" sizes="(max-width: 870px) 100vw, 870px" />', 
+//     '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_13_e9027d8aea.jpg" sizes="(max-width: 870px) 100vw, 870px" />',
+//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_102_c0facfd275.jpg" sizes="(max-width: 870px) 100vw, 870px" />',
 //   '<img width="467" height="700" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_78_56229fda60.jpg" sizes="(max-width: 467px) 100vw, 467px" />',
-// '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_12_2_65f5c8a86f.jpg" sizes="(max-width: 870px) 100vw, 870px" />', 
+// '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_12_2_65f5c8a86f.jpg" sizes="(max-width: 870px) 100vw, 870px" />',
 //   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556.jpg 870w, http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556-300x200.jpg 300w, http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556-768x512.jpg 768w" sizes="(max-width: 870px) 100vw, 870px" />',
-//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_13_e9027d8aea.jpg" sizes="(max-width: 870px) 100vw, 870px" />', 
-//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_12_2_65f5c8a86f.jpg" sizes="(max-width: 870px) 100vw, 870px" />', 
-//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_102_c0facfd275.jpg" sizes="(max-width: 870px) 100vw, 870px" />', 
+//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_13_e9027d8aea.jpg" sizes="(max-width: 870px) 100vw, 870px" />',
+//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_12_2_65f5c8a86f.jpg" sizes="(max-width: 870px) 100vw, 870px" />',
+//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_102_c0facfd275.jpg" sizes="(max-width: 870px) 100vw, 870px" />',
 //   '<img width="467" height="700" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_78_56229fda60.jpg" sizes="(max-width: 467px) 100vw, 467px" />',
-//     '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_13_e9027d8aea.jpg" sizes="(max-width: 870px) 100vw, 870px" />', 
-//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_102_c0facfd275.jpg" sizes="(max-width: 870px) 100vw, 870px" />', 
+//     '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_13_e9027d8aea.jpg" sizes="(max-width: 870px) 100vw, 870px" />',
+//   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_102_c0facfd275.jpg" sizes="(max-width: 870px) 100vw, 870px" />',
 //   '<img width="467" height="700" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_78_56229fda60.jpg" sizes="(max-width: 467px) 100vw, 467px" />',
-// '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_12_2_65f5c8a86f.jpg" sizes="(max-width: 870px) 100vw, 870px" />', 
+// '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/03/Jutta_Fastian_2021__c_Marlene_Rahmann_Web_12_2_65f5c8a86f.jpg" sizes="(max-width: 870px) 100vw, 870px" />',
 //   '<img width="870" height="580" src="http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556.jpg 870w, http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556-300x200.jpg 300w, http://localhost:4444/wp-content/uploads/2022/04/Leonie_Parusel__1__6e84b98556-768x512.jpg 768w" sizes="(max-width: 870px) 100vw, 870px" />',
 // ]
 
@@ -47,8 +47,7 @@ import { type BreakPoint } from './types/BreakPoints';
 //     "<img width=\"1920\" height=\"2560\" src=\"https://schwanenberg.mokka-webdesign.com/wp-content/uploads/2022/05/IMGP1650-scaled.jpg\" class=\"attachment-full size-full\" alt=\"\" srcset=\"https://schwanenberg.mokka-webdesign.com/wp-content/uploads/2022/05/IMGP1650-scaled.jpg 1920w, https://schwanenberg.mokka-webdesign.com/wp-content/uploads/2022/05/IMGP1650-225x300.jpg 225w, https://schwanenberg.mokka-webdesign.com/wp-content/uploads/2022/05/IMGP1650-768x1024.jpg 768w, https://schwanenberg.mokka-webdesign.com/wp-content/uploads/2022/05/IMGP1650-1152x1536.jpg 1152w, https://schwanenberg.mokka-webdesign.com/wp-content/uploads/2022/05/IMGP1650-1536x2048.jpg 1536w\" sizes=\"(max-width: 1920px) 100vw, 1920px\" />"
 // ])
 
-const slides = ref(
-  [
+const slides = ref([
   //   "<img width=\"667\" height=\"1000\" src=\"http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-1-optimized.jpg\" class=\"attachment-full size-full\" alt=\"\" loading=\"lazy\" srcset=\"http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-1-optimized.jpg 667w, http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-1-optimized-200x300.jpg 200w\" sizes=\"(max-width: 667px) 100vw, 667px\" />",
   //   "<img width=\"1000\" height=\"667\" src=\"http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-4-optimized.jpg\" class=\"attachment-full size-full\" alt=\"\" loading=\"lazy\" srcset=\"http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-4-optimized.jpg 1000w, http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-4-optimized-300x200.jpg 300w, http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-4-optimized-768x512.jpg 768w\" sizes=\"(max-width: 1000px) 100vw, 1000px\" />",
   //   "<img width=\"667\" height=\"1000\" src=\"http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-9-optimized.jpg\" class=\"attachment-full size-full\" alt=\"\" loading=\"lazy\" srcset=\"http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-9-optimized.jpg 667w, http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-9-optimized-200x300.jpg 200w\" sizes=\"(max-width: 667px) 100vw, 667px\" />",
@@ -66,11 +65,14 @@ const slides = ref(
   //   "<img width=\"667\" height=\"1000\" src=\"http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-7-optimized.jpg\" class=\"attachment-full size-full\" alt=\"\" loading=\"lazy\" srcset=\"http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-7-optimized.jpg 667w, http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-7-optimized-200x300.jpg 200w\" sizes=\"(max-width: 667px) 100vw, 667px\" />",
   //   "<img width=\"1000\" height=\"667\" src=\"http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-12-optimized.jpg\" class=\"attachment-full size-full\" alt=\"\" loading=\"lazy\" srcset=\"http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-12-optimized.jpg 1000w, http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-12-optimized-300x200.jpg 300w, http://localhost:4444/wp-content/uploads/2022/07/Helen-Woigk©Steffen-Roth-12-optimized-768x512.jpg 768w\" sizes=\"(max-width: 1000px) 100vw, 1000px\" />",
   // '<img width="2560" height="1707" src="https://schwanenberg.mokka-webdesign.com/wp-content/uploads/2022/05/Jutta_Fastian_2021_©Marlene_Rahmann_High_Res_100-scaled.jpg" class="attachment-full size-full" alt="" srcset="https://schwanenberg.mokka-webdesign.com/wp-content/uploads/2022/05/Jutta_Fastian_2021_©Marlene_Rahmann_High_Res_100-scaled.jpg 2560w, https://schwanenberg.mokka-webdesign.com/wp-content/uploads/2022/05/Jutta_Fastian_2021_©Marlene_Rahmann_High_Res_100-300x200.jpg 300w, https://schwanenberg.mokka-webdesign.com/wp-content/uploads/2022/05/Jutta_Fastian_2021_©Marlene_Rahmann_High_Res_100-1024x683.jpg 1024w, https://schwanenberg.mokka-webdesign.com/wp-content/uploads/2022/05/Jutta_Fastian_2021_©Marlene_Rahmann_High_Res_100-768x512.jpg 768w, https://schwanenberg.mokka-webdesign.com/wp-content/uploads/2022/05/Jutta_Fastian_2021_©Marlene_Rahmann_High_Res_100-1536x1024.jpg 1536w, https://schwanenberg.mokka-webdesign.com/wp-content/uploads/2022/05/Jutta_Fastian_2021_©Marlene_Rahmann_High_Res_100-2048x1366.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px">',
+  '<img width="578" height="867" src="http://localhost:4444/wp-content/uploads/2022/05/Franz-Xaver-Zeller©-Elena-Zaucke-6.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="http://localhost:4444/wp-content/uploads/2022/05/Franz-Xaver-Zeller©-Elena-Zaucke-6.jpg 578w, http://localhost:4444/wp-content/uploads/2022/05/Franz-Xaver-Zeller©-Elena-Zaucke-6-200x300.jpg 200w" sizes="(max-width: 578px) 100vw, 578px">',
+  '<img width="1008" height="672" src="http://localhost:4444/wp-content/uploads/2022/05/Franz-Xaver-Zeller©-Elena-Zaucke-10.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="http://localhost:4444/wp-content/uploads/2022/05/Franz-Xaver-Zeller©-Elena-Zaucke-10.jpg 1008w, http://localhost:4444/wp-content/uploads/2022/05/Franz-Xaver-Zeller©-Elena-Zaucke-10-300x200.jpg 300w, http://localhost:4444/wp-content/uploads/2022/05/Franz-Xaver-Zeller©-Elena-Zaucke-10-768x512.jpg 768w" sizes="(max-width: 1008px) 100vw, 1008px">',
+  '<img width="627" height="941" src="http://localhost:4444/wp-content/uploads/2022/05/Franz-Xaver-Zeller©-Elena-Zaucke-13.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="http://localhost:4444/wp-content/uploads/2022/05/Franz-Xaver-Zeller©-Elena-Zaucke-13.jpg 627w, http://localhost:4444/wp-content/uploads/2022/05/Franz-Xaver-Zeller©-Elena-Zaucke-13-200x300.jpg 200w" sizes="(max-width: 627px) 100vw, 627px">',
+  '<img width="568" height="851" src="http://localhost:4444/wp-content/uploads/2022/05/Franz-Xaver-Zeller©-Elena-Zaucke-18.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="http://localhost:4444/wp-content/uploads/2022/05/Franz-Xaver-Zeller©-Elena-Zaucke-18.jpg 568w, http://localhost:4444/wp-content/uploads/2022/05/Franz-Xaver-Zeller©-Elena-Zaucke-18-200x300.jpg 200w" sizes="(max-width: 568px) 100vw, 568px">',
   '<picture><source type="image/avif" media="(min-width: 1024px)" width="512" srcset="http://localhost:4444/wp-content/uploads/2022/09/opt-Daria-Monciu-2014_-©Xiomara-Bender-11.avif"><source media="(max-width: 1023px)" height="171" width="256" srcset="http://localhost:4444/wp-content/uploads/2022/09/opt-Daria-Monciu-2014_-©Xiomara-Bender-11-256x171.jpeg 256w"><img src="http://localhost:4444/wp-content/uploads/2022/09/opt-Daria-Monciu-2014_-©Xiomara-Bender-11.jpeg" alt="" width="512" height="341"></picture>',
-  '<picture><source type="image/avif" media="(min-width: 1024px)" width="512" srcset="http://localhost:4444/wp-content/uploads/2022/09/opt-Daria-Monciu-2014_-©Xiomara-Bender-11.avif"><source media="(max-width: 1023px)" height="171" width="256" srcset="http://localhost:4444/wp-content/uploads/2022/09/opt-Daria-Monciu-2014_-©Xiomara-Bender-11-256x171.jpeg 256w"><img src="http://localhost:4444/wp-content/uploads/2022/09/opt-Daria-Monciu-2014_-©Xiomara-Bender-11.jpeg" alt="" width="512" height="341"></picture>'
-]
-)
-const car_slider = ref(null)
+  '<picture><source type="image/avif" media="(min-width: 1024px)" width="512" srcset="http://localhost:4444/wp-content/uploads/2022/09/opt-Daria-Monciu-2014_-©Xiomara-Bender-11.avif"><source media="(max-width: 1023px)" height="171" width="256" srcset="http://localhost:4444/wp-content/uploads/2022/09/opt-Daria-Monciu-2014_-©Xiomara-Bender-11-256x171.jpeg 256w"><img src="http://localhost:4444/wp-content/uploads/2022/09/opt-Daria-Monciu-2014_-©Xiomara-Bender-11.jpeg" alt="" width="512" height="341"></picture>',
+]);
+const car_slider = ref(null);
 
 // const _slides = ref(slides.map((slide) => {
 //   const parser = new DOMParser()
@@ -90,14 +92,12 @@ const bP = ref<BreakPoint>({
   },
   400: {
     itemsToShow: 1,
-  }
-  
-})
+  },
+});
 </script>
 
-
 <template>
-<!-- <div class="sw-flex sw-flex-col lg:sw-flex-row ">
+  <!-- <div class="sw-flex sw-flex-col lg:sw-flex-row ">
   <div class="lg:sw-w-2/3">
     <Slider :slides="slides" :toShow="3" :breakPoints="bP" :showPagination="false" selectorForFullHeight="#foobar">
   
@@ -107,11 +107,15 @@ const bP = ref<BreakPoint>({
 
   </div>
 </div> -->
-<div>
-      <Slider :slides="slides" :toShow="3" :breakPoints="bP" :showPagination="true">
-  
+  <div>
+    <Slider
+      :slides="slides"
+      :toShow="3"
+      :breakPoints="bP"
+      :showPagination="true"
+    >
     </Slider>
-</div>
+  </div>
 </template>
 
 <style>
