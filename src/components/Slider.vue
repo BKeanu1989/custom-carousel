@@ -248,8 +248,6 @@ const dragHandler = (state: any) => {
 };
 
 const dragHandler_v2 = <T extends { movement: any, dragging: any }>({ movement: [x, y], dragging }: T) => {
-  console.log("drag handler", x, y, dragging)
-
   if (!dragging) {
     const direction = x > 0 ? 'left' : 'right'
     if (direction === 'left') {
@@ -258,30 +256,6 @@ const dragHandler_v2 = <T extends { movement: any, dragging: any }>({ movement: 
       _loop.value.next({ duration: 0.8, ease: 'power1.inOut' })
     }
   }
-  // if (dragStartPos.value === null) {
-  //   dragStartPos.value = state.event.offsetX;
-  // }
-
-  // if (state.dragging === false) {
-  //   dragEndPos.value = state.event.offsetX;
-  // }
-
-  // if (dragStartPos.value && dragEndPos.value) {
-  //   const draggingPixels = dragStartPos.value - dragEndPos.value;
-  //   if (draggingPixels !== 0) {
-  //     const carouselDistance = Math.round(draggingPixels / 300);
-  //     if (carouselDistance > 0) {
-  //       for (let index = 0; index < carouselDistance; index++) {
-  //         _loop.value.next({ duration: 0.8, ease: "power1.inOut" });
-  //       }
-  //     } else {
-  //       for (let index = 0; index > carouselDistance; index--) {
-  //         _loop.value.previous({ duration: 0.8, ease: "power1.inOut" });
-  //       }
-  //     }
-  //   }
-  //   restartDragPos();
-  // }
 };
 
 useDrag(dragHandler_v2, {
