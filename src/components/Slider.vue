@@ -1,32 +1,67 @@
 <template>
   <div>
-    <div class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden sw-overflow-y-hidden" ref="root"
-      :style="computedStyle" :data-active="activeIndex">
+    <div
+      class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden sw-overflow-y-hidden"
+      ref="root"
+      :style="computedStyle"
+      :data-active="activeIndex"
+    >
       <!-- <slot name="navigation"> -->
       <Navigation @prev="onPrev" @next="onNext"></Navigation>
       <!-- </slot> -->
-      <div class="sw-carousel--inner sw-max-h-[600px] sw-w-full" ref="innerTrack">
+      <div
+        class="sw-carousel--inner sw-max-h-[600px] sw-w-full"
+        ref="innerTrack"
+      >
         <slot>
-          <Slide v-for="(slide, index) in slides" :key="index" :slide="slide" :sliderWidth="sliderWidth"
-            class="sw-slide2" :rootMounted="rootMounted" :imageToShowCombinedWidth="combinedWidth" :parseCredits="true"
-            :style="{}" :class="{
+          <Slide
+            v-for="(slide, index) in slides"
+            :key="index"
+            :slide="slide"
+            :sliderWidth="sliderWidth"
+            class="sw-slide2"
+            :rootMounted="rootMounted"
+            :imageToShowCombinedWidth="combinedWidth"
+            :parseCredits="true"
+            :style="{}"
+            :class="{
               inActive: index !== activeIndex,
               'sw-z-10': index === activeIndex,
-            }" :active="index === activeIndex" :id="index" ref="slideRefs" @click="gsapToIndex(index)">
+            }"
+            :active="index === activeIndex"
+            :id="index"
+            ref="slideRefs"
+            @click="gsapToIndex(index)"
+          >
           </Slide>
         </slot>
         <slot name="indicator">
-          <PaginationIndicator :items="slides" :currentIndex="activeIndex"></PaginationIndicator>
+          <PaginationIndicator
+            :items="slides"
+            :currentIndex="activeIndex"
+          ></PaginationIndicator>
         </slot>
       </div>
     </div>
     <slot name="pagination" v-if="showPagination">
-      <Pagination :images="slides" :currentIndex="activeIndex" @updateSlide="gsapToIndex($event)"></Pagination>
+      <Pagination
+        :images="slides"
+        :currentIndex="activeIndex"
+        @updateSlide="gsapToIndex($event)"
+      ></Pagination>
     </slot>
   </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, PropType, ref, watch, provide } from "vue";
+import {
+  computed,
+  onMounted,
+  onUnmounted,
+  PropType,
+  ref,
+  watch,
+  provide,
+} from "vue";
 import { useDrag } from "@vueuse/gesture";
 
 import Slide from "./Slide.vue";
@@ -106,27 +141,28 @@ const props = defineProps({
   },
   slideClasses: {
     type: Array,
-    required: false
-  }
+    required: false,
+  },
 });
 
-provide('slideStyles', props.slideStyles)
-provide('slideClasses', props.slideClasses)
-provide('creditStyles', props.creditStyles)
+provide("slideStyles", props.slideStyles);
+provide("slideClasses", props.slideClasses);
+provide("creditStyles", props.creditStyles);
 
 function gsapToIndex(index: number) {
-  console.log("gsapToIndex", index)
+  console.log("gsapToIndex", index);
   _loop.value.toIndex(index, { duration: 0.8, ease: "power1.inOut" });
 }
 
 function onPrev() {
-  // for some reason we need this rn
+  // BUG: fix for some reason we need to double call - working in previous version
   _loop.value.previous({ duration: 0.8, ease: "power1.inOut" });
   _loop.value.previous({ duration: 0.8, ease: "power1.inOut" });
 }
 
 function onNext() {
-  _loop.value.next({ duration: 0.8, ease: "power1.inOut" });
+  // BUG: fix for some reason we need to not call - working in previous version
+  // _loop.value.next({ duration: 0.8, ease: "power1.inOut" });
 }
 
 function resetLoop() {
@@ -161,7 +197,7 @@ onMounted(() => {
   }
 
   setTimeout(() => {
-    const boxes = gsap.utils.toArray('.sw-slide2')
+    const boxes = gsap.utils.toArray(".sw-slide2");
     const callBackOptions = {
       // aniEnd: (index: number) => {
       //   activeIndex.value = index
@@ -170,44 +206,50 @@ onMounted(() => {
         // slideRefs.value[newV].setTransform()
       },
       onCompleteSecond: (_old: any, _newV: any) => {
-
         // @ts-ignore
-        slideRefs.value[activeIndex.value].setTransform()
+        slideRefs.value[activeIndex.value].setTransform();
         // slideRefs.value[newV].setTransform()
       },
       onReset: () => {
-        resetLoop()
-      }
-    }
+        resetLoop();
+      },
+    };
     let activeElement: any;
     //   _loop.value = horizontalLoop(boxes, {paused: true, draggable: true, center: true}, callBackOptions)
     _loop.value = horizontalLoop3(boxes, {
       paused: true,
       draggable: true, // make it draggable
       center: true, // active element is the one in the center of the container rather than th left edge
-      onChange: (element: HTMLElement, index: number) => { // when the active element changes, this function gets called.
+      onChange: (element: HTMLElement, index: number) => {
+        // when the active element changes, this function gets called.
         activeElement && activeElement.classList.remove("active");
         element.classList.add("active");
         activeElement = element;
       },
       updateIndex(index: number) {
-        activeIndex.value = index
-      }
-    })
-    console.log("🚀 ~ file: Slider.vue ~ line 179 ~ boxes.forEach ~ boxes", boxes)
-    boxes.forEach((box: any, i: number) => {
-      console.log(i, box)
-      box.addEventListener("click", () => {
-        console.log("test")
-        _loop.value.toIndex(i, { duration: 0.8, ease: "power1.inOut" })
-      })
+        activeIndex.value = index;
+      },
     });
+    // console.log(
+    //   "🚀 ~ file: Slider.vue ~ line 179 ~ boxes.forEach ~ boxes",
+    //   boxes
+    // );
+    // boxes.forEach((box: any, i: number) => {
+    //   console.log(i, box);
+    //   box.addEventListener("click", () => {
+    //     console.log("test");
+    //     _loop.value.toIndex(i, { duration: 0.8, ease: "power1.inOut" });
+    //   });
+    // });
 
     try {
       activeIndex.value = _loop.value?.current() || 0;
-      _loop.value.toIndex(activeIndex.value, { duration: 0.8, ease: 'power1.inOut' })
+      _loop.value.toIndex(activeIndex.value, {
+        duration: 0.8,
+        ease: "power1.inOut",
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }, 50);
   // setTimeout(() => {
@@ -278,13 +320,16 @@ function restartDragPos() {
   dragEndPos.value = null;
 }
 
-const dragHandler_v2 = <T extends { movement: any, dragging: any }>({ movement: [x, y], dragging }: T) => {
+const dragHandler_v2 = <T extends { movement: any; dragging: any }>({
+  movement: [x, y],
+  dragging,
+}: T) => {
   if (!dragging) {
-    const direction = x > 0 ? 'left' : 'right'
-    if (direction === 'left') {
-      _loop.value.previous({ duration: 0.8, ease: 'power1.inOut' })
+    const direction = x > 0 ? "left" : "right";
+    if (direction === "left") {
+      _loop.value.previous({ duration: 0.8, ease: "power1.inOut" });
     } else {
-      _loop.value.next({ duration: 0.8, ease: 'power1.inOut' })
+      _loop.value.next({ duration: 0.8, ease: "power1.inOut" });
     }
   }
 };
