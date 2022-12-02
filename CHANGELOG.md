@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.44](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.43...v0.0.44) (2022-12-02)
+
+
+### Bug Fixes
+
+* **credits:** Kopie -> '', ([ae9d9d4](https://github.com/BKeanu1989/custom-carousel/commit/ae9d9d48575b9c95c33365ffa47724ec792effd0))
+
 ### [0.0.43](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.42...v0.0.43) (2022-11-15)
 
 ### [0.0.42](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.41...v0.0.42) (2022-11-15)
