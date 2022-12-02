@@ -63,6 +63,7 @@ import {
   provide,
 } from "vue";
 import { useDrag } from "@vueuse/gesture";
+import { useEventListener } from "@vueuse/core";
 
 import Slide from "./Slide.vue";
 import Navigation from "./Navigation.vue";
@@ -86,9 +87,14 @@ const _loop = ref<any>(null);
 const slideRefs = ref([]);
 const combinedWidth = ref(0);
 
-// we could make it to a computed property...
-const activeIndex = ref(0);
+useEventListener(document, "keydown", (e) => {
+  if (e.key === "ArrowLeft")
+    _loop.value.previous({ duration: 0.8, ease: "power1.inOut" });
+  if (e.key === "ArrowRight")
+    _loop.value.next({ duration: 0.8, ease: "power1.inOut" });
+});
 
+const activeIndex = ref(0);
 const computedStyle = computed(() => {
   const styles = {
     height: "",
