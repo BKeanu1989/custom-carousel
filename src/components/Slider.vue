@@ -89,9 +89,9 @@ const combinedWidth = ref(0);
 
 useEventListener(document, "keydown", (e) => {
   if (e.key === "ArrowLeft")
-    _loop.value.previous({ duration: 0.8, ease: "power1.inOut" });
+    _loop.value.previous({ duration: 0.6, ease: "power1.inOut" });
   if (e.key === "ArrowRight")
-    _loop.value.next({ duration: 0.8, ease: "power1.inOut" });
+    _loop.value.next({ duration: 0.6, ease: "power1.inOut" });
 });
 
 const activeIndex = ref(0);
@@ -157,13 +157,13 @@ provide("creditStyles", props.creditStyles);
 
 function gsapToIndex(index: number) {
   console.log("gsapToIndex", index);
-  _loop.value.toIndex(index, { duration: 0.8, ease: "power1.inOut" });
+  _loop.value.toIndex(index, { duration: 0.5, ease: "power1.inOut" });
 }
 
 function onPrev() {
   // BUG: fix for some reason we need to double call - working in previous version
-  _loop.value.previous({ duration: 0.8, ease: "power1.inOut" });
-  _loop.value.previous({ duration: 0.8, ease: "power1.inOut" });
+  _loop.value.previous({ duration: 0.5, ease: "power1.inOut" });
+  _loop.value.previous({ duration: 0.5, ease: "power1.inOut" });
 }
 
 function onNext() {
