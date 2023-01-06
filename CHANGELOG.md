@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.46](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.45...v0.0.46) (2023-01-06)
+
+
+### Bug Fixes
+
+* click working, but drag not working rn ([9669768](https://github.com/BKeanu1989/custom-carousel/commit/9669768640b0cfd4fb58db9e7b409d946e8770e9))
+* clicking & drag ([65caab1](https://github.com/BKeanu1989/custom-carousel/commit/65caab10aba8c3f3b3b6124a3cdcc840f33b31ad))
+* some fixes, css & paginatiion duration ([cd6179a](https://github.com/BKeanu1989/custom-carousel/commit/cd6179a77fadd4efb03a79af9d81d445ae15e5fb))
+
 ### [0.0.45](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.44...v0.0.45) (2022-12-02)
 
 
