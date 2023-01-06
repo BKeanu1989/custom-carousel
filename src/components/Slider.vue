@@ -162,13 +162,10 @@ function gsapToIndex(index: number) {
 }
 
 function onPrev() {
-  // BUG: fix for some reason we need to double call - working in previous version
-  // _loop.value.previous({ duration: 0.5, ease: "power1.inOut" });
   _loop.value.previous({ duration: 0.5, ease: "power1.inOut" });
 }
 
 function onNext() {
-  // BUG: fix for some reason we need to not call - working in previous version
   _loop.value.next({ duration: 0.8, ease: "power1.inOut" });
 }
 
@@ -206,12 +203,7 @@ onMounted(() => {
   setTimeout(() => {
     const boxes = gsap.utils.toArray(".sw-slide2");
     const callBackOptions = {
-      // aniEnd: (index: number) => {
-      //   activeIndex.value = index
-      // },
-      onComplete: (_old: number, _newV: number) => {
-        // slideRefs.value[newV].setTransform()
-      },
+      onComplete: (_old: number, _newV: number) => {},
       onCompleteSecond: (_old: any, _newV: any) => {
         // @ts-ignore
         slideRefs.value[activeIndex.value].setTransform();
@@ -222,7 +214,6 @@ onMounted(() => {
       },
     };
     let activeElement: any;
-    //   _loop.value = horizontalLoop(boxes, {paused: true, draggable: true, center: true}, callBackOptions)
     _loop.value = horizontalLoop3(boxes, {
       paused: true,
       draggable: true, // make it draggable
@@ -237,20 +228,9 @@ onMounted(() => {
         activeIndex.value = index;
       },
     });
-    // console.log(
-    //   "🚀 ~ file: Slider.vue ~ line 179 ~ boxes.forEach ~ boxes",
-    //   boxes
-    // );
-    // boxes.forEach((box: any, i: number) => {
-    //   console.log(i, box);
-    //   box.addEventListener("click", () => {
-    //     console.log("test");
-    //     _loop.value.toIndex(i, { duration: 0.8, ease: "power1.inOut" });
-    //   });
-    // });
 
     try {
-      activeIndex.value = _loop.value?.current() || 0;
+      activeIndex.value = 0;
       _loop.value.toIndex(activeIndex.value, {
         duration: 0.8,
         ease: "power1.inOut",
@@ -259,60 +239,6 @@ onMounted(() => {
       console.log(error);
     }
   }, 50);
-  // setTimeout(() => {
-  //   const boxes = gsap.utils.toArray(".sw-slide2");
-  //   console.log("🚀 ~ file: Slider.vue ~ line 166 ~ setTimeout ~ boxes", boxes)
-  //   const callBackOptions = {
-  //     // aniEnd: (index: number) => {
-  //     //   activeIndex.value = index
-  //     // },
-  //     onComplete: (_old: number, _newV: number) => {
-  //       // slideRefs.value[newV].setTransform()
-  //     },
-  //     onCompleteSecond: (_old: any, _newV: any) => {
-  //       // @ts-ignore
-  //       // slideRefs.value[activeIndex.value].setTransform()
-  //       // slideRefs.value[newV].setTransform()
-  //     },
-  //     onReset: () => {
-  //       resetLoop();
-  //     },
-  //   };
-  //   let activeElement: any;
-  //   //   _loop.value = horizontalLoop(boxes, {paused: true, draggable: true, center: true}, callBackOptions)
-  //   _loop.value = horizontalLoop3(boxes, {
-  //     paused: true,
-  //     draggable: false, // make it draggable
-  //     center: true, // active element is the one in the center of the container rather than th left edge
-  //     onChange: (element: HTMLElement, index: number) => {
-  //       // when the active element changes, this function gets called.
-  //       activeElement && activeElement.classList.remove("active");
-  //       element.classList.add("active");
-  //       activeElement = element;
-  //     },
-  //     updateIndex(index: number) {
-  //       activeIndex.value = index;
-  //     },
-  //   });
-
-  //   // boxes.forEach((box: any, i: number) => box.addEventListener("click", () => _loop.value.toIndex(i, { duration: 0.8, ease: "power1.inOut" })));
-
-  //   // boxes.forEach((box: any, i: number) =>
-  //   //   box.addEventListener("click", () =>
-  //   //     _loop.value.toIndex(i, { duration: 0.8, ease: "power1.inOut" })
-  //   //   )
-  //   // );
-
-  //   try {
-  //     activeIndex.value = _loop.value?.current() || 0;
-  //     _loop.value.toIndex(activeIndex.value, {
-  //       duration: 0.8,
-  //       ease: "power1.inOut",
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, 50);
 });
 
 onUnmounted(() => {
