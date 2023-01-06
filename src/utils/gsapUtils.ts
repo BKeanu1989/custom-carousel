@@ -624,6 +624,7 @@ export function horizontalLoop3(items, config) {
       type: "x",
       onPressInit() {
         gsap.killTweensOf(tl);
+        console.log("onPressInit");
         startProgress = tl.progress();
         refresh();
         ratio = 1 / totalWidth;
@@ -633,6 +634,7 @@ export function horizontalLoop3(items, config) {
       onThrowUpdate: align,
       inertia: true,
       snap: (value) => {
+        console.log("snap");
         let time = -(value * ratio) * tl.duration(),
           wrappedTime = timeWrap(time),
           snapTime = times[getClosest(times, wrappedTime, tl.duration())],

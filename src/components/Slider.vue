@@ -1,7 +1,8 @@
 <template>
   <div>
+    <!-- class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden sw-overflow-y-hidden" -->
     <div
-      class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden sw-overflow-y-hidden"
+      class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden"
       ref="root"
       :style="computedStyle"
       :data-active="activeIndex"
@@ -31,7 +32,7 @@
             :active="index === activeIndex"
             :id="index"
             ref="slideRefs"
-            @click="gsapToIndex(index)"
+            @slide-to-index="gsapToIndex($event)"
           >
           </Slide>
         </slot>
@@ -156,19 +157,18 @@ provide("slideClasses", props.slideClasses);
 provide("creditStyles", props.creditStyles);
 
 function gsapToIndex(index: number) {
-  console.log("gsapToIndex", index);
   _loop.value.toIndex(index, { duration: 0.5, ease: "power1.inOut" });
 }
 
 function onPrev() {
   // BUG: fix for some reason we need to double call - working in previous version
-  _loop.value.previous({ duration: 0.5, ease: "power1.inOut" });
+  // _loop.value.previous({ duration: 0.5, ease: "power1.inOut" });
   _loop.value.previous({ duration: 0.5, ease: "power1.inOut" });
 }
 
 function onNext() {
   // BUG: fix for some reason we need to not call - working in previous version
-  // _loop.value.next({ duration: 0.8, ease: "power1.inOut" });
+  _loop.value.next({ duration: 0.8, ease: "power1.inOut" });
 }
 
 function resetLoop() {
@@ -331,6 +331,10 @@ const dragHandler_v2 = <T extends { movement: any; dragging: any }>({
   dragging,
 }: T) => {
   if (!dragging) {
+    if (x === 0) {
+      console.log("should handle mouse click...");
+      return;
+    }
     const direction = x > 0 ? "left" : "right";
     if (direction === "left") {
       _loop.value.previous({ duration: 0.8, ease: "power1.inOut" });
@@ -341,10 +345,12 @@ const dragHandler_v2 = <T extends { movement: any; dragging: any }>({
 };
 
 useDrag(dragHandler_v2, {
-  domTarget: root,
-  filterTaps: true,
+  // domTarget: root,
+  domTarget: innerTrack,
+  filterTaps: false,
   swipeDistance: "1000",
   axis: "x",
+  // eventOptions: { capture: true, passive: true },
 });
 </script>
 <style>
