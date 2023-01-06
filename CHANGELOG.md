@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.47](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.46...v0.0.47) (2023-01-06)
+
+
+### Bug Fixes
+
+* start index for carousel ([685f2ea](https://github.com/BKeanu1989/custom-carousel/commit/685f2ea4a16a619233ff7a531080ea1c0e093a5e))
+
 ### [0.0.46](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.45...v0.0.46) (2023-01-06)
 
 
