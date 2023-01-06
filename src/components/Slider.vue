@@ -280,12 +280,10 @@ const dragHandler_v2 = <
 
 // @ts-ignore
 useDrag(dragHandler_v2, {
-  // domTarget: root,
   domTarget: innerTrack,
   filterTaps: true,
   swipeDistance: "1000",
   axis: "x",
-  // eventOptions: { capture: true, passive: true },
 });
 </script>
 <style>
