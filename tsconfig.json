@@ -2,14 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "lib": [
-      "es6",
-      "esnext",
-      "es2016",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ],
+    "lib": ["es6", "esnext", "es2016", "dom", "dom.iterable", "scripthost"],
     "allowJs": true,
     "declaration": true,
     "sourceMap": false,
@@ -21,25 +14,14 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
-    "types": ["vitest/global"
-    ],
+    "types": ["vitest/global", "src/types/index.d.ts"],
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "test"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": ["node_modules", "dist", "test"]
 }

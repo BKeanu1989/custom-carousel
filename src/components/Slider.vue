@@ -76,6 +76,7 @@ import gsap from "gsap";
 import { type BreakPoint } from "../types/BreakPoints";
 import { horizontalLoop3 } from "../utils/gsapUtils";
 import { getWidthOfImage, getBreakPointWidth } from "../utils/misc";
+import { type SlideEvent } from "../types/index";
 
 const root = ref<HTMLElement | null>(null);
 const innerTrack = ref<HTMLElement | null>(null);
@@ -326,13 +327,20 @@ function restartDragPos() {
   dragEndPos.value = null;
 }
 
-const dragHandler_v2 = <T extends { movement: any; dragging: any }>({
+const dragHandler_v2 = <
+  T extends { movement: any; dragging: any; event: SlideEvent }
+>({
   movement: [x, y],
   dragging,
+  event,
 }: T) => {
   if (!dragging) {
     if (x === 0) {
-      console.log("should handle mouse click...");
+      const dataKey = parseInt(event.target?.dataset.key);
+      if (dataKey !== undefined) {
+        if (dataKey === _loop.value.current()) return;
+        gsapToIndex(dataKey);
+      }
       return;
     }
     const direction = x > 0 ? "left" : "right";
@@ -344,10 +352,11 @@ const dragHandler_v2 = <T extends { movement: any; dragging: any }>({
   }
 };
 
+// @ts-ignore
 useDrag(dragHandler_v2, {
   // domTarget: root,
   domTarget: innerTrack,
-  filterTaps: false,
+  filterTaps: true,
   swipeDistance: "1000",
   axis: "x",
   // eventOptions: { capture: true, passive: true },

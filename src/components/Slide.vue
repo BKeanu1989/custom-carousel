@@ -4,6 +4,7 @@
     class="sw-h-full sw-carousel sw-relative sw-cursor-pointer sw-select-none"
     :class="injectedStyleClasses"
     :style="computedStyle"
+    :data-key="props.id"
     ref="slideElement"
   ></div>
 </template>
@@ -117,12 +118,12 @@ onMounted(() => {
       imageHeight.value = ratioInfo.height;
     }
   }
-  if (slideElement.value) {
-    slideElement.value.addEventListener("click", () => {
-      console.log(props.id);
-      emits("slideToIndex", props.id);
-    });
-  }
+  //   if (slideElement.value) {
+  //     slideElement.value.addEventListener("click", () => {
+  //       console.log(props.id);
+  //       emits("slideToIndex", props.id);
+  //     });
+  //   }
 });
 
 onUnmounted(() => {
