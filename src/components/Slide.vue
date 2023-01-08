@@ -89,7 +89,6 @@ const slideIsCloseToActive = computed(() => {
   if (!injectedSlides) return;
   if (!injectedActive) return;
   const test = isClose(unref(injectedSlides), props.id, unref(injectedActive));
-  console.log("🚀 ~ file: Slide.vue:77 ~ slideIsCloseToActive ~ test", test);
   return test;
 });
 watch(
