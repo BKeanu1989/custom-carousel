@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.48](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.47...v0.0.48) (2023-01-08)
+
+
+### Bug Fixes
+
+* ref value for z-index ([da91341](https://github.com/BKeanu1989/custom-carousel/commit/da91341ad1181c8b7d6c91065da1e60c318ddf08))
+* z-index as int ([ba25417](https://github.com/BKeanu1989/custom-carousel/commit/ba25417284b6de6d209495cd751380db61d69941))
+* z-index test for sw bug on urlsearch params ([e5e3def](https://github.com/BKeanu1989/custom-carousel/commit/e5e3def568e09246b4d35738c3332ac6c698e062))
+
 ### [0.0.47](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.46...v0.0.47) (2023-01-06)
 
 
