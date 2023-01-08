@@ -5,6 +5,7 @@
     :class="injectedStyleClasses"
     :style="computedStyle"
     :data-key="props.id"
+    :data-near="slideIsCloseToActive ? 'yes' : 'no'"
     ref="slideElement"
   ></div>
 </template>
@@ -15,19 +16,33 @@ import {
   onMounted,
   onUnmounted,
   PropType,
+  unref,
   ref,
   watch,
   inject,
   Ref,
 } from "vue";
+import { reactify } from "@vueuse/core";
+
 import { isClose } from "../utils/misc";
+
 const slideElement = ref<HTMLElement | null>(null);
 
-const injectedStyleClasses = inject("slideClasses", []);
+const injectedStyleClasses = inject<string[]>("slideClasses", [""]);
+const computedStyleClasses = computed(() => {
+  if (!injectedStyleClasses) return [];
+  console.log(
+    "🚀 ~ file: Slide.vue:32 ~ computedStyleClasses ~ injectedStyleClasses",
+    injectedStyleClasses
+  );
+  const _cp = [...injectedStyleClasses];
+  if (slideIsCloseToActive) _cp.push("near");
+  return;
+});
 const injectedCreditStyles = inject("creditStyles", "");
-const injectedActive = inject<Ref<number> | null>("slideActiveIndex", null);
+const injectedActive = inject<number | null>("slideActiveIndex", null);
 // const injectedTotalSlides = inject(" slideTotalSlides", null);
-const injectedSlides = inject<Ref[]>("slideRefs", []);
+const injectedSlides = inject<[]>("slideRefs", []);
 
 const emits = defineEmits(["slideToIndex"]);
 
@@ -69,11 +84,11 @@ const imageHeight = ref(0);
 const imageWidth = ref(0);
 const credits = ref("");
 const slideIsCloseToActive = computed(() => {
+  // console.log("🚀 ~ ", injectedSlides.value, props.id, injectedActive.value);
+
   if (!injectedSlides) return;
   if (!injectedActive) return;
-  if (injectedActive && Number.isInteger(injectedActive.value)) {
-  }
-  const test = isClose(injectedSlides.value, props.id, injectedActive.value);
+  const test = isClose(unref(injectedSlides), props.id, unref(injectedActive));
   console.log("🚀 ~ file: Slide.vue:77 ~ slideIsCloseToActive ~ test", test);
   return test;
 });
@@ -129,7 +144,7 @@ function getWidthForSlide(slide: string, combinedWidth: number): number {
 }
 
 onMounted(() => {
-  // console.log(injectedActive, injectedSlides);
+  console.log(injectedStyleClasses, computedStyleClasses);
   const _image = slideElement.value?.querySelector("img");
   if (props.parseCredits) {
     credits.value = getPhotographerCredits(props.slide);
