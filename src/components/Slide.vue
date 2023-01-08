@@ -18,11 +18,16 @@ import {
   ref,
   watch,
   inject,
+  Ref,
 } from "vue";
+import { isClose } from "../utils/misc";
 const slideElement = ref<HTMLElement | null>(null);
 
 const injectedStyleClasses = inject("slideClasses", []);
 const injectedCreditStyles = inject("creditStyles", "");
+const injectedActive = inject<Ref<number> | null>("slideActiveIndex", null);
+// const injectedTotalSlides = inject(" slideTotalSlides", null);
+const injectedSlides = inject<Ref[]>("slideRefs", []);
 
 const emits = defineEmits(["slideToIndex"]);
 
@@ -63,6 +68,15 @@ const width = ref(0);
 const imageHeight = ref(0);
 const imageWidth = ref(0);
 const credits = ref("");
+const slideIsCloseToActive = computed(() => {
+  if (!injectedSlides) return;
+  if (!injectedActive) return;
+  if (injectedActive && Number.isInteger(injectedActive.value)) {
+  }
+  const test = isClose(injectedSlides.value, props.id, injectedActive.value);
+  console.log("🚀 ~ file: Slide.vue:77 ~ slideIsCloseToActive ~ test", test);
+  return test;
+});
 watch(
   () => [props.rootMounted, props.imageToShowCombinedWidth],
   (val) => {
@@ -83,9 +97,17 @@ watch(
   }
 );
 
+watch(
+  () => slideIsCloseToActive,
+  (val) => {
+    console.log("new slide close", val);
+  }
+);
+
 const computedStyle = computed(() => {
   return {
     "aspect-ratio": `${imageWidth.value} / ${imageHeight.value}`,
+    "z-index": slideIsCloseToActive ? "10" : "-10",
     // 'width': `${width.value}px`,
     // 'transform': transformText.value,
   };
@@ -107,6 +129,7 @@ function getWidthForSlide(slide: string, combinedWidth: number): number {
 }
 
 onMounted(() => {
+  // console.log(injectedActive, injectedSlides);
   const _image = slideElement.value?.querySelector("img");
   if (props.parseCredits) {
     credits.value = getPhotographerCredits(props.slide);

@@ -110,7 +110,7 @@ const bP = ref<BreakPoint>({
   <div>
     <Slider
       :slides="slides"
-      :toShow="3"
+      :toShow="4"
       :breakPoints="bP"
       :showPagination="true"
       creditStyles="font-size: 12px; color: #C7AC7F"

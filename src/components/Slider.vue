@@ -61,6 +61,7 @@ import {
   PropType,
   ref,
   watch,
+  readonly,
   provide,
 } from "vue";
 import { useDrag } from "@vueuse/gesture";
@@ -87,6 +88,7 @@ const widthsOfSlides = ref<number[]>([]);
 const _loop = ref<any>(null);
 
 const slideRefs = ref([]);
+const totalSlides = computed(() => slideRefs.value.length);
 const combinedWidth = ref(0);
 
 useEventListener(document, "keydown", (e) => {
@@ -97,6 +99,8 @@ useEventListener(document, "keydown", (e) => {
 });
 
 const activeIndex = ref(0);
+const tmp_prev = computed(() => {});
+const tmp_next = computed(() => {});
 const computedStyle = computed(() => {
   const styles = {
     height: "",
@@ -156,6 +160,9 @@ const props = defineProps({
 provide("slideStyles", props.slideStyles);
 provide("slideClasses", props.slideClasses);
 provide("creditStyles", props.creditStyles);
+provide("totalSlides", totalSlides);
+provide("slideActiveIndex", readonly(activeIndex));
+provide("slideRefs", readonly(slideRefs));
 
 function gsapToIndex(index: number) {
   _loop.value.toIndex(index, { duration: 0.5, ease: "power1.inOut" });

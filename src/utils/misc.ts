@@ -103,6 +103,25 @@ export function plainGetPhotoCredits(url: string) {
   }
 }
 
+export function isClose(
+  array: any[],
+  index: number,
+  active: number,
+  modifier: number = 2
+) {
+  const left = (active - modifier + array.length) % array.length;
+  const right = (active + modifier + array.length) % array.length;
+  const new_result = (index + array.length) % array.length;
+
+  if (left > right) {
+    if (left <= new_result) return true;
+    if (new_result <= right) return true;
+  }
+
+  if (left <= new_result && right >= new_result) return true;
+  return false;
+}
+
 function titleCase(str: string) {
   var splitStr = str.toLowerCase().split(" ");
   for (var i = 0; i < splitStr.length; i++) {
