@@ -107,7 +107,7 @@ watch(
 const computedStyle = computed(() => {
   return {
     "aspect-ratio": `${imageWidth.value} / ${imageHeight.value}`,
-    "z-index": slideIsCloseToActive ? "10" : "-10",
+    "z-index": slideIsCloseToActive ? 10 : -10,
     // 'width': `${width.value}px`,
     // 'transform': transformText.value,
   };
