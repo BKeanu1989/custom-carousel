@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.49](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.48...v0.0.49) (2023-01-08)
+
+
+### Bug Fixes
+
+* with unref fn args ([350f4f8](https://github.com/BKeanu1989/custom-carousel/commit/350f4f825c784507e8e41d62cb652085f92fdfec))
+
 ### [0.0.48](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.47...v0.0.48) (2023-01-08)
 
 
