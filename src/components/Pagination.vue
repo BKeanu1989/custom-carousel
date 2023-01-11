@@ -7,25 +7,26 @@
       <PaginationItem
         :item="photo"
         :index="index"
-        :currentIndex="currentIndex"
+        :currentIndex="injectedActive"
         @click="$emit('updateSlide', index)"
       ></PaginationItem>
     </template>
   </div>
 </template>
 <script setup lang="ts">
-import { PropType } from "vue";
+import { inject, PropType } from "vue";
 import PaginationItem from "./PaginationItem.vue";
 
+const injectedActive = inject("slideActiveIndex", 0);
 const props = defineProps({
   images: {
     type: Array as PropType<string[]>,
     required: true,
   },
-  currentIndex: {
-    type: Number as PropType<number>,
-    default: 0,
-  },
+  // currentIndex: {
+  //   type: Number as PropType<number>,
+  //   default: 0,
+  // },
   activeStyle: {
     type: Object as PropType<object>,
     default: () => ({}),

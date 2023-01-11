@@ -39,7 +39,7 @@
         <slot name="indicator">
           <PaginationIndicator
             :items="slides"
-            :currentIndex="activeIndex"
+            @slide-to-index="($event) => gsapToIndex($event)"
           ></PaginationIndicator>
         </slot>
       </div>
@@ -47,7 +47,6 @@
     <slot name="pagination" v-if="showPagination">
       <Pagination
         :images="slides"
-        :currentIndex="activeIndex"
         @updateSlide="gsapToIndex($event)"
       ></Pagination>
     </slot>
@@ -165,6 +164,7 @@ provide("slideActiveIndex", readonly(activeIndex));
 provide("slideRefs", readonly(slideRefs));
 
 function gsapToIndex(index: number) {
+  if (Number.isNaN(index)) return;
   _loop.value.toIndex(index, { duration: 0.5, ease: "power1.inOut" });
 }
 

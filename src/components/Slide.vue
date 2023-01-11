@@ -22,7 +22,6 @@ import {
   inject,
   Ref,
 } from "vue";
-import { reactify } from "@vueuse/core";
 
 import { isClose } from "../utils/misc";
 
@@ -143,7 +142,6 @@ function getWidthForSlide(slide: string, combinedWidth: number): number {
 }
 
 onMounted(() => {
-  console.log(injectedStyleClasses, computedStyleClasses);
   const _image = slideElement.value?.querySelector("img");
   if (props.parseCredits) {
     credits.value = getPhotographerCredits(props.slide);
