@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.52](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.51...v0.0.52) (2023-01-11)
+
+
+### Bug Fixes
+
+* paginationindicator click; debug error message ([ed7f7e1](https://github.com/BKeanu1989/custom-carousel/commit/ed7f7e1d84d4a7dc348bf62a577623854ba1f92e))
+
 ### [0.0.51](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.50...v0.0.51) (2023-01-08)
 
 ### [0.0.50](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.49...v0.0.50) (2023-01-08)
