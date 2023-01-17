@@ -107,7 +107,7 @@ const bP = ref<BreakPoint>({
 
   </div>
 </div> -->
-  <div :style="{ width: '67vw' }">
+  <div :style="{ width: '' }">
     <Slider
       :slides="slides"
       :toShow="4"
