@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.54](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.53...v0.0.54) (2023-01-17)
+
+
+### Bug Fixes
+
+* gap for preview slides & indicator [@resize](https://github.com/resize) ([db4b224](https://github.com/BKeanu1989/custom-carousel/commit/db4b224d0701fbde8f0cb6bc7a2f447cfa269745))
+
 ### [0.0.53](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.52...v0.0.53) (2023-01-11)
 
 ### [0.0.52](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.51...v0.0.52) (2023-01-11)
