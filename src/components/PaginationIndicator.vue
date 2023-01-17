@@ -55,6 +55,15 @@ onMounted(() => {
     const half = test.offsetWidth / 2 - _root.value.clientWidth / 2;
     setLeft(half);
   }
+
+  window.addEventListener("resize", () => {
+    const viewPortWidth = window.innerWidth;
+    const test = document.querySelector(".sw-carousel--inner");
+    if (_root.value && test) {
+      const half = test.offsetWidth / 2 - _root.value.clientWidth / 2;
+      setLeft(half);
+    }
+  });
 });
 </script>
 
