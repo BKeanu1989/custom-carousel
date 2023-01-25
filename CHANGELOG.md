@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.57](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.56...v0.0.57) (2023-01-25)
+
+
+### Bug Fixes
+
+* white spaces with overlap ([665750d](https://github.com/BKeanu1989/custom-carousel/commit/665750d2b96021a49e31ddbffb26e41e21349155))
+
 ### [0.0.56](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.55...v0.0.56) (2023-01-25)
 
 
