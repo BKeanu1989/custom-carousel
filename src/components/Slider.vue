@@ -9,6 +9,7 @@
     >
       <!-- <slot name="navigation"> -->
       <Navigation @prev="onPrev" @next="onNext"></Navigation>
+      <!-- class="sw-carousel--inner sw-max-h-[600px] sw-w-full" -->
       <!-- </slot> -->
       <div
         class="sw-carousel--inner sw-max-h-[600px] sw-w-full"
