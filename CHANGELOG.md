@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.55](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.54...v0.0.55) (2023-01-25)
+
+
+### Bug Fixes
+
+* "snappier" scroll ([447a5d2](https://github.com/BKeanu1989/custom-carousel/commit/447a5d2cee5f848a5b7e870fc396a433c66fea63))
+
 ### [0.0.54](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.53...v0.0.54) (2023-01-17)
 
 
