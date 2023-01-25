@@ -89,12 +89,12 @@ const _loop = ref<any>(null);
 const slideRefs = ref([]);
 const totalSlides = computed(() => slideRefs.value.length);
 const combinedWidth = ref(0);
-
+const globalTimer = 0.5;
 useEventListener(document, "keydown", (e) => {
   if (e.key === "ArrowLeft")
-    _loop.value.previous({ duration: 0.6, ease: "power1.inOut" });
+    _loop.value.previous({ duration: globalTimer, ease: "power1.inOut" });
   if (e.key === "ArrowRight")
-    _loop.value.next({ duration: 0.6, ease: "power1.inOut" });
+    _loop.value.next({ duration: globalTimer, ease: "power1.inOut" });
 });
 
 const activeIndex = ref(0);
@@ -165,15 +165,15 @@ provide("slideRefs", readonly(slideRefs));
 
 function gsapToIndex(index: number) {
   if (Number.isNaN(index)) return;
-  _loop.value.toIndex(index, { duration: 0.5, ease: "power1.inOut" });
+  _loop.value.toIndex(index, { duration: globalTimer, ease: "power1.inOut" });
 }
 
 function onPrev() {
-  _loop.value.previous({ duration: 0.5, ease: "power1.inOut" });
+  _loop.value.previous({ duration: globalTimer, ease: "power1.inOut" });
 }
 
 function onNext() {
-  _loop.value.next({ duration: 0.5, ease: "power1.inOut" });
+  _loop.value.next({ duration: globalTimer, ease: "power1.inOut" });
 }
 
 function resetLoop() {
@@ -239,7 +239,7 @@ onMounted(() => {
     try {
       activeIndex.value = 0;
       _loop.value.toIndex(activeIndex.value, {
-        duration: 0.5,
+        duration: globalTimer,
         ease: "power1.inOut",
       });
     } catch (error) {
@@ -278,9 +278,9 @@ const dragHandler_v2 = <
     }
     const direction = x > 0 ? "left" : "right";
     if (direction === "left") {
-      _loop.value.previous({ duration: 0.5, ease: "power1.inOut" });
+      _loop.value.previous({ duration: globalTimer, ease: "power1.inOut" });
     } else {
-      _loop.value.next({ duration: 0.5, ease: "power1.inOut" });
+      _loop.value.next({ duration: globalTimer, ease: "power1.inOut" });
     }
   }
 };
