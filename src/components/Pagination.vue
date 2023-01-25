@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sw-carousel--pagination sw-flex sw-flex-row sw-flex-wrap sw-justify-center gallery-preview-slide sw-mb-10 sw-gap-[3.2px] sw-mt-[2px]"
+    class="sw-carousel--pagination sw-flex sw-flex-row sw-flex-wrap sw-justify-center gallery-preview-slide sw-mb-10 sw-gap-[2.2px] sw-mt-[2px]"
     v-if="images"
   >
     <template v-for="(photo, index) in images" :key="index">
