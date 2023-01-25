@@ -173,7 +173,7 @@ function onPrev() {
 }
 
 function onNext() {
-  _loop.value.next({ duration: 0.8, ease: "power1.inOut" });
+  _loop.value.next({ duration: 0.5, ease: "power1.inOut" });
 }
 
 function resetLoop() {
@@ -239,7 +239,7 @@ onMounted(() => {
     try {
       activeIndex.value = 0;
       _loop.value.toIndex(activeIndex.value, {
-        duration: 0.8,
+        duration: 0.5,
         ease: "power1.inOut",
       });
     } catch (error) {
@@ -278,9 +278,9 @@ const dragHandler_v2 = <
     }
     const direction = x > 0 ? "left" : "right";
     if (direction === "left") {
-      _loop.value.previous({ duration: 0.8, ease: "power1.inOut" });
+      _loop.value.previous({ duration: 0.5, ease: "power1.inOut" });
     } else {
-      _loop.value.next({ duration: 0.8, ease: "power1.inOut" });
+      _loop.value.next({ duration: 0.5, ease: "power1.inOut" });
     }
   }
 };
