@@ -75,10 +75,8 @@ function addImageOverlay() {
   const _template = `<div class="sw-absolute sw-w-full sw-h-full sw-top-0 sw-bg-gold sw-bg-opacity-50 sw-z-10" id="imageOverlay-${props.index}"></div>`;
   const element = document.querySelector(`#pagination-html-${props.index}`);
   if (!element) {
-    console.log("element not found", element);
     setTimeout(() => {
       const element = document.querySelector(`#pagination-html-${props.index}`);
-      console.log("element found", element);
       element?.insertAdjacentHTML("beforeend", _template);
     }, 500);
   }

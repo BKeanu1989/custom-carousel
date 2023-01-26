@@ -39,7 +39,7 @@ const computedStyleClasses = computed(() => {
   return;
 });
 const injectedCreditStyles = inject("creditStyles", "");
-const injectedActive = inject<number | null>("slideActiveIndex", null);
+const injectedActive = inject<number | null>("slideActiveIndex", 0);
 // const injectedTotalSlides = inject(" slideTotalSlides", null);
 const injectedSlides = inject<[]>("slideRefs", []);
 
@@ -107,14 +107,15 @@ watch(
     } else {
       removeCredits();
     }
+  },
+  {
+    immediate: true,
   }
 );
 
 watch(
   () => slideIsCloseToActive,
-  (val) => {
-    console.log("new slide close", val);
-  }
+  (val) => {}
 );
 
 const computedStyle = computed(() => {
@@ -145,6 +146,7 @@ onMounted(() => {
   const _image = slideElement.value?.querySelector("img");
   if (props.parseCredits) {
     credits.value = getPhotographerCredits(props.slide);
+    // console.log("should set", props.slide, credits.value);
   }
   if (_image) {
     const ratioInfo = getAspectRatio(props.slide);
@@ -172,35 +174,34 @@ function setWidth() {
 function appendCredits() {
   if (!props.parseCredits) return;
 
-  if (slideElement.value) {
-    if (!document.querySelector(`#credits-${props.id}`)) {
-      const creditsElement = document.createElement("div");
-      creditsElement.id = `credits-${props.id}`;
-      const classesToAdd = [
-        "sw-carousel--credits",
-        "sw-absolute",
-        "sw-top-0",
-        "sw-left-1",
-      ];
-      classesToAdd.forEach((className) => {
-        creditsElement.classList.add(className);
-      });
-      let stringStyle = JSON.stringify(injectedCreditStyles);
-      // stringStyle = stringStyle.substring(1)
-      // stringStyle = stringStyle.slice(0, -1)
-      // stringStyle = stringStyle.replace(',', ';')
-      // console.log("🚀 ~ file: Slide.vue ~ line 178 ~ appendCredits ~ stringStyle", stringStyle)
-
-      creditsElement.setAttribute("style", injectedCreditStyles);
-      // creditsElement.set
-      creditsElement.innerText = credits.value ? `©${credits.value}` : "";
-      slideElement.value.appendChild(creditsElement);
-    }
+  function insertDiv() {
+    if (!slideElement.value) return;
+    const creditsElement = document.createElement("div");
+    creditsElement.id = `credits-${props.id}`;
+    const classesToAdd = [
+      "sw-carousel--credits",
+      "sw-absolute",
+      "sw-top-0",
+      "sw-left-1",
+    ];
+    classesToAdd.forEach((className) => {
+      creditsElement.classList.add(className);
+    });
+    let stringStyle = JSON.stringify(injectedCreditStyles);
+    creditsElement.setAttribute("style", injectedCreditStyles);
+    creditsElement.innerText = credits.value ? `©${credits.value}` : "";
+    slideElement.value.appendChild(creditsElement);
   }
-  // const credits = getPhotographerCredits()
-  // if (credits) {
-  //     transformText.value = `translateY(-100%)`
-  // }
+
+  if (slideElement.value) {
+    insertDiv();
+  }
+  // if (!document.querySelector(`#credits-${props.id}`)) {
+  else {
+    setTimeout(() => {
+      insertDiv();
+    }, 500);
+  }
 }
 
 function removeCredits() {
