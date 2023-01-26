@@ -47,6 +47,7 @@ import { type BreakPoint } from "./types/BreakPoints";
 // ])
 
 const slides = ref([
+  "",
   '<img width="667" height="1000" src="/Helen-Woigk©Steffen-Roth-1-optimized.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="/Helen-Woigk©Steffen-Roth-1-optimized.jpg 667w, /Helen-Woigk©Steffen-Roth-1-optimized-200x300.jpg 200w" sizes="(max-width: 667px) 100vw, 667px" />',
   '<img width="1000" height="667" src="/Helen-Woigk©Steffen-Roth-4-optimized.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="/Helen-Woigk©Steffen-Roth-4-optimized.jpg 1000w, /Helen-Woigk©Steffen-Roth-4-optimized-300x200.jpg 300w, /Helen-Woigk©Steffen-Roth-4-optimized-768x512.jpg 768w" sizes="(max-width: 1000px) 100vw, 1000px" />',
   '<img width="667" height="1000" src="/Helen-Woigk©Steffen-Roth-9-optimized.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="/Helen-Woigk©Steffen-Roth-9-optimized.jpg 667w, /Helen-Woigk©Steffen-Roth-9-optimized-200x300.jpg 200w" sizes="(max-width: 667px) 100vw, 667px" />',

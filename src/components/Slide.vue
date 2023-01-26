@@ -180,7 +180,7 @@ function appendCredits() {
         "sw-carousel--credits",
         "sw-absolute",
         "sw-top-0",
-        "sw-left-0",
+        "sw-left-1",
       ];
       classesToAdd.forEach((className) => {
         creditsElement.classList.add(className);

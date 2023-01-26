@@ -11,13 +11,14 @@
       <Navigation @prev="onPrev" @next="onNext"></Navigation>
       <!-- class="sw-carousel--inner sw-max-h-[600px] sw-w-full" -->
       <!-- </slot> -->
+      <!-- {{ cleanedSlides }} -->
       <div
         class="sw-carousel--inner sw-max-h-[600px] sw-w-full"
         ref="innerTrack"
       >
         <slot>
           <Slide
-            v-for="(slide, index) in slides"
+            v-for="(slide, index) in cleanedSlides"
             :key="index"
             :slide="slide"
             :sliderWidth="sliderWidth"
@@ -39,7 +40,7 @@
         </slot>
         <slot name="indicator">
           <PaginationIndicator
-            :items="slides"
+            :items="cleanedSlides"
             @slide-to-index="($event) => gsapToIndex($event)"
           ></PaginationIndicator>
         </slot>
@@ -47,7 +48,7 @@
     </div>
     <slot name="pagination" v-if="showPagination">
       <Pagination
-        :images="slides"
+        :images="cleanedSlides"
         @updateSlide="gsapToIndex($event)"
       ></Pagination>
     </slot>
@@ -63,6 +64,7 @@ import {
   watch,
   readonly,
   provide,
+  reactive,
 } from "vue";
 import { useDrag } from "@vueuse/gesture";
 import { useEventListener } from "@vueuse/core";
@@ -90,12 +92,18 @@ const _loop = ref<any>(null);
 const slideRefs = ref([]);
 const totalSlides = computed(() => slideRefs.value.length);
 const combinedWidth = ref(0);
-const globalTimer = 0.5;
+
+const cleanedSlides = computed(() => {
+  return props.slides.filter((htmlString) => {
+    return !!htmlString;
+  });
+});
+
 useEventListener(document, "keydown", (e) => {
   if (e.key === "ArrowLeft")
-    _loop.value.previous({ duration: globalTimer, ease: "power1.inOut" });
+    _loop.value.previous({ duration: props.slideTimer, ease: "power1.inOut" });
   if (e.key === "ArrowRight")
-    _loop.value.next({ duration: globalTimer, ease: "power1.inOut" });
+    _loop.value.next({ duration: props.slideTimer, ease: "power1.inOut" });
 });
 
 const activeIndex = ref(0);
@@ -155,6 +163,11 @@ const props = defineProps({
     type: Array,
     required: false,
   },
+  slideTimer: {
+    type: Number,
+    required: false,
+    default: 0.5,
+  },
 });
 
 provide("slideStyles", props.slideStyles);
@@ -164,17 +177,26 @@ provide("totalSlides", totalSlides);
 provide("slideActiveIndex", readonly(activeIndex));
 provide("slideRefs", readonly(slideRefs));
 
+const state = reactive({
+  sliderActiveIndex: readonly(activeIndex),
+});
+
+provide("sliderState", state);
+
 function gsapToIndex(index: number) {
   if (Number.isNaN(index)) return;
-  _loop.value.toIndex(index, { duration: globalTimer, ease: "power1.inOut" });
+  _loop.value.toIndex(index, {
+    duration: props.slideTimer,
+    ease: "power1.inOut",
+  });
 }
 
 function onPrev() {
-  _loop.value.previous({ duration: globalTimer, ease: "power1.inOut" });
+  _loop.value.previous({ duration: props.slideTimer, ease: "power1.inOut" });
 }
 
 function onNext() {
-  _loop.value.next({ duration: globalTimer, ease: "power1.inOut" });
+  _loop.value.next({ duration: props.slideTimer, ease: "power1.inOut" });
 }
 
 function resetLoop() {
@@ -240,7 +262,7 @@ onMounted(() => {
     try {
       activeIndex.value = 0;
       _loop.value.toIndex(activeIndex.value, {
-        duration: globalTimer,
+        duration: props.slideTimer,
         ease: "power1.inOut",
       });
     } catch (error) {
@@ -279,9 +301,12 @@ const dragHandler_v2 = <
     }
     const direction = x > 0 ? "left" : "right";
     if (direction === "left") {
-      _loop.value.previous({ duration: globalTimer, ease: "power1.inOut" });
+      _loop.value.previous({
+        duration: props.slideTimer,
+        ease: "power1.inOut",
+      });
     } else {
-      _loop.value.next({ duration: globalTimer, ease: "power1.inOut" });
+      _loop.value.next({ duration: props.slideTimer, ease: "power1.inOut" });
     }
   }
 };
