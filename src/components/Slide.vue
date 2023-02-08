@@ -24,16 +24,20 @@ import {
 } from "vue";
 
 import { isClose } from "../utils/misc";
-
+import {
+  aspectRatioSupportedKey,
+  containerHeightKey,
+} from "../utils/symbolKeys";
 const slideElement = ref<HTMLElement | null>(null);
 
 const injectedStyleClasses = inject<string[]>("slideClasses", [""]);
+const injectedContainerHeight = inject(containerHeightKey, ref(0));
+const injectedAspectRatio = inject<Ref<boolean>>(
+  aspectRatioSupportedKey,
+  ref(true)
+);
 const computedStyleClasses = computed(() => {
   if (!injectedStyleClasses) return [];
-  console.log(
-    "🚀 ~ file: Slide.vue:32 ~ computedStyleClasses ~ injectedStyleClasses",
-    injectedStyleClasses
-  );
   const _cp = [...injectedStyleClasses];
   if (slideIsCloseToActive) _cp.push("near");
   return;
@@ -118,11 +122,37 @@ watch(
   (val) => {}
 );
 
+watch(
+  () => injectedAspectRatio,
+  (newVal, oldVal) => {
+    // aka not supported
+    if (!newVal.value) {
+      console.log("new val: aspect " + newVal.value, oldVal);
+    }
+  },
+  {
+    deep: true,
+  }
+);
+
+const calcSemiAspectRatioWidth = () => {
+  const _imageHeight = imageHeight.value;
+  const _imageWidth = imageWidth.value;
+  const divisor = injectedContainerHeight.value / _imageHeight;
+  return _imageWidth * divisor;
+};
+
 const computedStyle = computed(() => {
+  // console.log("injected aspect ratio", injectedAspectRatio.value);
   return {
     "aspect-ratio": `${imageWidth.value} / ${imageHeight.value}`,
+    "--aspect-ratio": `${imageWidth.value} / ${imageHeight.value}`,
     "z-index": slideIsCloseToActive.value ? 10 : -10,
-    // 'width': `${width.value}px`,
+    width: injectedAspectRatio.value ? "" : `${calcSemiAspectRatioWidth()}px`,
+    "--width": injectedAspectRatio.value
+      ? ""
+      : `${calcSemiAspectRatioWidth()}px`,
+    // "--width": `${width.value}px`,
     // 'transform': transformText.value,
   };
 });

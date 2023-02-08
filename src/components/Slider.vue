@@ -3,6 +3,7 @@
     <!-- class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden sw-overflow-y-hidden" -->
     <div
       class="sw-carousel sw-flex sw-relative sw-w-f sw-overflow-x-hidden"
+      :class="rootClasses"
       ref="root"
       :style="computedStyle"
       :data-active="activeIndex"
@@ -65,6 +66,7 @@ import {
   readonly,
   provide,
   reactive,
+  inject,
 } from "vue";
 import { useDrag } from "@vueuse/gesture";
 import { useEventListener } from "@vueuse/core";
@@ -80,7 +82,10 @@ import { type BreakPoint } from "../types/BreakPoints";
 import { horizontalLoop3 } from "../utils/gsapUtils";
 import { getWidthOfImage, getBreakPointWidth } from "../utils/misc";
 import { type SlideEvent } from "../types/index";
-
+import {
+  containerHeightKey,
+  aspectRatioSupportedKey,
+} from "../utils/symbolKeys";
 const root = ref<HTMLElement | null>(null);
 const innerTrack = ref<HTMLElement | null>(null);
 
@@ -88,7 +93,7 @@ const rootMounted = ref(false);
 const sliderWidth = ref(0);
 const widthsOfSlides = ref<number[]>([]);
 const _loop = ref<any>(null);
-
+const aspectRatioSupported = ref(true);
 const slideRefs = ref([]);
 const totalSlides = computed(() => slideRefs.value.length);
 const combinedWidth = ref(0);
@@ -109,21 +114,27 @@ useEventListener(document, "keydown", (e) => {
 const activeIndex = ref(0);
 const tmp_prev = computed(() => {});
 const tmp_next = computed(() => {});
-const computedStyle = computed(() => {
-  const styles = {
-    height: "",
-  };
+const containerHeight = computed(() => {
   if (root.value) {
     if (props.selectorForFullHeight) {
       const element = document.querySelector(
         props.selectorForFullHeight
       ) as HTMLElement;
-      if (!element) return {};
-      styles.height = `${element.offsetHeight}px`;
+      if (!element) return 0;
+      return element.offsetHeight;
     } else {
-      styles.height = `${props.height}px`;
+      return props.height;
     }
   }
+  return 0;
+});
+provide(containerHeightKey, containerHeight);
+
+const computedStyle = computed(() => {
+  const styles = {
+    height: "",
+  };
+  styles.height = `${containerHeight.value}px`;
 
   return styles;
 });
@@ -176,9 +187,17 @@ provide("creditStyles", props.creditStyles);
 provide("totalSlides", totalSlides);
 provide("slideActiveIndex", readonly(activeIndex));
 provide("slideRefs", readonly(slideRefs));
+// provide("aspectRatioSupported", readonly(aspectRatioSupported));
+provide(aspectRatioSupportedKey, aspectRatioSupported);
 
 const state = reactive({
   sliderActiveIndex: readonly(activeIndex),
+});
+
+const rootClasses = computed(() => {
+  return {
+    "scrollbar-none": !aspectRatioSupported.value,
+  };
 });
 
 provide("sliderState", state);
@@ -220,6 +239,15 @@ defineExpose({
 });
 
 onMounted(() => {
+  if (!CSS.supports("aspect-ratio", "16/9")) {
+    console.log("aspect ratio is not supported");
+    aspectRatioSupported.value = false;
+  }
+  if (innerTrack.value) {
+    if (!aspectRatioSupported.value) {
+      innerTrack.value.style.display = "block ruby";
+    }
+  }
   if (root.value) {
     const rect = root.value.getBoundingClientRect();
     sliderWidth.value = rect.width;
@@ -339,5 +367,14 @@ useDrag(dragHandler_v2, {
 .sw-slide.inActive,
 .sw-slide2.inActive {
   filter: opacity(0.7);
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
 </style>

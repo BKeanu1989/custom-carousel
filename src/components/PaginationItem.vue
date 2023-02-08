@@ -17,6 +17,14 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch, inject, reactive, Ref } from "vue";
 import { getAspectRatio } from "../utils/misc";
+import {
+  aspectRatioSupportedKey,
+  containerHeightKey,
+} from "../utils/symbolKeys";
+const injectedAspectRatio = inject<Ref<boolean>>(
+  aspectRatioSupportedKey,
+  ref(true)
+);
 const html_image = ref<HTMLElement | null>(null);
 const injectedActive = inject("slideActiveIndex", 0);
 const injectedState = inject<{ sliderActiveIndex: number } | null>(
@@ -36,7 +44,9 @@ const props = defineProps({
 });
 const imageWidth = ref(0);
 const imageHeight = ref(0);
-
+// "container height"
+const fixedHeight = ref(80);
+const _fixedHeightPx = computed(() => fixedHeight.value + "px");
 onMounted(() => {
   const ratioInfo = getAspectRatio(props.item);
   // console.log(injectedActive);
@@ -63,10 +73,20 @@ watch(
   }
 );
 
+const calcSemiAspectRatioWidth = () => {
+  const _imageHeight = imageHeight.value;
+  const _imageWidth = imageWidth.value;
+  const divisor = fixedHeight.value / _imageHeight;
+  return _imageWidth * divisor;
+};
+
 const computedStyle = computed(() => {
   return {
     // TODO: maybe need to remove it. or add it again in case of x amount of images
     "aspect-ratio": `${imageWidth.value} / ${imageHeight.value}`,
+    "--aspect-ratio": `${imageWidth.value} / ${imageHeight.value}`,
+    // "width":
+    width: injectedAspectRatio.value ? "" : `${calcSemiAspectRatioWidth()}px`,
   };
 });
 
@@ -95,6 +115,6 @@ function removeImageOverlay() {
 <style>
 .pagination--item {
   width: auto;
-  height: 80px;
+  height: v-bind(_fixedHeightPx);
 }
 </style>
