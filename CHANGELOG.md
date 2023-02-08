@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.61](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.60...v0.0.61) (2023-02-08)
+
+
+### Bug Fixes
+
+* aspect ratio not supported ([d68d9cc](https://github.com/BKeanu1989/custom-carousel/commit/d68d9ccde3ddfb5b60ff1a16fcf9b1de80a400a5))
+* overflow y ([d417bf2](https://github.com/BKeanu1989/custom-carousel/commit/d417bf27849d254fce489fa59bd1f10a758a7170))
+
 ### [0.0.60](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.59...v0.0.60) (2023-01-26)
 
 
