@@ -197,6 +197,7 @@ const state = reactive({
 const rootClasses = computed(() => {
   return {
     "scrollbar-none": !aspectRatioSupported.value,
+    "sw-overflow-y-hidden": !aspectRatioSupported.value,
   };
 });
 

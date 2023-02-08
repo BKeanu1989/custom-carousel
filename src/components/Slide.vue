@@ -122,18 +122,18 @@ watch(
   (val) => {}
 );
 
-watch(
-  () => injectedAspectRatio,
-  (newVal, oldVal) => {
-    // aka not supported
-    if (!newVal.value) {
-      console.log("new val: aspect " + newVal.value, oldVal);
-    }
-  },
-  {
-    deep: true,
-  }
-);
+// watch(
+//   () => injectedAspectRatio,
+//   (newVal, oldVal) => {
+//     // aka not supported
+//     if (!newVal.value) {
+//       console.log("new val: aspect " + newVal.value, oldVal);
+//     }
+//   },
+//   {
+//     deep: true,
+//   }
+// );
 
 const calcSemiAspectRatioWidth = () => {
   const _imageHeight = imageHeight.value;
