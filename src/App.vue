@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import Slider from "./components/Slider.vue";
 // import Slider2 from './components/Slider2.vue';
 import { type BreakPoint } from "./types/BreakPoints";
@@ -95,6 +95,11 @@ const bP = ref<BreakPoint>({
     itemsToShow: 1,
   },
 });
+
+const html_slider = ref(null);
+onMounted(() => {
+  console.log(html_slider.value);
+});
 </script>
 
 <template>
@@ -116,6 +121,7 @@ const bP = ref<BreakPoint>({
       :showPagination="true"
       creditStyles="font-size: 12px; color: #C7AC7F"
       :height="600"
+      ref="html_slider"
     >
     </Slider>
   </div>

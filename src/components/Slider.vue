@@ -129,7 +129,6 @@ const containerHeight = computed(() => {
   return 0;
 });
 provide(containerHeightKey, containerHeight);
-
 const computedStyle = computed(() => {
   const styles = {
     height: "",
@@ -237,6 +236,7 @@ defineExpose({
   slideRefs,
   onPrev,
   onNext,
+  containerHeight,
 });
 
 onMounted(() => {
