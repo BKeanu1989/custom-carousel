@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.62](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.61...v0.0.62) (2023-02-15)
+
+
+### Bug Fixes
+
+* expose containerHeight ([a158187](https://github.com/BKeanu1989/custom-carousel/commit/a158187579ec4136df8ff51dacfc72cd2ed47342))
+
 ### [0.0.61](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.60...v0.0.61) (2023-02-08)
 
 
