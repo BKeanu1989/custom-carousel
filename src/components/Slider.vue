@@ -69,7 +69,7 @@ import {
   inject,
 } from "vue";
 import { useDrag } from "@vueuse/gesture";
-import { useEventListener } from "@vueuse/core";
+import { useEventListener, useResizeObserver } from "@vueuse/core";
 
 import Slide from "./Slide.vue";
 import Navigation from "./Navigation.vue";
@@ -114,20 +114,36 @@ useEventListener(document, "keydown", (e) => {
 const activeIndex = ref(0);
 const tmp_prev = computed(() => {});
 const tmp_next = computed(() => {});
-const containerHeight = computed(() => {
-  if (root.value) {
-    if (props.selectorForFullHeight) {
-      const element = document.querySelector(
-        props.selectorForFullHeight
-      ) as HTMLElement;
-      if (!element) return 0;
-      return element.offsetHeight;
-    } else {
-      return props.height;
-    }
-  }
-  return 0;
+useResizeObserver(root, (entries) => {
+  const entry = entries[0];
+  const { width, height } = entry.contentRect;
+  console.log(
+    "🚀 ~ file: Slider.vue:121 ~ useResizeObserver ~ height:",
+    height
+  );
+  // text.value = `width: ${width}, height: ${height}`
 });
+// const containerHeight = computed(() => {
+//   if (root.value) {
+//     if (props.selectorForFullHeight) {
+//       const element = document.querySelector(
+//         props.selectorForFullHeight
+//       ) as HTMLElement;
+//       if (!element) return 0;
+//       return element.offsetHeight;
+//     } else {
+//       return props.height;
+//     }
+//   }
+//   return 0;
+// });
+
+useEventListener(document, "resize", (event) => {
+  console.log("resized");
+  setContainerHeight();
+});
+const containerHeight = ref(0);
+
 provide(containerHeightKey, containerHeight);
 const computedStyle = computed(() => {
   const styles = {
@@ -239,6 +255,17 @@ defineExpose({
   containerHeight,
 });
 
+const setContainerHeight = () => {
+  if (props.selectorForFullHeight) {
+    const element = document.querySelector(
+      props.selectorForFullHeight
+    ) as HTMLElement;
+    if (!element) containerHeight.value = 0;
+    containerHeight.value = element.offsetHeight;
+  } else {
+    containerHeight.value = props.height;
+  }
+};
 onMounted(() => {
   if (!CSS.supports("aspect-ratio", "16/9")) {
     console.log("aspect ratio is not supported");
@@ -257,6 +284,8 @@ onMounted(() => {
     setImagesDependingOnWidth();
     // setLefts()
     rootMounted.value = true;
+
+    setContainerHeight();
   }
 
   setTimeout(() => {
