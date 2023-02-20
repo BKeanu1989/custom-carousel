@@ -114,14 +114,9 @@ useEventListener(document, "keydown", (e) => {
 const activeIndex = ref(0);
 const tmp_prev = computed(() => {});
 const tmp_next = computed(() => {});
-useResizeObserver(root, (entries) => {
-  const entry = entries[0];
-  const { width, height } = entry.contentRect;
-  console.log(
-    "🚀 ~ file: Slider.vue:121 ~ useResizeObserver ~ height:",
-    height
-  );
-  // text.value = `width: ${width}, height: ${height}`
+
+useEventListener(window, "resize", (event) => {
+  setContainerHeight();
 });
 // const containerHeight = computed(() => {
 //   if (root.value) {
@@ -138,10 +133,6 @@ useResizeObserver(root, (entries) => {
 //   return 0;
 // });
 
-useEventListener(document, "resize", (event) => {
-  console.log("resized");
-  setContainerHeight();
-});
 const containerHeight = ref(0);
 
 provide(containerHeightKey, containerHeight);
