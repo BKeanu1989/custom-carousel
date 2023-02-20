@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.64](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.63...v0.0.64) (2023-02-20)
+
+
+### Bug Fixes
+
+* test resize observer set container height ([7c4819d](https://github.com/BKeanu1989/custom-carousel/commit/7c4819da0e2010ea1fdc74d5672c2c9a86261a31))
+
 ### [0.0.63](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.62...v0.0.63) (2023-02-20)
 
 ### [0.0.62](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.61...v0.0.62) (2023-02-15)
