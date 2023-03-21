@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.65](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.64...v0.0.65) (2023-03-21)
+
+
+### Bug Fixes
+
+* context menu ([3c38cf9](https://github.com/BKeanu1989/custom-carousel/commit/3c38cf94ec7796589fcbbaeb92991d2988dc605a))
+* progress context menu ([0088d27](https://github.com/BKeanu1989/custom-carousel/commit/0088d272d5916bcf1dadfa170aa6d1f582c7b235))
+
 ### [0.0.64](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.63...v0.0.64) (2023-02-20)
 
 
