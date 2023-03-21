@@ -133,3 +133,47 @@ function titleCase(str: string) {
   // Directly return the joined string
   return splitStr.join(" ");
 }
+
+export function getMimeTypeFromImageUrl(imageUrl: string) {
+  const splitted = imageUrl.split(".");
+
+  const lastElement = splitted[splitted.length - 1];
+
+  switch (lastElement) {
+    case "png":
+      return "image/png";
+      break;
+    case "jpeg":
+    case "jpg":
+      return "image/jpeg";
+  }
+}
+
+/**
+ *
+ * @param imageUrl
+ * @returns url name with extension
+ */
+export function getNameFromImageUrl(imageUrl: string) {
+  const regex = /.+(\/.+)$/g;
+
+  const result = regex.exec(imageUrl);
+  if (result && result[1]) {
+    const splitted = result[1].split(".");
+    // splitted.splice(splitted.length - 1, 1);
+
+    return splitted.join(".").substring(1);
+  }
+
+  return "default";
+  // const lastElement = splitted[splitted.length - 1];
+
+  // switch (lastElement) {
+  //   case "png":
+  //     return "image/png";
+  //     break;
+  //   case "jpeg":
+  //   case "jpg":
+  //     return "image/jpeg";
+  // }
+}

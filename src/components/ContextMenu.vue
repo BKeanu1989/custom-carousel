@@ -1,7 +1,12 @@
 <template>
   <div ref="target" id="context-menu" class="sw-w-fit sw-z-50">
-    <span>Bild speichern -- {{ injectedImgUrl }}</span>
-    {{ injectedX }} - {{ injectedY }}
+    <button
+      type="button"
+      class="sw-py-2 sw-px-5 sw-text-white"
+      @click="injectedDownload()"
+    >
+      Bild speichern
+    </button>
   </div>
 </template>
 <script lang="ts" setup>
@@ -16,7 +21,9 @@ const injectedImgUrl = inject("context-menu-img-url", "");
 onClickOutside(target, () => {
   injectedSetShow(false);
 });
-
+const injectedDownload = inject("context-menu-download", () =>
+  console.log("default context download")
+);
 const injectedX = inject("context-menu-mouse-pos-x", ref(0));
 const injectedY = inject("context-menu-mouse-pos-y", ref(0));
 
@@ -34,5 +41,9 @@ const yPos = computed(() => {
   position: fixed;
   left: v-bind(xPos);
   top: v-bind(yPos);
+}
+
+#context-menu:hover {
+  background-color: #27525c;
 }
 </style>

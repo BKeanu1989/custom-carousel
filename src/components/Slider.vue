@@ -106,6 +106,7 @@ provide("context-menu-set-show", usedContextMenu.setShow);
 provide("context-menu-mouse-pos-x", usedContextMenu.internalX);
 provide("context-menu-mouse-pos-y", usedContextMenu.internalY);
 provide("context-menu-img-url", usedContextMenu.img_url);
+provide("context-menu-download", usedContextMenu.downloadImage);
 const cleanedSlides = computed(() => {
   return props.slides.filter((htmlString) => {
     return !!htmlString;
