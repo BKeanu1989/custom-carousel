@@ -53,6 +53,7 @@
         @updateSlide="gsapToIndex($event)"
       ></Pagination>
     </slot>
+    <ContextMenu v-if="usedContextMenu.status.value"></ContextMenu>
   </div>
 </template>
 <script setup lang="ts">
@@ -74,8 +75,9 @@ import { useEventListener, useResizeObserver } from "@vueuse/core";
 import Slide from "./Slide.vue";
 import Navigation from "./Navigation.vue";
 import Pagination from "./Pagination.vue";
+import ContextMenu from "./ContextMenu.vue";
 import PaginationIndicator from "./PaginationIndicator.vue";
-
+import useContextMenu from "../composables/useContextMenu";
 import gsap from "gsap";
 
 import { type BreakPoint } from "../types/BreakPoints";
@@ -98,6 +100,12 @@ const slideRefs = ref([]);
 const totalSlides = computed(() => slideRefs.value.length);
 const combinedWidth = ref(0);
 
+const usedContextMenu = useContextMenu();
+provide("context-menu-handler", usedContextMenu.handler);
+provide("context-menu-set-show", usedContextMenu.setShow);
+provide("context-menu-mouse-pos-x", usedContextMenu.internalX);
+provide("context-menu-mouse-pos-y", usedContextMenu.internalY);
+provide("context-menu-img-url", usedContextMenu.img_url);
 const cleanedSlides = computed(() => {
   return props.slides.filter((htmlString) => {
     return !!htmlString;
@@ -340,6 +348,8 @@ const dragHandler_v2 = <
   event,
 }: T) => {
   if (!dragging) {
+    // @ts-ignore -- which = 3 when right click
+    if (event.which == 3) return;
     if (x === 0) {
       const dataKey = parseInt(event.target?.dataset.key);
       if (dataKey !== undefined) {

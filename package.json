@@ -24,7 +24,7 @@
     "vue": "^3.2.25"
   },
   "peerDependencies": {
-    "@vueuse/core": "^9.1.1",
+    "@vueuse/core": "^9.13.0",
     "@vueuse/gesture": "^2.0.0-beta.1"
   },
   "devDependencies": {
