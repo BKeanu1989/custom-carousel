@@ -7,6 +7,7 @@
     :data-key="props.id"
     :data-near="slideIsCloseToActive ? 'yes' : 'no'"
     ref="slideElement"
+    @contextmenu.native="handler"
   ></div>
 </template>
 <script setup lang="ts">
@@ -28,7 +29,13 @@ import {
   aspectRatioSupportedKey,
   containerHeightKey,
 } from "../utils/symbolKeys";
+
+const handler = (e: MouseEvent) => {
+  console.log(e, $img.value);
+};
+
 const slideElement = ref<HTMLElement | null>(null);
+const $img = ref<HTMLElement | null>(null);
 
 const injectedStyleClasses = inject<string[]>("slideClasses", [""]);
 const injectedContainerHeight = inject(containerHeightKey, ref(0));
@@ -174,6 +181,8 @@ function getWidthForSlide(slide: string, combinedWidth: number): number {
 
 onMounted(() => {
   const _image = slideElement.value?.querySelector("img");
+  console.log("🚀 ~ file: Slide.vue:183 ~ onMounted ~ _image:", _image);
+  if (_image) $img.value = _image;
   if (props.parseCredits) {
     credits.value = getPhotographerCredits(props.slide);
     // console.log("should set", props.slide, credits.value);
