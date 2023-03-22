@@ -13,17 +13,33 @@ describe("utils", () => {
   it("gets correct jpg mime type", () => {
     expect(
       getMimeTypeFromImageUrl(
-        "http://localhost:3000/Helen-Woigk%C2%A9Steffen-Roth-12-optimized.png"
+        "http://localhost:3000/Helen-Woigk%C2%A9Steffen-Roth-12-optimized.jpg"
       )
-    ).toBe("image/png");
+    ).toBe("image/jpeg");
   });
 
-  it("gets correct jpg mime type", () => {
+  it("gets correct jpeg mime type", () => {
     expect(
       getMimeTypeFromImageUrl(
-        "http://localhost:3000/Helen-Woigk%C2%A9Steffen-Roth..-12-optimized.png"
+        "http://localhost:3000/Helen-Woigk%C2%A9Steffen-Roth..-12-optimized.jpeg"
       )
-    ).toBe("image/png");
+    ).toBe("image/jpeg");
+  });
+
+  it("gets correct avif mime type", () => {
+    expect(
+      getMimeTypeFromImageUrl(
+        "http://localhost:3000/Helen-Woigk%C2%A9Steffen-Roth..-12-optimized.avif"
+      )
+    ).toBe("image/avif");
+  });
+
+  it("gets correct webp mime type", () => {
+    expect(
+      getMimeTypeFromImageUrl(
+        "http://localhost:3000/Helen-Woigk%C2%A9Steffen-Roth..-12-optimized.webp"
+      )
+    ).toBe("image/webp");
   });
 
   it("gets filename from url", () => {

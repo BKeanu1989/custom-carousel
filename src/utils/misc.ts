@@ -146,6 +146,10 @@ export function getMimeTypeFromImageUrl(imageUrl: string) {
     case "jpeg":
     case "jpg":
       return "image/jpeg";
+    case "avif":
+      return "image/avif";
+    case "webp":
+      return "image/webp";
   }
 }
 
