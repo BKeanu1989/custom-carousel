@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.68](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.67...v0.0.68) (2023-03-22)
+
+
+### Bug Fixes
+
+* **tests:** CSS is not defined via setup file ([2c5f539](https://github.com/BKeanu1989/custom-carousel/commit/2c5f53958d424f198a3fd26a210814a0f6f9fef8))
+
 ### [0.0.67](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.66...v0.0.67) (2023-03-22)
 
 ### [0.0.66](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.65...v0.0.66) (2023-03-22)
