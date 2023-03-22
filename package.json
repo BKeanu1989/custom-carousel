@@ -17,7 +17,8 @@
     "preview": "vite preview",
     "tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/sw-carousel.css --watch",
     "release": "npm run build && npx standard-version && git push --follow-tags origin master && npm publish",
-    "test": "vitest"
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "gsap": "^3.10.4",

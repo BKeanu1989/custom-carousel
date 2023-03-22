@@ -13,7 +13,7 @@
 import { computed, inject, ref } from "vue";
 import { onClickOutside } from "@vueuse/core";
 
-const target = ref(null);
+const target = ref<HTMLElement | null>(null);
 const injectedSetShow = inject("context-menu-set-show", (e: boolean) =>
   console.log("default set show")
 );
@@ -28,11 +28,22 @@ const injectedX = inject("context-menu-mouse-pos-x", ref(0));
 const injectedY = inject("context-menu-mouse-pos-y", ref(0));
 
 const xPos = computed(() => {
-  return injectedX.value + "px";
+  console.log(target.value);
+  let minus = 0;
+  if (target.value) {
+    const vals = target.value.getBoundingClientRect();
+    minus = vals.width / 2;
+  }
+  return injectedX.value - minus + "px";
 });
 
 const yPos = computed(() => {
-  return injectedY.value - window.scrollY + "px";
+  let minus = 0;
+  if (target.value) {
+    const vals = target.value.getBoundingClientRect();
+    minus = vals.height * 0.875;
+  }
+  return injectedY.value - minus - window.scrollY + "px";
 });
 </script>
 <style scoped>

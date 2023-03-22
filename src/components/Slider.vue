@@ -267,7 +267,7 @@ const setContainerHeight = () => {
   }
 };
 onMounted(() => {
-  if (!CSS.supports("aspect-ratio", "16/9")) {
+  if (CSS && !CSS.supports("aspect-ratio", "16/9")) {
     console.log("aspect ratio is not supported");
     aspectRatioSupported.value = false;
   }
