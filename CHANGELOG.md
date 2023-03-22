@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.66](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.65...v0.0.66) (2023-03-22)
+
+
+### Bug Fixes
+
+* avif & webp ([22239dd](https://github.com/BKeanu1989/custom-carousel/commit/22239dda18b6e2785d1333f2e7a1d67386f1e691))
+
 ### [0.0.65](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.64...v0.0.65) (2023-03-21)
 
 
