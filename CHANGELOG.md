@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.69](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.68...v0.0.69) (2023-05-04)
+
+
+### Bug Fixes
+
+* download max resolution image via src ([95d40e1](https://github.com/BKeanu1989/custom-carousel/commit/95d40e191e17557493a839dc1b504efe1d180591))
+
 ### [0.0.68](https://github.com/BKeanu1989/custom-carousel/compare/v0.0.67...v0.0.68) (2023-03-22)
 
 
