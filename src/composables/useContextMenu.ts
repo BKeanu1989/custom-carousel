@@ -32,9 +32,9 @@ export default function useContextMenu() {
     internalX.value = x.value;
     internalY.value = y.value;
     setShow(true);
-    setImgUrl(val.currentSrc);
+    setImgUrl(val.src);
 
-    await getImageBuffer(val.currentSrc);
+    await getImageBuffer(val.src);
   };
 
   const getImageBuffer = async (val: any) => {
